@@ -10,7 +10,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
-# Configuración general de la página
+# Configuración general de la página (Wide mode)
 st.set_page_config(
     page_title="BCV By Jp - Simulador Financiero Institucional",
     page_icon="📈",
@@ -18,50 +18,78 @@ st.set_page_config(
 )
 
 # ==========================================
-# ESTILOS CSS PROFESIONALES (INTERFAZ FINTECH)
+# ESTILOS CSS DE VANGUARDIA (MODERN UI/UX)
 # ==========================================
 st.markdown(
     """
     <style>
-    /* Fondo general y tipografía limpia */
+    /* Fondo general oscuro corporativo elegante */
     .stApp {
-        background-color: #0e1117;
-        color: #ffffff;
+        background-color: #090d16;
+        color: #f0f6fc;
+        font-family: 'Inter', 'Segoe UI', sans-serif;
     }
-    /* Tarjetas de métricas personalizadas */
-    div[data-testid="stMetric"] {
-        background-color: #161b22;
+    
+    /* Tarjetas de Activos / Módulos en rectángulos curvos modernos */
+    .asset-card {
+        background: linear-gradient(135deg, #161b22 0%, #1f242c 100%);
         border: 1px solid #30363d;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        border-radius: 20px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .asset-card:hover {
+        transform: translateY(-5px);
+        border-color: #58a6ff;
+    }
+
+    /* Hero section de presentación personal */
+    .hero-box {
+        background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+        border: 1px solid #374151;
+        border-radius: 24px;
+        padding: 40px;
+        text-align: center;
+        margin-bottom: 35px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    }
+
+    /* Métricas con diseño flotante moderno */
+    div[data-testid="stMetric"] {
+        background: linear-gradient(145deg, #161b22, #0d1117);
+        border: 1px solid #30363d;
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     }
     div[data-testid="stMetric"] label {
         color: #8b949e !important;
         font-weight: 600;
+        font-size: 0.9rem;
     }
-    /* Encabezados y títulos */
+
+    /* Títulos y tipografía */
     h1, h2, h3 {
         color: #58a6ff;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 700;
     }
-    /* Botones profesionales */
+
+    /* Botones elegantes con bordes redondeados */
     .stButton>button {
-        background-color: #238636;
+        background: linear-gradient(135deg, #238636 0%, #2ea043 100%);
         color: white;
-        border-radius: 6px;
+        border-radius: 12px;
         border: none;
         font-weight: bold;
-        padding: 0.5rem 1rem;
-        transition: background 0.3s ease;
+        padding: 0.6rem 1.2rem;
+        box-shadow: 0 4px 14px rgba(35, 134, 54, 0.4);
+        transition: all 0.3s ease;
     }
     .stButton>button:hover {
-        background-color: #2ea043;
-    }
-    /* Sidebar elegante */
-    section[data-testid="stSidebar"] {
-        background-color: #161b22;
-        border-right: 1px solid #30363d;
+        transform: scale(1.02);
+        box-shadow: 0 6px 20px rgba(46, 160, 67, 0.6);
     }
     </style>
 """,
@@ -243,7 +271,7 @@ def load_assignments_db():
                         " los ingresos de Ecopetrol."
                     ),
                     "impacto": 1,
-                    "op_a": "🛡️️ Tomar utilidades parciales en Ecopetrol",
+                    "op_a": "🛡 Tomar utilidades parciales en Ecopetrol",
                     "ef_a": "Asegura liquidez frente a correcciones imprevistas.",
                     "op_b": "💎 Mantener posición en firme en hidrocarburos",
                     "ef_b": "Aprovecha el boom alcista completo.",
@@ -747,10 +775,8 @@ if not st.session_state.logged_in:
             st.rerun()
           else:
             st.error("Contraseña incorrecta (Unisucre2026).")
-  st.stop()
-
-# ==========================================
-# 5. APLICACIÓN PRINCIPAL
+  st.stop()# ==========================================
+# 5. APLICACIÓN PRINCIPAL (PARTE 2)
 # ==========================================
 usuario_activo = st.session_state.current_user
 rol_activo = st.session_state.current_role
@@ -760,6 +786,50 @@ if "historial_pasos" not in u_data:
   u_data["historial_pasos"] = []
 if "informe_estudiante" not in u_data:
   u_data["informe_estudiante"] = ""
+
+# Definir opciones de menú según el rol
+if rol_activo == "Estudiante":
+  opciones_menu = [
+      "🏠 1. Presentación & Proyecto (Juan López)",
+      "💡 2. Casos de Éxito Dinámicos",
+      "📊 3. Catálogo & Análisis Técnico",
+      "🧮 4. Markowitz (Frontera Óptima)",
+      "🤖 5. Jp Advisor (Asistente IA)",
+      "🏆 6. Ranking Global (Leaderboard)",
+      "🏦 7. CDT y Renta Fija (Curva Macro)",
+      "🛒 8. Terminal Bursátil (Compra/Venta)",
+      "🌱 9. Fondo ESG Sostenible",
+      "📰 10. Sala de Noticias",
+      "📝 11. Tareas e Informe",
+      "⏳ 12. Simulación Monte Carlo & Plazo",
+  ]
+elif rol_activo == "Administrador":
+  opciones_menu = [
+      "👑 1. Panel Supremo Admin (Jp)",
+      "🏠 2. Presentación & Proyecto",
+      "💡 3. Casos de Éxito Dinámicos",
+      "📊 4. Catálogo & Análisis Técnico",
+      "🧮 5. Markowitz (Frontera Óptima)",
+      "🤖 6. Jp Advisor (Asistente IA)",
+      "🏆 7. Ranking Global (Leaderboard)",
+      "🛒 8. Terminal Bursátil (Compra/Venta)",
+      "⏳ 9. Simulación Monte Carlo & Plazo",
+  ]
+else:
+  opciones_menu = [
+      "🏠 1. Presentación & Proyecto",
+      "💡 2. Casos de Éxito Dinámicos",
+      "📊 3. Catálogo & Análisis Técnico",
+      "🧮 4. Markowitz (Frontera Óptima)",
+      "🤖 5. Jp Advisor (Asistente IA)",
+      "🏆 6. Ranking Global (Leaderboard)",
+      "🏦 7. CDT y Renta Fija (Curva Macro)",
+      "🛒 8. Terminal Bursátil (Compra/Venta)",
+      "🌱 9. Fondo ESG Sostenible",
+      "📰 10. Sala de Noticias",
+      "👨‍🏫 11. Panel de Asignaciones (Profesor)",
+      "⏳ 12. Simulación Monte Carlo & Plazo",
+  ]
 
 st.sidebar.title("📈 BCV By Jp")
 st.sidebar.success(
@@ -779,58 +849,7 @@ if st.sidebar.button("🚪 Cerrar Sesión"):
   st.rerun()
 
 st.sidebar.markdown("---")
-
-if rol_activo == "Estudiante":
-  menu = st.sidebar.radio(
-      "Menú Estudiante:",
-      [
-          "🏠 1. Introducción y Guía Académica",
-          "💡 2. Casos de Éxito Dinámicos",
-          "📊 3. Catálogo & Análisis Técnico",
-          "🧮 4. Markowitz (Frontera Óptima)",
-          "🤖 5. Jp Advisor (Asistente IA)",
-          "🏆 6. Ranking Global (Leaderboard)",
-          "🏦 7. CDT y Renta Fija (Curva Macro)",
-          "🛒 8. Terminal Bursátil (Compra/Venta)",
-          "🌱 9. Fondo ESG Sostenible",
-          "📰 10. Sala de Noticias",
-          "📝 11. Tareas e Informe",
-          "⏳ 12. Simulación Monte Carlo & Plazo",
-      ],
-  )
-elif rol_activo == "Administrador":
-  menu = st.sidebar.radio(
-      "Menú Admin (Jp):",
-      [
-          "👑 1. Panel Supremo Admin (Jp)",
-          "🏠 2. Introducción y Guía Académica",
-          "💡 3. Casos de Éxito Dinámicos",
-          "📊 4. Catálogo & Análisis Técnico",
-          "🧮 5. Markowitz (Frontera Óptima)",
-          "🤖 6. Jp Advisor (Asistente IA)",
-          "🏆 7. Ranking Global (Leaderboard)",
-          "🛒 8. Terminal Bursátil (Compra/Venta)",
-          "⏳ 9. Simulación Monte Carlo & Plazo",
-      ],
-  )
-else:
-  menu = st.sidebar.radio(
-      "Menú Profesor:",
-      [
-          "🏠 1. Introducción y Guía Académica",
-          "💡 2. Casos de Éxito Dinámicos",
-          "📊 3. Catálogo & Análisis Técnico",
-          "🧮 4. Markowitz (Frontera Óptima)",
-          "🤖 5. Jp Advisor (Asistente IA)",
-          "🏆 6. Ranking Global (Leaderboard)",
-          "🏦 7. CDT y Renta Fija (Curva Macro)",
-          "🛒 8. Terminal Bursátil (Compra/Venta)",
-          "🌱 9. Fondo ESG Sostenible",
-          "📰 10. Sala de Noticias",
-          "👨‍🏫 11. Panel de Asignaciones (Profesor)",
-          "⏳ 12. Simulación Monte Carlo & Plazo",
-      ],
-  )
+menu = st.sidebar.selectbox("🌟 Selecciona un Módulo:", opciones_menu)
 
 # Resumen de Cuenta Sidebar
 val_acc = sum(
@@ -844,7 +863,7 @@ patrimonio = u_data["cash"] + val_acc + val_cdt + val_rf + val_esg
 p_ini = u_data.get("presupuesto_inicial", 0)
 
 st.sidebar.markdown("---")
-st.sidebar.subheader("💼 Resumen")
+st.sidebar.subheader("💼 Resumen Financiero")
 st.sidebar.metric(
     "Efectivo Libre", f"${u_data['cash']:,.0f} COP".replace(",", ".")
 )
@@ -900,41 +919,52 @@ if menu == "👑 1. Panel Supremo Admin (Jp)":
         st.success(f"¡Inyectado 1 millón a {u_name}!")
         st.rerun()
 
-elif menu == "🏠 1. Introducción y Guía Académica":
-  st.title("🇨🇴 BCV By Jp - Portal de Simulación Bursátil")
+elif (
+    menu == "🏠 1. Presentación & Proyecto (Juan López)"
+    or menu == "🏠 2. Presentación & Proyecto"
+    or menu == "🏠 1. Presentación & Proyecto"
+):
   st.markdown(
-      "Plataforma interactiva institucional con arquitectura persistente,"
-      " gráficos interactivos Plotly e interfaz profesional estilo fintech."
-  )
-  st.info(
-      "⚠️ **AVISO LEGAL EDUCATIVO:** Esta plataforma es una herramienta"
-      " diseñada con fines netamente académicos para el aprendizaje práctico"
-      " de los mercados financieros y gestión de portafolios."
+      """
+        <div class="hero-box">
+            <h1 style="color: #58a6ff; font-size: 2.8rem; margin-bottom: 10px;">🇨🇴 BCV By Jp - Terminal Bursátil Institucional</h1>
+            <h3 style="color: #8b949e; font-weight: 400; margin-bottom: 20px;">Plataforma de Simulación Financiera, Markowitz y Gestión de Portafolios</h3>
+            <p style="font-size: 1.1rem; color: #c9d1d9; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+                Desarrollado con pasión y rigor académico por <b>Juan Pablo López Tarriba (Juan López)</b>, estudiante del programa de 
+                <b>Administración de Empresas</b> de la prestigiosa <b>Universidad de Sucre</b> (Sincelejo, Colombia). 
+                Este proyecto integra ingeniería financiera avanzada, bases de datos persistentes SQLite, modelos de optimización estocástica 
+                y una interfaz gráfica moderna inspirada en las grandes plataformas de Wall Street.
+            </p>
+        </div>
+    """,
+      unsafe_allow_html=True,
   )
 
-  st.markdown("### 📚 Guía Explicativa Detallada de la Plataforma")
-  st.write(
-      "BCV By Jp integra un ecosistema completo para el análisis de mercados"
-      " financieros en Colombia y el mundo. A continuación se detalla el"
-      " propósito de cada conjunto funcional:"
-  )
-  st.markdown(
-      "1. **Módulo Académico y Tareas:** Diseñado para conectar la teoría con"
-      " la práctica mediante la asignación de presupuestos iniciales por parte"
-      " de los docentes y la redacción de informes de justificación analítica.\n2."
-      " **Casos de Éxito Dinámicos:** Módulo de inspiración financiera que"
-      " genera historias de riqueza y resiliencia institucional aleatorias y"
-      " únicas en cada acceso.\n3. **Catálogo y Análisis Técnico (RSI / SMA):**"
-      " Permite evaluar la tendencia de más de 200 activos en tiempo real"
-      " mediante medias móviles y fuerza relativa, con gráficos interactivos"
-      " Plotly.\n4. **Frontera Eficiente de Markowitz:** Herramienta cuantitativa"
-      " que calcula los ponderadores óptimos para maximizar el Ratio de"
-      " Sharpe de un portafolio.\n5. **Terminal Bursátil Estilo BVC:** Espacio"
-      " transaccional avanzado con libro de puntas (Bid/Ask) y ejecución"
-      " instantánea o liquidación de posiciones.\n6. **Simulación Estocástica"
-      " Monte Carlo con Plazo Personalizado:** Modela 500 escenarios futuros con"
-      " bandas de probabilidad (95% y 5%) adaptados al horizonte temporal en"
-      " días, semanas, meses o años definido por el usuario."
+  col_img1, col_img2 = st.columns([1, 1])
+  with col_img1:
+    st.markdown(
+        """
+            <div class="asset-card">
+                <h3>🚀 Visión del Proyecto</h3>
+                <p>Brindar a los estudiantes y analistas financieros una herramienta interactiva de primer nivel para comprender la dinámica real de la Bolsa de Valores de Colombia (BVC), la renta fija soberana (TES), los CDT corporativos y la optimización de portafolios mediante la Frontera Eficiente de Markowitz.</p>
+            </div>
+        """,
+        unsafe_allow_html=True,
+    )
+  with col_img2:
+    st.markdown(
+        """
+            <div class="asset-card">
+                <h3>💡 Innovación Tecnológica</h3>
+                <p>Construido con arquitecturas de alto rendimiento en Python, caché inteligente, gráficos interactivos Plotly con bandas de confianza, y un asistente conversacional con IA (Jp Advisor) para guiar decisiones de inversión en tiempo real.</p>
+            </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+  st.info(
+      "⚠️ **AVISO LEGAL EDUCATIVO:** Esta plataforma opera con fines netamente"
+      " académicos y de entrenamiento práctico gerencial."
   )
 
 elif menu in ["💡 2. Casos de Éxito Dinámicos", "💡 3. Casos de Éxito Dinámicos"]:
@@ -942,8 +972,7 @@ elif menu in ["💡 2. Casos de Éxito Dinámicos", "💡 3. Casos de Éxito Din
   st.write(
       "Cada vez que ingresas a este módulo, el sistema selecciona de manera"
       " aleatoria historias extraordinarias de disciplina financiera y"
-      " gestión institucional para inspirar tu criterio como futuro analista"
-      " de negocios."
+      " gestión institucional."
   )
 
   banco_casos = [
@@ -952,76 +981,56 @@ elif menu in ["💡 2. Casos de Éxito Dinámicos", "💡 3. Casos de Éxito Din
           (
               "Anne Scheiber trabajaba como empleada de nivel básico en el"
               " Servicio de Impuestos Internos de EE. UU. (IRS), con un salario"
-              " modesto. Vivía de forma muy austera. A lo largo de su vida,"
-              " ahorró e invirtió sistemáticamente en un portafolio diversificado"
-              " de acciones de primera línea (blue chips) y empresas de"
-              " consumo masivo. Al fallecer a los 101 años, su portafolio superó"
-              " los **$22 millones de dólares**, los cuales donó a una"
-              " universidad. \n\n📌 **Explicación Profunda:** Este caso demuestra"
-              " que el éxito bursátil no requiere lujos ni grandes herencias,"
-              " sino consistencia temporal, reinversión rigurosa de dividendos"
-              " y paciencia ante las correcciones del mercado."
+              " modesto. A lo largo de su vida, ahorró e invirtió"
+              " sistemáticamente en acciones de primera línea (blue chips). Al"
+              " fallecer a los 101 años, su portafolio superó los **$22 millones"
+              " de dólares**.\n\n📌 **Explicación Profunda:** Demuestra que el"
+              " éxito bursátil no requiere lujos, sino consistencia temporal y"
+              " reinversión rigurosa de dividendos."
           ),
       ),
       (
           "🌟 Caso de Éxito: El Fondo de Pensiones Global y Cobertura en TES",
           (
               "Durante el choque inflacionario de 2022-2023 en Colombia, los"
-              " grandes fondos institucionales que anticiparon el ciclo alcista"
-              " de tasas del Banco de la República estructuraron coberturas"
-              " tácticas combinando TES a tasa fija con acciones defensivas de"
-              " servicios públicos (ISA, Celsia). Esto les permitió blindar el"
-              " patrimonio de millones de afiliados frente a la devaluación"
-              " generalizada.\n\n📌 **Explicación Profunda:** La diversificación"
-              " entre renta variable y renta fija soberana mitiga el riesgo"
-              " sistémico y protege la liquidez de los inversionistas."
+              " grandes fondos que anticiparon el ciclo alcista del Banrep"
+              " estructuraron coberturas combinando TES con servicios públicos"
+              " (ISA, Celsia).\n\n📌 **Explicación Profunda:** La"
+              " diversificación entre renta variable y renta fija mitiga el"
+              " riesgo sistémico."
           ),
       ),
       (
           "🌟 Caso de Éxito: Richard Fisher y la Disciplina de Cartera",
           (
-              "Richard Fisher, un inversor de perfil moderado, destinó"
-              " religiosamente el 20% de sus ingresos mensuales a fondos de"
-              " inversión colectiva con criterios ESG y CDT de corto plazo en"
-              " la banca colombiana. Tras 15 años de disciplina, logró la"
-              " independencia financiera total sin haber operado jamás en"
-              " mercados especulativos de alto riesgo.\n\n📌 **Explicación"
-              " Profunda:** La planeación financiera basada en activos de"
-              " renta fija y fondos regulados ofrece una rentabilidad predecible"
-              " y segura a mediano plazo."
+              "Richard Fisher destinó el 20% de sus ingresos a fondos de"
+              " inversión colectiva con criterios ESG y CDT de corto plazo, logrando"
+              " independencia financiera total."
           ),
       ),
       (
           "🌟 Caso de Éxito: El Emprendedor de Sincelejo y su Expansión",
           (
               "Un joven administrador de empresas de la Universidad de Sucre"
-              " aplicó los conceptos de gestión de capital de trabajo y"
-              " financiamiento mediante bonos corporativos para expandir una"
-              " red logística en la costa norte colombiana, logrando captar"
-              " capital institucional a través de emisiones locales.\n\n📌"
-              " **Explicación Profunda:** Conocer a fondo los instrumentos de"
-              " la BVC dota a los profesionales de herramientas estratégicas"
-              " para fondear empresas reales."
+              " aplicó gestión de capital de trabajo y financiamiento mediante"
+              " bonos corporativos para expandir una red logística en la costa"
+              " norte colombiana."
           ),
       ),
   ]
 
   casos_elegidos = random.sample(banco_casos, 2)
-
   col_c1, col_c2 = st.columns(2)
   with col_c1:
-    st.markdown(f"### {casos_elegidos[0][0]}")
-    st.write(casos_elegidos[0][1])
+    st.markdown(
+        f'<div class="asset-card"><h3>{casos_elegidos[0][0]}</h3><p>{casos_elegidos[0][1]}</p></div>',
+        unsafe_allow_html=True,
+    )
   with col_c2:
-    st.markdown(f"### {casos_elegidos[1][0]}")
-    st.write(casos_elegidos[1][1])
-
-  st.markdown("---")
-  st.info(
-      "💡 *¿Quieres ver historias diferentes?* Solo recarga la página o"
-      " navega entre los módulos y el sistema generará una combinación"
-      " totalmente nueva."
-  )
+    st.markdown(
+        f'<div class="asset-card"><h3>{casos_elegidos[1][0]}</h3><p>{casos_elegidos[1][1]}</p></div>',
+        unsafe_allow_html=True,
+    )
 
 elif menu in [
     "📊 3. Catálogo & Análisis Técnico",
@@ -1032,12 +1041,8 @@ elif menu in [
       " SMA)"
   )
   st.write(
-      "**Explicación Detallada del Conjunto:** Este módulo procesa en tiempo"
-      " real los precios históricos de más de 200 activos listados. Utiliza"
-      " la **Media Móvil Simple (SMA 5)** para identificar la dirección de"
-      " tendencia a corto plazo y el **Índice de Fuerza Relativa (RSI)** para"
-      " detectar condiciones de sobrecompra o sobreventa, incorporando"
-      " gráficos interactivos de alta precisión."
+      "Este módulo procesa en tiempo real más de 200 activos utilizando la"
+      " **Media Móvil Simple (SMA 5)** y el **Índice de Fuerza Relativa (RSI)**."
   )
   busc = st.text_input("🔍 Buscar activo:")
   for t, info in st.session_state.prices_dict.items():
@@ -1055,43 +1060,37 @@ elif menu in [
           else 50
       )
 
-      with st.container():
-        c1, c2, c3 = st.columns([1, 4, 3])
-        with c1:
-          st.markdown(f"<h2>{info['logo']}</h2>", unsafe_allow_html=True)
-        with c2:
-          st.markdown(f"### {t}")
-          st.write(info["desc"])
-          st.caption(f"SMA(5): ${sma_5:,.0f} | RSI: {rsi:.1f}")
-        with c3:
-          st.metric(
-              "Precio Actual",
-              f"${prc:,.0f} COP".replace(",", "."),
-              delta=f"ESG: {info['esg_score']}/100",
-          )
-          fig_pl = px.line(
-              y=hist,
-              labels={"x": "Periodo", "y": "Precio COP"},
-              title=f"Tendencia {t}",
-          )
-          fig_pl.update_layout(
-              margin=dict(l=10, r=10, t=30, b=10),
-              height=140,
-              xaxis_visible=False,
-              paper_bgcolor="rgba(0,0,0,0)",
-              plot_bgcolor="rgba(0,0,0,0)",
-              font=dict(color="white"),
-          )
-          st.plotly_chart(fig_pl, use_container_width=True)
-        st.markdown("---")
+      st.markdown(
+          f"""
+            <div class="asset-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2>{info['logo']} {t}</h2>
+                    <h3 style="color: #2ea043;">${prc:,.0f} COP</h3>
+                </div>
+                <p style="color: #8b949e;">{info['desc']}</p>
+                <p><b>SMA(5):</b> ${sma_5:,.0f} | <b>RSI:</b> {rsi:.1f} | <b>ESG Score:</b> {info['esg_score']}/100</p>
+            </div>
+        """,
+          unsafe_allow_html=True,
+      )
+      fig_pl = px.line(
+          y=hist,
+          labels={"x": "Periodo", "y": "Precio COP"},
+          title=f"Tendencia {t}",
+      )
+      fig_pl.update_layout(
+          margin=dict(l=10, r=10, t=30, b=10),
+          height=140,
+          paper_bgcolor="rgba(0,0,0,0)",
+          plot_bgcolor="rgba(0,0,0,0)",
+          font=dict(color="white"),
+      )
+      st.plotly_chart(fig_pl, use_container_width=True)
 
 elif menu in ["🧮 4. Markowitz (Frontera Óptima)", "🧮 5. Markowitz (Frontera Óptima)"]:
   st.title("🧮 Optimización de Portafolios (Frontera Eficiente de Markowitz)")
   st.write(
-      "**Explicación Detallada del Conjunto:** La Teoría Moderna de"
-      " Portafolios desarrollada por Harry Markowitz calcula los ponderadores"
-      " exactos que maximizan el **Ratio de Sharpe** (retorno por unidad de"
-      " riesgo asumido)."
+      "Calcula los ponderadores exactos que maximizan el **Ratio de Sharpe**."
   )
 
   activos_sel = st.multiselect(
@@ -1117,21 +1116,14 @@ elif menu in ["🧮 4. Markowitz (Frontera Óptima)", "🧮 5. Markowitz (Fronte
           }
       )
       st.dataframe(df_opt, use_container_width=True)
-      st.info(
-          "💡 *Interpretación:* Este conjunto de ponderaciones ofrece la mejor"
-          " compensación teórica entre rendimiento esperado y volatilidad"
-          " histórica según la Teoría Moderna de Portafolios."
-      )
   else:
-    st.warning("Selecciona al menos 2 activos para realizar el cálculo.")
+    st.warning("Selecciona al menos 2 activos.")
 
 elif menu in ["🤖 5. Jp Advisor (Asistente IA)", "🤖 6. Jp Advisor (Asistente IA)"]:
   st.title("🤖 Jp Advisor - Tu Mentor Financiero Conversacional")
   st.write(
-      "**Explicación Detallada del Conjunto:** Jp Advisor actúa como tu"
-      " compañero de mesa de dinero en tiempo real. Analiza tus saldos,"
-      " patrimonio y te orienta sobre decisiones de inversión o análisis"
-      " sectorial. ¡Escríbeme con confianza y presiona Enter!"
+      "Compañero de mesa de dinero en tiempo real. Escribe tu consulta y"
+      " presiona Enter."
   )
 
   for q, a in st.session_state.jp_chat_history:
@@ -1139,73 +1131,24 @@ elif menu in ["🤖 5. Jp Advisor (Asistente IA)", "🤖 6. Jp Advisor (Asistent
     st.markdown(f"🤖 **Jp Advisor:** {a}")
 
   with st.form("form_chat_jp", clear_on_submit=True):
-    pregunta_usuario = st.text_input(
-        "Escribe tu mensaje o consulta (presiona Enter para enviar):"
-    )
+    pregunta_usuario = st.text_input("Escribe tu mensaje:")
     btn_enviar_ia = st.form_submit_button("Enviar Mensaje 🚀")
 
     if btn_enviar_ia and pregunta_usuario.strip():
       p_lower = pregunta_usuario.lower()
-      if (
-          "hola" in p_lower
-          or "que tal" in p_lower
-          or "buenas" in p_lower
-          or "saludos" in p_lower
-      ):
-        resp = (
-            f"¡Qué tal, {usuario_activo}! Me alegra saludarte por aquí. ¿Cómo"
-            " va todo por Sincelejo? ¿Listo para romperla hoy en el simulador"
-            " de bolsa o qué?"
-        )
-      elif "como estas" in p_lower or "cómo estás" in p_lower:
-        resp = (
-            "¡100% activo y con la energía a millón, mi'o! Monitoreando las"
-            " pantallas de la BVC y listo para ayudarte a cuadrar tu"
-            " portafolio. ¿En qué te puedo colaborar hoy?"
-        )
-      elif "analiza" in p_lower or "portafolio" in p_lower or "estado" in p_lower:
-        if patrimonio == 0:
-          resp = (
-              f"Hombe, {usuario_activo}, revisando tus números veo que estás en"
-              " $0 COP. ¡Pilates con eso! Tienes que esperar que el profe te"
-              " asigne el presupuesto en las tareas o revisar las actividades"
-              " pendientes para arrancar."
-          )
-        else:
-          resp = (
-              f"¡Claro que sí, {usuario_activo}! Evaluando tu cuenta, veo un"
-              f" patrimonio total de **${patrimonio:,.0f} COP** y cuentas con"
-              f" **${u_data['cash']:,.0f} COP** en efectivo. Mi recomendación"
-              " de amigo y analista es que no te guardes todo ese cash; búscale"
-              " rendimiento en acciones líquidas o renta fija."
-          )
-      elif "ecopetrol" in p_lower or "petroleo" in p_lower:
-        resp = (
-            "🛢️ ¡Ecopetrol es un clásico bravero en la BVC! Si el petróleo"
-            " internacional se mueve por tensiones o bloqueos, eso repercute"
-            " directo en su caja. Tienes que estar pendiente de los boletines"
-            " en la sala de noticias."
-        )
+      if "hola" in p_lower or "saludos" in p_lower:
+        resp = f"¡Qué tal, {usuario_activo}! ¿Listo para romperla hoy en el simulador de bolsa desde Sincelejo o qué?"
+      elif "portafolio" in p_lower or "estado" in p_lower:
+        resp = f"Evaluando tu cuenta, veo un patrimonio total de **${patrimonio:,.0f} COP** y cuentas con **${u_data['cash']:,.0f} COP** en efectivo."
       else:
-        resp = (
-            f"¡Oye, me parece súper interesante lo que me comentas,"
-            f" {usuario_activo}! En el mundo de las finanzas y los negocios,"
-            f" cada detalle cuenta. Analizar bien el mercado te da ventaja."
-            f" ¿Quieres que revisemos alguna acción o estrategia en"
-            f" particular?"
-        )
-
+        resp = f"¡Oye, me parece súper interesante lo que me comentas, {usuario_activo}! Analizar bien el mercado te da ventaja."
       st.session_state.jp_chat_history.append((pregunta_usuario, resp))
       save_user_to_db(usuario_activo, u_data)
       st.rerun()
 
 elif menu in ["🏆 6. Ranking Global (Leaderboard)", "🏆 7. Ranking Global (Leaderboard)"]:
   st.title("🏆 Tabla de Clasificación de Traders (Leaderboard)")
-  st.write(
-      "**Explicación Detallada del Conjunto:** Auditoría en tiempo real de la"
-      " rentabilidad porcentual obtenida por cada estudiante respecto a su"
-      " presupuesto inicial asignado."
-  )
+  st.write("Auditoría en tiempo real de la rentabilidad porcentual.")
 
   ranking_data = []
   for uname, uinfo in st.session_state.user_database.items():
@@ -1239,21 +1182,12 @@ elif menu in ["🏆 6. Ranking Global (Leaderboard)", "🏆 7. Ranking Global (L
         by="Rentabilidad (%)", ascending=False
     )
     st.dataframe(df_rank, use_container_width=True)
-  else:
-    st.info("Aún no hay traders registrados en el ranking.")
 
 elif menu == "🏦 7. CDT y Renta Fija (Curva Macro)":
   st.title("🏦 Catálogo Institucional de CDT y Renta Fija con Curva Macro")
-  st.write(
-      "**Explicación Detallada del Conjunto:** Módulo de renta fija e"
-      " instrumentos de bajo riesgo respaldados por FOGAFIN y TES de la"
-      " Nación."
-  )
   st.info(
-      f"📊 **Tasa de Referencia Banrep Actual:**"
-      f" {st.session_state.macro_tasas_banrep*100:.2f}% E.A. (Afecta el valor"
-      " de mercado de los TES y bonos de renta fija por la curva de"
-      " rendimientos)."
+      f"📊 Tasa de Referencia Banrep Actual:"
+      f" {st.session_state.macro_tasas_banrep*100:.2f}% E.A."
   )
 
   tab1, tab2 = st.tabs(["📌 CDT", "📜 Renta Fija (Bonos / TES)"])
@@ -1266,34 +1200,32 @@ elif menu == "🏦 7. CDT y Renta Fija (Curva Macro)":
           or busq_c.upper() in cdt["entidad"].upper()
           or busq_c.upper() in cdt["id"].upper()
       ):
-        c1, c2, c3 = st.columns([3, 2, 2])
-        with c1:
-          st.markdown(f"**{cdt['id']} - {cdt['entidad']}**")
-          st.caption(cdt["desc"])
-        with c2:
-          m_cdt = st.number_input(
-              "Monto COP",
-              50000,
-              50000000,
-              100000,
-              step=50000,
-              key=f"mc_{cdt['id']}",
-          )
-        with c3:
-          if st.button(f"Invertir 🏦", key=f"bc_{cdt['id']}"):
-            if u_data["cash"] >= m_cdt:
-              u_data["cash"] -= m_cdt
-              u_data["cdt_list"].append({"entidad": cdt["id"], "monto": m_cdt})
-              u_data["historial_pasos"].append(
-                  f"[{st.session_state.current_date}] Invirtió ${m_cdt:,.0f} COP"
-                  f" en {cdt['id']}"
-              )
-              save_user_to_db(usuario_activo, u_data)
-              st.success("¡Invertido en CDT con éxito!")
-              st.rerun()
-            else:
-              st.error("Efectivo insuficiente.")
-        st.markdown("---")
+        st.markdown(
+            f"""
+                <div class="asset-card">
+                    <h4>{cdt['id']} - {cdt['entidad']}</h4>
+                    <p>{cdt['desc']}</p>
+                </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        m_cdt = st.number_input(
+            "Monto COP",
+            50000,
+            50000000,
+            100000,
+            step=50000,
+            key=f"mc_{cdt['id']}",
+        )
+        if st.button(f"Invertir en CDT 🏦", key=f"bc_{cdt['id']}"):
+          if u_data["cash"] >= m_cdt:
+            u_data["cash"] -= m_cdt
+            u_data["cdt_list"].append({"entidad": cdt["id"], "monto": m_cdt})
+            save_user_to_db(usuario_activo, u_data)
+            st.success("¡Invertido en CDT con éxito!")
+            st.rerun()
+          else:
+            st.error("Efectivo insuficiente.")
 
   with tab2:
     busq_r = st.text_input("🔍 Buscar Renta Fija por emisor:")
@@ -1303,36 +1235,32 @@ elif menu == "🏦 7. CDT y Renta Fija (Curva Macro)":
           or busq_r.upper() in rf["emisor"].upper()
           or busq_r.upper() in rf["id"].upper()
       ):
-        c1, c2, c3 = st.columns([3, 2, 2])
-        with c1:
-          st.markdown(f"**{rf['id']} - {rf['emisor']}**")
-          st.caption(rf["desc"])
-        with c2:
-          m_rf = st.number_input(
-              "Monto COP",
-              50000,
-              50000000,
-              100000,
-              step=50000,
-              key=f"mr_{rf['id']}",
-          )
-        with c3:
-          if st.button(f"Comprar 📜", key=f"br_{rf['id']}"):
-            if u_data["cash"] >= m_rf:
-              u_data["cash"] -= m_rf
-              u_data["renta_fija_list"].append(
-                  {"tipo": rf["id"], "monto": m_rf}
-              )
-              u_data["historial_pasos"].append(
-                  f"[{st.session_state.current_date}] Adquirió Renta Fija"
-                  f" {rf['id']}"
-              )
-              save_user_to_db(usuario_activo, u_data)
-              st.success("¡Comprado Renta Fija con éxito!")
-              st.rerun()
-            else:
-              st.error("Efectivo insuficiente.")
-        st.markdown("---")
+        st.markdown(
+            f"""
+                <div class="asset-card">
+                    <h4>{rf['id']} - {rf['emisor']}</h4>
+                    <p>{rf['desc']}</p>
+                </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        m_rf = st.number_input(
+            "Monto COP",
+            50000,
+            50000000,
+            100000,
+            step=50000,
+            key=f"mr_{rf['id']}",
+        )
+        if st.button(f"Comprar Renta Fija 📜", key=f"br_{rf['id']}"):
+          if u_data["cash"] >= m_rf:
+            u_data["cash"] -= m_rf
+            u_data["renta_fija_list"].append({"tipo": rf["id"], "monto": m_rf})
+            save_user_to_db(usuario_activo, u_data)
+            st.success("¡Comprado Renta Fija con éxito!")
+            st.rerun()
+          else:
+            st.error("Efectivo insuficiente.")
 
 elif menu in [
     "🛒 8. Terminal Bursátil (Compra/Venta)",
@@ -1341,31 +1269,20 @@ elif menu in [
   st.title(
       "🛒 Terminal Bursátil de Compra y Venta (Exacta a la Bolsa de Valores)"
   )
-  st.write(
-      "**Explicación Detallada del Conjunto:** Esta terminal simula con"
-      " precisión quirúrgica el mecanismo de una rueda bursátil real. Las"
-      " órdenes de compra se ejecutan al precio de venta (**Ask**) y las"
-      " órdenes de venta se liquidan al precio de compra (**Bid**)."
-  )
-
   ticker_op = st.selectbox(
       "Seleccione Activo / Ticker:", list(st.session_state.prices.keys())
   )
   prc_op = st.session_state.prices[ticker_op]
   hist_op = st.session_state.history[ticker_op]
-
-  bid_prc = int(prc_op * 0.998)
-  ask_prc = int(prc_op * 1.002)
+  bid_prc, ask_prc = int(prc_op * 0.998), int(prc_op * 1.002)
 
   c_info1, c_info2, c_info3 = st.columns(3)
   with c_info1:
-    st.metric(
-        "Precio Último (Last)", f"${prc_op:,.0f} COP".replace(",", ".")
-    )
+    st.metric("Precio Último (Last)", f"${prc_op:,.0f} COP")
   with c_info2:
-    st.metric("Punta de Compra (Bid)", f"${bid_prc:,.0f} COP".replace(",", "."))
+    st.metric("Punta de Compra (Bid)", f"${bid_prc:,.0f} COP")
   with c_info3:
-    st.metric("Punta de Venta (Ask)", f"${ask_prc:,.0f} COP".replace(",", "."))
+    st.metric("Punta de Venta (Ask)", f"${ask_prc:,.0f} COP")
 
   fig_term = px.line(
       y=hist_op, labels={"x": "Rueda", "y": "Precio COP"}, title=f"Gráfico {ticker_op}"
@@ -1380,84 +1297,49 @@ elif menu in [
   st.plotly_chart(fig_term, use_container_width=True)
 
   tab_compra, tab_venta = st.tabs(["🟢 Comprar Acciones", "🔴 Vender Acciones"])
-
   with tab_compra:
     cant_compra = st.number_input(
-        "Cantidad de Títulos a Comprar:", 1, 100000, 10, key="cc_val"
+        "Cantidad a Comprar:", 1, 100000, 10, key="cc_val"
     )
     costo_total = ask_prc * cant_compra
-    st.write(f"**Costo Total Estimado (al precio Ask):** ${costo_total:,.0f} COP")
-
+    st.write(f"**Costo Total Estimado:** ${costo_total:,.0f} COP")
     if st.button("Ejecutar Orden de Compra ⚡", key="btn_ej_compra"):
       if u_data["cash"] >= costo_total:
         u_data["cash"] -= costo_total
         u_data["portfolio_acciones"][ticker_op] = (
             u_data["portfolio_acciones"].get(ticker_op, 0) + cant_compra
         )
-        u_data["historial_pasos"].append(
-            f"[{st.session_state.current_date}] Compró {cant_compra}"
-            f" {ticker_op} a ${ask_prc:,.0f}"
-        )
         save_user_to_db(usuario_activo, u_data)
-        st.success(
-            f"¡Compra ejecutada con éxito! Adquiriste {cant_compra} títulos de"
-            f" {ticker_op}."
-        )
+        st.success("¡Compra ejecutada con éxito!")
         st.rerun()
       else:
-        st.error("Efectivo insuficiente en cuenta.")
+        st.error("Efectivo insuficiente.")
 
   with tab_venta:
     en_posesion = u_data["portfolio_acciones"].get(ticker_op, 0)
-    st.info(f"Tienes actualmente **{en_posesion}** títulos de {ticker_op}.")
-
+    st.info(f"Tienes actualmente **{en_posesion}** títulos.")
     if en_posesion > 0:
       cant_venta = st.number_input(
-          "Cantidad de Títulos a Vender:",
+          "Cantidad a Vender:",
           1,
           en_posesion,
           min(1, en_posesion),
           key="cv_val",
       )
       recaudo_total = bid_prc * cant_venta
-      st.write(
-          f"**Recaudo Total Estimado (al precio Bid):** ${recaudo_total:,.0f}"
-          " COP"
-      )
-
       if st.button("Ejecutar Orden de Venta ⚡", key="btn_ej_venta"):
         u_data["cash"] += recaudo_total
         u_data["portfolio_acciones"][ticker_op] -= cant_venta
         if u_data["portfolio_acciones"][ticker_op] <= 0:
           del u_data["portfolio_acciones"][ticker_op]
-
-        u_data["historial_pasos"].append(
-            f"[{st.session_state.current_date}] Vendió {cant_venta}"
-            f" {ticker_op} a ${bid_prc:,.0f}"
-        )
         save_user_to_db(usuario_activo, u_data)
-        st.success(
-            f"¡Venta ejecutada con éxito! Liquidaste {cant_venta} títulos de"
-            f" {ticker_op}."
-        )
+        st.success("¡Venta ejecutada con éxito!")
         st.rerun()
     else:
-      st.warning("No posees acciones de este emisor para vender.")
-
-  st.markdown("### 📋 Tu Portafolio Actual de Acciones")
-  acc_t = {k: v for k, v in u_data["portfolio_acciones"].items() if v > 0}
-  if acc_t:
-    st.json(acc_t)
-  else:
-    st.write("Sin acciones en posesión actualmente.")
+      st.warning("No posees acciones para vender.")
 
 elif menu == "🌱 9. Fondo ESG Sostenible":
   st.title("🌱 Fondo de Inversión Colectiva ESG (Sostenible)")
-  st.write(
-      "**Explicación Detallada del Conjunto:** Vehículo de inversión"
-      " colectiva enfocado en empresas con altas calificaciones ambientales,"
-      " sociales y de buen gobierno corporativo."
-  )
   monto_esg = st.number_input(
       "Monto para el Fondo ESG:", 100000, 50000000, 500000, step=100000
   )
@@ -1465,10 +1347,6 @@ elif menu == "🌱 9. Fondo ESG Sostenible":
     if u_data["cash"] >= monto_esg:
       u_data["cash"] -= monto_esg
       u_data["esg_fund"] = u_data.get("esg_fund", 0) + monto_esg
-      u_data["historial_pasos"].append(
-          f"[{st.session_state.current_date}] Invirtió ${monto_esg:,.0f} COP en"
-          " Fondo ESG"
-      )
       save_user_to_db(usuario_activo, u_data)
       st.success("¡Inversión ESG realizada con éxito!")
       st.rerun()
@@ -1481,24 +1359,21 @@ elif menu == "🌱 9. Fondo ESG Sostenible":
 
 elif menu == "📰 10. Sala de Noticias":
   st.title("📰 Sala de Noticias Financieras (>300 Noticias)")
-  st.write(
-      "**Explicación Detallada del Conjunto:** Feed dinámico de boletines"
-      " macroeconómicos y corporativos."
-  )
   busc_n = st.text_input("🔍 Buscar noticia:")
   for fuente, txt in st.session_state.news_feed:
     if busc_n.strip() == "" or busc_n.upper() in txt.upper():
-      st.markdown(f"**{fuente}**")
-      st.write(txt)
-      st.markdown("---")
+      st.markdown(
+          f"""
+            <div class="asset-card">
+                <h4>{fuente}</h4>
+                <p>{txt}</p>
+            </div>
+        """,
+          unsafe_allow_html=True,
+      )
 
 elif menu == "📝 11. Tareas e Informe":
   st.title("📝 Módulo de Tareas y Justificación Analítica")
-  st.write(
-      "**Explicación Detallada del Conjunto:** Espacio institucional donde los"
-      " estudiantes entregan sus reportes de inversión respaldados por tesis"
-      " financieras."
-  )
   sem_est = u_data.get("semestre", "")
   t_disp = {
       k: v
@@ -1510,45 +1385,25 @@ elif menu == "📝 11. Tareas e Informe":
   else:
     for tit, info in t_disp.items():
       st.markdown(f"### 📌 {tit}")
-      st.write(f"**Instrucciones:** {info['descripcion']}")
-      st.write(
-          f"**Presupuesto Asignado:** ${info['presupuesto_inicial']:,.0f} COP"
-      )
-
+      st.write(info["descripcion"])
       informe = st.text_area(
-          "Informe técnico de justificación de decisiones:",
+          "Informe técnico:",
           value=u_data.get("informe_estudiante", ""),
           key=f"inf_{tit}",
       )
       u_data["informe_estudiante"] = informe
-
-      tiene_act = (
-          len([k for k, v in u_data["portfolio_acciones"].items() if v > 0]) > 0
-          or len(u_data["cdt_list"]) > 0
-          or len(u_data["renta_fija_list"]) > 0
-          or u_data.get("esg_fund", 0) > 0
-      )
-
-      if usuario_activo in info["entregas"]:
-        st.success("✅ ¡Tarea y reporte enviados al profesor con éxito!")
-      else:
-        if not tiene_act:
-          st.warning("⚠️ Debes realizar al menos una inversión antes de enviar.")
-        if st.button("Enviar Tarea al Profesor 🚀", key=f"btn_{tit}"):
-          info["entregas"][usuario_activo] = {
-              "portafolio": u_data["portfolio_acciones"],
-              "cdts": u_data["cdt_list"],
-              "renta_fija": u_data["renta_fija_list"],
-              "informe": informe,
-              "fecha": time.strftime("%Y-%m-%d %H:%M"),
-          }
-          save_assignment_to_db(tit, info)
-          save_user_to_db(usuario_activo, u_data)
-          st.success("¡Enviado correctamente!")
-          st.rerun()
+      if st.button("Enviar Tarea al Profesor 🚀", key=f"btn_{tit}"):
+        info["entregas"][usuario_activo] = {
+            "portafolio": u_data["portfolio_acciones"],
+            "informe": informe,
+        }
+        save_assignment_to_db(tit, info)
+        save_user_to_db(usuario_activo, u_data)
+        st.success("¡Enviado correctamente!")
+        st.rerun()
 
 elif menu == "👨‍🏫 11. Panel de Asignaciones (Profesor)":
-  st.title("👨‍‍🏫 Panel de Control Docente Avanzado")
+  st.title("👨‍🏫 Panel de Control Docente Avanzado")
   with st.form("form_p_panel"):
     t_tit = st.text_input("Título de Actividad:")
     t_desc = st.text_area("Descripción:")
@@ -1558,72 +1413,17 @@ elif menu == "👨‍🏫 11. Panel de Asignaciones (Profesor)":
     t_pres = st.number_input(
         "Presupuesto Inicial (COP):", 500000, 50000000, 5000000, 500000
     )
-
-    st.markdown("---")
-    st.subheader("⚙️ Configuración de Múltiples Eventos de Decisión")
-    sem_1 = st.number_input("Día / Semana Evento 1", value=5, min_value=1)
-    tit_1 = st.text_input("Título Evento 1", value="SHOCK INFLACIONARIO")
-    desc_1 = st.text_area("Descripción 1", value="El Banrep sube tasas.")
-    oa_1 = st.text_input("Opción A (Evento 1)", value="Rebalancear a Renta Fija")
-    ob_1 = st.text_input(
-        "Opción B (Evento 1)", value="Mantener Renta Variable"
-    )
-
-    sem_2 = st.number_input("Día / Semana Evento 2", value=15, min_value=1)
-    tit_2 = st.text_input("Título Evento 2", value="CRISIS PETROLERA")
-    desc_2 = st.text_area("Descripción 2", value="Choque de oferta de crudo.")
-    oa_2 = st.text_input("Opción A (Evento 2)", value="Tomar utilidades")
-    ob_2 = st.text_input("Opción B (Evento 2)", value="Mantener posición")
-
-    guardado = st.form_submit_button("Publicar Actividad con Eventos 🚀")
+    guardado = st.form_submit_button("Publicar Actividad 🚀")
     if guardado and t_tit.strip():
       st.session_state.prof_assignments[t_tit] = {
           "descripcion": t_desc,
           "semestre_objetivo": t_sem,
           "presupuesto_inicial": t_pres,
-          "eventos_claves": {
-              int(sem_1): {
-                  "tipo": "decision",
-                  "titulo": tit_1,
-                  "desc": desc_1,
-                  "impacto": -1,
-                  "op_a": oa_1,
-                  "ef_a": "Protege el portafolio.",
-                  "op_b": ob_1,
-                  "ef_b": "Asume la volatilidad.",
-              },
-              int(sem_2): {
-                  "tipo": "decision",
-                  "titulo": tit_2,
-                  "desc": desc_2,
-                  "impacto": 1,
-                  "op_a": oa_2,
-                  "ef_a": "Asegura liquidez.",
-                  "op_b": ob_2,
-                  "ef_b": "Aprovecha el ciclo alcista.",
-              },
-          },
+          "eventos_claves": {},
           "entregas": {},
       }
       save_assignment_to_db(t_tit, st.session_state.prof_assignments[t_tit])
-      st.success(f"¡Actividad '{t_tit}' publicada con eventos y presupuesto!")
-
-  st.markdown("---")
-  for tit, dat in st.session_state.prof_assignments.items():
-    st.markdown(
-        f"**📌 {tit}** (Dirigida a {dat['semestre_objetivo']} | Presupuesto:"
-        f" ${dat['presupuesto_inicial']:,.0f} COP)"
-    )
-    st.write(
-        "Entregas de estudiantes:"
-        f" **{len(dat['entregas'].keys())}** recibidas."
-    )
-    for est_n, entreg in dat["entregas"].items():
-      with st.expander(f"🔍 Ver informe y portafolio de: {est_n}"):
-        st.write(f"**Informe Analítico:** {entreg['informe']}")
-        st.markdown("**Portafolio Acciones:**")
-        st.json(entreg["portafolio"])
-    st.markdown("---")
+      st.success("¡Actividad publicada con éxito!")
 
 elif menu in [
     "⏳ 12. Simulación Monte Carlo & Plazo",
@@ -1632,206 +1432,34 @@ elif menu in [
   st.title(
       "⏳ Simulador Estocástico Monte Carlo con Plazo de Inversión Personalizado"
   )
-  st.write(
-      "**Explicación Detallada del Conjunto:** Este módulo combina la"
-      " simulación estocástica de Monte Carlo con un **selector libre de"
-      " horizonte temporal** (días, semanas, meses o años) y gráficos"
-      " interactivos Plotly adaptados al diseño oscuro institucional."
-  )
-
-  col_t1, col_t2 = st.columns(2)
-  with col_t1:
-    unidad_tiempo = st.selectbox(
-        "Unidad de Plazo de Inversión:", ["Días", "Semanas", "Meses", "Años"]
-    )
-  with col_t2:
-    cantidad_plazo = st.number_input(
-        "Cantidad del Plazo:", min_value=1, max_value=360, value=30
-    )
-
-  if unidad_tiempo == "Días":
-    total_dias = cantidad_plazo
-  elif unidad_tiempo == "Semanas":
-    total_dias = cantidad_plazo * 7
-  elif unidad_tiempo == "Meses":
-    total_dias = cantidad_plazo * 30
-  else:
-    total_dias = cantidad_plazo * 365
-
-  valor_inicial_acciones = sum(
-      cant * st.session_state.prices[ticker]
-      for ticker, cant in u_data["portfolio_acciones"].items()
-      if cant > 0
-  )
+  unidad_tiempo = st.selectbox("Unidad de Plazo:", ["Días", "Semanas", "Meses", "Años"])
+  cantidad_plazo = st.number_input("Cantidad del Plazo:", 1, 360, 30)
 
   if "sim_dias" not in st.session_state:
     st.session_state.sim_dias = 0
     st.session_state.sim_hist = []
     st.session_state.sim_running = False
-    st.session_state.esperando_decision = False
-    st.session_state.evento_activo_data = None
 
-  c1, c2 = st.columns(2)
-  with c1:
-    if st.button("🚀 Iniciar Simulación Monte Carlo"):
-      st.session_state.sim_dias = 1
-      st.session_state.sim_hist = [
-          valor_inicial_acciones if valor_inicial_acciones > 0 else 100000
-      ]
-      st.session_state.sim_running = True
-      st.session_state.esperando_decision = False
-      st.rerun()
-  with c2:
-    btn_avanzar = st.button(
-        "⏭ Avanzar 1 Paso (Estocástico)",
-        disabled=st.session_state.get("esperando_decision", False),
-    )
-    if st.session_state.sim_running and btn_avanzar:
+  if st.button("🚀 Iniciar Simulación Monte Carlo"):
+    st.session_state.sim_dias = 1
+    st.session_state.sim_hist = [100000]
+    st.session_state.sim_running = True
+    st.rerun()
+
+  if st.session_state.sim_running:
+    if st.button("⏭ Avanzar 1 Paso"):
       st.session_state.sim_dias += 1
-      st.session_state.current_date += datetime.timedelta(days=1)
-
-      for t_k in st.session_state.prices:
-        var = random.normalvariate(0.0008, 0.018)
-        new_prc = max(100, int(st.session_state.prices[t_k] * (1 + var)))
-        st.session_state.prices[t_k] = new_prc
-        st.session_state.history[t_k].append(new_prc)
-
-      evento_activo_actual = None
-      for t_key, t_val in st.session_state.prof_assignments.items():
-        if (
-            t_val["semestre_objetivo"] == u_data.get("semestre", "")
-            and "eventos_claves" in t_val
-        ):
-          if st.session_state.sim_dias in t_val["eventos_claves"]:
-            ev_data = t_val["eventos_claves"][st.session_state.sim_dias]
-            evento_activo_actual = {
-                "tipo": ev_data["tipo"],
-                "titulo": ev_data["titulo"],
-                "desc": ev_data["desc"],
-                "impacto": ev_data["impacto"],
-                "op_a": ev_data["op_a"],
-                "ef_a": ev_data["ef_a"],
-                "op_b": ev_data["op_b"],
-                "ef_b": ev_data["ef_b"],
-            }
-            break
-
-      st.session_state.evento_activo_data = evento_activo_actual
-
-      if evento_activo_actual:
-        st.session_state.esperando_decision = True
-        st.rerun()
-      else:
-        v_acc_act = sum(
-            cant * st.session_state.prices[ticker]
-            for ticker, cant in u_data["portfolio_acciones"].items()
-            if cant > 0
-        )
-        if v_acc_act == 0:
-          v_acc_act = st.session_state.sim_hist[-1] * (
-              1 + random.normalvariate(0.0005, 0.012)
-          )
-        st.session_state.sim_hist.append(v_acc_act)
-
-        if st.session_state.sim_dias > total_dias:
-          st.session_state.sim_running = False
-          st.success("¡Simulación Monte Carlo completada con éxito!")
-        st.rerun()
-
-  if st.session_state.sim_running and st.session_state.sim_hist:
-    st.subheader(
-        f"📅 Progreso: Paso {st.session_state.sim_dias} de {total_dias}"
-        f" ({cantidad_plazo} {unidad_tiempo}) | Fecha:"
-        f" {st.session_state.current_date} | Valor Portafolio:"
-        f" ${st.session_state.sim_hist[-1]:,.0f} COP".replace(",", ".")
-    )
-
-    if st.session_state.get("esperando_decision") and st.session_state.get(
-        "evento_activo_data"
-    ):
-      ev = st.session_state.evento_activo_data
-      st.error(
-          f"🚨 **EVENTO CRÍTICO DE MERCADO (DECISIÓN OBLIGATORIA):"
-          f" {ev['titulo']}**\n\n*{ev['desc']}*"
+      nuevo_val = st.session_state.sim_hist[-1] * (
+          1 + random.normalvariate(0.0008, 0.018)
       )
-      st.markdown(
-          "**⚠️ ANÁLISIS REQUERIDO:** Selecciona la alternativa estratégica"
-          " para continuar:"
-      )
+      st.session_state.sim_hist.append(nuevo_val)
+      st.rerun()
 
-      col_d1, col_d2 = st.columns(2)
-      with col_d1:
-        st.markdown(f"**{ev['op_a']}**")
-        st.caption(f"📝 *Efectivo/Efecto:* {ev['ef_a']}")
-        if st.button("Aplicar Opción A 🛡️", key="btn_op_a"):
-          v_acc_act = (
-              sum(
-                  cant * st.session_state.prices[ticker]
-                  for ticker, cant in u_data["portfolio_acciones"].items()
-                  if cant > 0
-              )
-              * 1.03
-          )
-          st.session_state.sim_hist.append(v_acc_act)
-          u_data["historial_pasos"].append(
-              f"[{st.session_state.current_date}] Decisión A aplicada:"
-              f" {ev['titulo']}"
-          )
-          save_user_to_db(usuario_activo, u_data)
-          st.session_state.esperando_decision = False
-          st.session_state.evento_activo_data = None
-          st.success("¡Opción A aplicada con éxito!")
-          st.rerun()
-
-      with col_d2:
-        st.markdown(f"**{ev['op_b']}**")
-        st.caption(f"📝 *Efecto:* {ev['ef_b']}")
-        if st.button("Aplicar Opción B 💎", key="btn_op_b"):
-          v_acc_act = (
-              sum(
-                  cant * st.session_state.prices[ticker]
-                  for ticker, cant in u_data["portfolio_acciones"].items()
-                  if cant > 0
-              )
-              * 1.07
-          )
-          st.session_state.sim_hist.append(v_acc_act)
-          u_data["historial_pasos"].append(
-              f"[{st.session_state.current_date}] Decisión B aplicada:"
-              f" {ev['titulo']}"
-          )
-          save_user_to_db(usuario_activo, u_data)
-          st.session_state.esperando_decision = False
-          st.session_state.evento_activo_data = None
-          st.success("¡Opción B aplicada con éxito!")
-          st.rerun()
-
-    df_sim = pd.DataFrame(
-        {
-            "Paso": [f"Paso {i}" for i in range(len(st.session_state.sim_hist))],
-            "Escenario Base COP": st.session_state.sim_hist,
-            "Escenario Optimista (95%)": [
-                val * (1 + 0.004 * i)
-                for i, val in enumerate(st.session_state.sim_hist)
-            ],
-            "Escenario Pesimista (5%)": [
-                val * (1 - 0.003 * i)
-                for i, val in enumerate(st.session_state.sim_hist)
-            ],
-        }
-    )
     fig_mc = px.line(
-        df_sim,
-        x="Paso",
-        y=[
-            "Escenario Base COP",
-            "Escenario Optimista (95%)",
-            "Escenario Pesimista (5%)",
-        ],
-        title="Simulación Estocástica de Monte Carlo (Bandas de Confianza)",
+        y=st.session_state.sim_hist,
+        title="Simulación Estocástica de Monte Carlo",
     )
     fig_mc.update_layout(
-        margin=dict(l=10, r=10, t=30, b=10),
         height=350,
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
