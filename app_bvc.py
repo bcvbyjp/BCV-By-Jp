@@ -18,7 +18,7 @@ st.set_page_config(
 )
 
 # ==========================================
-# ESTILOS CSS CON GRÁFICO ANIMADO Y VIDEO BURSÁTIL EN BUCLE
+# ESTILOS CSS CON TU FONDO FINANCIERO Y LOGIN MODERNO
 # ==========================================
 st.markdown(
     """
@@ -30,33 +30,19 @@ st.markdown(
         font-family: 'Inter', 'Segoe UI', sans-serif;
     }
     
-    /* Contenedor de video de fondo con superposiciones de flechas de mercado */
-    .bg-video-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: -999;
-        overflow: hidden;
-        opacity: 0.28;
+    /* Fondo personalizado para la pantalla de registro / login */
+    body {
+        background: 
+            linear-gradient(rgba(4, 8, 18, 0.88), rgba(4, 8, 18, 0.95)),
+            url("fondo-financiero.jpg") center/cover no-repeat fixed;
     }
-    .bg-video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    /* Indicadores visuales dinámicos de flechas verdes y rojas flotantes */
-    .market-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: -998;
-        pointer-events: none;
-        background: linear-gradient(135deg, rgba(6,9,19,0.85) 0%, rgba(13,27,42,0.85) 100%);
+    .login-container {
+        background: rgba(8, 13, 25, 0.78);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(100, 150, 200, 0.25);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        border-radius: 24px;
+        padding: 30px;
     }
 
     /* Tarjetas de Activos / Módulos en rectángulos curvos modernos */
@@ -638,41 +624,22 @@ if "logged_in" not in st.session_state:
   st.session_state.logged_in = False
 
 # ==========================================
-# 4. LOGIN CON VIDEO BURSÁTIL Y FLECHAS DINÁMICAS (VERDE / ROJA)
+# 4. LOGIN CON TU NUEVO ESTILO CSS Y FONDO FINANCIERO
 # ==========================================
 if not st.session_state.logged_in:
   st.markdown(
       """
-        <div class="bg-video-container">
-            <iframe class="bg-video" src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1&mute=1&loop=1&playlist=5qap5aO4i9A&controls=0&showinfo=0" frameborder="0"></iframe>
-        </div>
-        <div class="market-overlay"></div>
-        
-        <!-- Elementos visuales flotantes dinámicos de flechas verdes y rojas -->
-        <div style="position: absolute; top: 10%; left: 8%; font-size: 3rem; color: #2ea043; animation: pulse 2s infinite; z-index: -997;">🟢 📈 ▲ +4.8%</div>
-        <div style="position: absolute; top: 25%; right: 10%; font-size: 3rem; color: #f85149; animation: pulse 2.5s infinite; z-index: -997;">🔴 📉 ▼ -2.1%</div>
-        <div style="position: absolute; bottom: 15%; left: 12%; font-size: 3rem; color: #2ea043; animation: pulse 1.8s infinite; z-index: -997;">🟢 📊 ▲ +12.5%</div>
-        <div style="position: absolute; bottom: 20%; right: 15%; font-size: 3rem; color: #f85149; animation: pulse 2.2s infinite; z-index: -997;">🔴 📉 ▼ -0.9%</div>
+        <div style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
+            <div class="login-container" style="width: 100%; max-width: 500px;">
+                <h1 style="text-align: center; color: #58a6ff; margin-bottom: 5px;">🔐 BCV By Jp</h1>
+                <h3 style="text-align: center; color: #8b949e; font-size: 1.1rem; margin-bottom: 25px;">Portal Académico Financiero Institucional</h3>
     """,
       unsafe_allow_html=True,
   )
 
-  st.markdown(
-      "<h1 style='text-align: center; text-shadow: 0 0 15px rgba(88,166,255,0.7);'>🔐"
-      " BCV By Jp</h1>",
-      unsafe_allow_html=True,
-  )
-  st.markdown(
-      "<h3 style='text-align: center; color: #8b949e;'>Portal Académico"
-      " Financiero Institucional</h3>",
-      unsafe_allow_html=True,
-  )
-  st.markdown("---")
-
-  col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
+  col_l1, col_l2, col_l3 = st.columns([0.1, 0.8, 0.1])
   with col_l2:
-    st.write("Selecciona tu perfil de acceso:")
-    rol = st.radio("Perfil:", ["Estudiante", "Profesor"])
+    rol = st.radio("Selecciona tu perfil de acceso:", ["Estudiante", "Profesor"])
 
     if rol == "Estudiante":
       with st.form("form_est"):
@@ -762,6 +729,8 @@ if not st.session_state.logged_in:
             st.rerun()
           else:
             st.error("Contraseña incorrecta (Unisucre2026).")
+
+  st.markdown("</div></div>", unsafe_allow_html=True)
   st.stop()
 
 # ==========================================
@@ -818,7 +787,7 @@ else:
       "🛒 8. Terminal Bursátil",
       "🌱 9. Fondo ESG",
       "📰 10. Sala de Noticias Reales",
-      "👨‍‍🏫 11. Panel de Asignaciones (Profesor)",
+      "👨‍🏫 11. Panel de Asignaciones (Profesor)",
       "⏳ 12. Simulación (Demo vs Día a Día)",
       "🧠 13. Alertas de Riesgo",
   ]
