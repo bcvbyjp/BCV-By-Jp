@@ -18,6 +18,57 @@ st.set_page_config(
 )
 
 # ==========================================
+# ESTILOS CSS PROFESIONALES (INTERFAZ FINTECH)
+# ==========================================
+st.markdown(
+    """
+    <style>
+    /* Fondo general y tipografía limpia */
+    .stApp {
+        background-color: #0e1117;
+        color: #ffffff;
+    }
+    /* Tarjetas de métricas personalizadas */
+    div[data-testid="stMetric"] {
+        background-color: #161b22;
+        border: 1px solid #30363d;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    div[data-testid="stMetric"] label {
+        color: #8b949e !important;
+        font-weight: 600;
+    }
+    /* Encabezados y títulos */
+    h1, h2, h3 {
+        color: #58a6ff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    /* Botones profesionales */
+    .stButton>button {
+        background-color: #238636;
+        color: white;
+        border-radius: 6px;
+        border: none;
+        font-weight: bold;
+        padding: 0.5rem 1rem;
+        transition: background 0.3s ease;
+    }
+    .stButton>button:hover {
+        background-color: #2ea043;
+    }
+    /* Sidebar elegante */
+    section[data-testid="stSidebar"] {
+        background-color: #161b22;
+        border-right: 1px solid #30363d;
+    }
+    </style>
+""",
+    unsafe_allow_html=True,
+)
+
+# ==========================================
 # 1. GESTIÓN DE BASE DE DATOS PERSISTENTE (SQLITE)
 # ==========================================
 DB_FILE = "bcv_database.db"
@@ -192,7 +243,7 @@ def load_assignments_db():
                         " los ingresos de Ecopetrol."
                     ),
                     "impacto": 1,
-                    "op_a": "🛡️ Tomar utilidades parciales en Ecopetrol",
+                    "op_a": "🛡️️ Tomar utilidades parciales en Ecopetrol",
                     "ef_a": "Asegura liquidez frente a correcciones imprevistas.",
                     "op_b": "💎 Mantener posición en firme en hidrocarburos",
                     "ef_b": "Aprovecha el boom alcista completo.",
@@ -593,95 +644,109 @@ if "logged_in" not in st.session_state:
   st.session_state.logged_in = False
 
 if not st.session_state.logged_in:
-  st.title("🔐 BCV By Jp - Portal Académico Financiero (Base Persistente)")
-  st.write("Selecciona tu perfil de acceso:")
-  rol = st.radio("Perfil:", ["Estudiante", "Profesor"])
+  st.markdown(
+      "<h1 style='text-align: center;'>🔐 BCV By Jp</h1>",
+      unsafe_allow_html=True,
+  )
+  st.markdown(
+      "<h3 style='text-align: center; color: #8b949e;'>Portal Académico"
+      " Financiero Institucional</h3>",
+      unsafe_allow_html=True,
+  )
+  st.markdown("---")
 
-  if rol == "Estudiante":
-    with st.form("form_est"):
-      nombre_est = st.text_input("Nombre Completo:")
-      semestre_est = st.selectbox(
-          "Semestre:",
-          [f"Semestre {i}" for i in range(1, 11)],
-      )
-      carrera_est = st.text_input(
-          "Carrera (ej. Administración de Empresas):"
-      )
-      btn_ing = st.form_submit_button("Ingresar al Portal 🚀")
-      if btn_ing:
-        if nombre_est.strip() and carrera_est.strip():
-          if nombre_est.strip().upper() == "JP":
-            rol_real = "Administrador"
-            presup_def = 100000000
-          else:
-            rol_real = "Estudiante"
-            presup_def = 0
-            for k, v in st.session_state.prof_assignments.items():
-              if v["semestre_objetivo"] == semestre_est:
-                presup_def = v["presupuesto_inicial"]
-                break
+  col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
+  with col_l2:
+    st.write("Selecciona tu perfil de acceso:")
+    rol = st.radio("Perfil:", ["Estudiante", "Profesor"])
 
-          if nombre_est not in st.session_state.user_database:
-            st.session_state.user_database[nombre_est] = {
-                "rol": rol_real,
-                "semestre": semestre_est if rol_real == "Estudiante" else "Admin",
-                "carrera": carrera_est,
-                "cash": presup_def,
-                "presupuesto_inicial": presup_def,
-                "portfolio_acciones": {},
-                "cdt_list": [],
-                "renta_fija_list": [],
-                "historial_pasos": [],
-                "informe_estudiante": "",
-                "esg_fund": 0,
-            }
-            save_user_to_db(
-                nombre_est, st.session_state.user_database[nombre_est]
-            )
-          else:
+    if rol == "Estudiante":
+      with st.form("form_est"):
+        nombre_est = st.text_input("Nombre Completo:")
+        semestre_est = st.selectbox(
+            "Semestre:",
+            [f"Semestre {i}" for i in range(1, 11)],
+        )
+        carrera_est = st.text_input(
+            "Carrera (ej. Administración de Empresas):"
+        )
+        btn_ing = st.form_submit_button("Ingresar al Portal 🚀")
+        if btn_ing:
+          if nombre_est.strip() and carrera_est.strip():
             if nombre_est.strip().upper() == "JP":
-              st.session_state.user_database[nombre_est]["rol"] = (
-                  "Administrador"
-              )
+              rol_real = "Administrador"
+              presup_def = 100000000
+            else:
+              rol_real = "Estudiante"
+              presup_def = 0
+              for k, v in st.session_state.prof_assignments.items():
+                if v["semestre_objetivo"] == semestre_est:
+                  presup_def = v["presupuesto_inicial"]
+                  break
 
-          st.session_state.current_user = nombre_est
-          st.session_state.current_role = (
-              st.session_state.user_database[nombre_est]["rol"]
-          )
-          st.session_state.logged_in = True
-          st.rerun()
-        else:
-          st.error("Completa todos los campos.")
-  else:
-    with st.form("form_prof"):
-      nombre_prof = st.text_input("Nombre del Profesor:")
-      pass_prof = st.text_input("Contraseña:", type="password")
-      btn_ing_p = st.form_submit_button("Ingresar Docente 👨‍🏫")
-      if btn_ing_p:
-        if pass_prof == "Unisucre2026" and nombre_prof.strip():
-          if nombre_prof not in st.session_state.user_database:
-            st.session_state.user_database[nombre_prof] = {
-                "rol": "Profesor",
-                "semestre": "Profesor",
-                "carrera": "Docencia",
-                "cash": 0,
-                "presupuesto_inicial": 0,
-                "portfolio_acciones": {},
-                "cdt_list": [],
-                "renta_fija_list": [],
-                "historial_pasos": [],
-                "informe_estudiante": "",
-                "esg_fund": 0,
-            }
-            save_user_to_db(
-                nombre_prof, st.session_state.user_database[nombre_prof]
+            if nombre_est not in st.session_state.user_database:
+              st.session_state.user_database[nombre_est] = {
+                  "rol": rol_real,
+                  "semestre": (
+                      semestre_est if rol_real == "Estudiante" else "Admin"
+                  ),
+                  "carrera": carrera_est,
+                  "cash": presup_def,
+                  "presupuesto_inicial": presup_def,
+                  "portfolio_acciones": {},
+                  "cdt_list": [],
+                  "renta_fija_list": [],
+                  "historial_pasos": [],
+                  "informe_estudiante": "",
+                  "esg_fund": 0,
+              }
+              save_user_to_db(
+                  nombre_est, st.session_state.user_database[nombre_est]
+              )
+            else:
+              if nombre_est.strip().upper() == "JP":
+                st.session_state.user_database[nombre_est]["rol"] = (
+                    "Administrador"
+                )
+
+            st.session_state.current_user = nombre_est
+            st.session_state.current_role = (
+                st.session_state.user_database[nombre_est]["rol"]
             )
-          st.session_state.current_user = nombre_prof
-          st.session_state.current_role = "Profesor"
-          st.session_state.logged_in = True
-          st.rerun()
-        else:
-          st.error("Contraseña incorrecta (Unisucre2026).")
+            st.session_state.logged_in = True
+            st.rerun()
+          else:
+            st.error("Completa todos los campos.")
+    else:
+      with st.form("form_prof"):
+        nombre_prof = st.text_input("Nombre del Profesor:")
+        pass_prof = st.text_input("Contraseña:", type="password")
+        btn_ing_p = st.form_submit_button("Ingresar Docente 👨‍🏫")
+        if btn_ing_p:
+          if pass_prof == "Unisucre2026" and nombre_prof.strip():
+            if nombre_prof not in st.session_state.user_database:
+              st.session_state.user_database[nombre_prof] = {
+                  "rol": "Profesor",
+                  "semestre": "Profesor",
+                  "carrera": "Docencia",
+                  "cash": 0,
+                  "presupuesto_inicial": 0,
+                  "portfolio_acciones": {},
+                  "cdt_list": [],
+                  "renta_fija_list": [],
+                  "historial_pasos": [],
+                  "informe_estudiante": "",
+                  "esg_fund": 0,
+              }
+              save_user_to_db(
+                  nombre_prof, st.session_state.user_database[nombre_prof]
+              )
+            st.session_state.current_user = nombre_prof
+            st.session_state.current_role = "Profesor"
+            st.session_state.logged_in = True
+            st.rerun()
+          else:
+            st.error("Contraseña incorrecta (Unisucre2026).")
   st.stop()
 
 # ==========================================
@@ -839,7 +904,7 @@ elif menu == "🏠 1. Introducción y Guía Académica":
   st.title("🇨🇴 BCV By Jp - Portal de Simulación Bursátil")
   st.markdown(
       "Plataforma interactiva institucional con arquitectura persistente,"
-      " caché optimizado y gráficos interactivos Plotly."
+      " gráficos interactivos Plotly e interfaz profesional estilo fintech."
   )
   st.info(
       "⚠️ **AVISO LEGAL EDUCATIVO:** Esta plataforma es una herramienta"
@@ -1004,7 +1069,6 @@ elif menu in [
               f"${prc:,.0f} COP".replace(",", "."),
               delta=f"ESG: {info['esg_score']}/100",
           )
-          # Gráfico interactivo Plotly
           fig_pl = px.line(
               y=hist,
               labels={"x": "Periodo", "y": "Precio COP"},
@@ -1014,6 +1078,9 @@ elif menu in [
               margin=dict(l=10, r=10, t=30, b=10),
               height=140,
               xaxis_visible=False,
+              paper_bgcolor="rgba(0,0,0,0)",
+              plot_bgcolor="rgba(0,0,0,0)",
+              font=dict(color="white"),
           )
           st.plotly_chart(fig_pl, use_container_width=True)
         st.markdown("---")
@@ -1300,11 +1367,16 @@ elif menu in [
   with c_info3:
     st.metric("Punta de Venta (Ask)", f"${ask_prc:,.0f} COP".replace(",", "."))
 
-  # Gráfico interactivo Plotly en la terminal
   fig_term = px.line(
       y=hist_op, labels={"x": "Rueda", "y": "Precio COP"}, title=f"Gráfico {ticker_op}"
   )
-  fig_term.update_layout(margin=dict(l=10, r=10, t=30, b=10), height=180)
+  fig_term.update_layout(
+      margin=dict(l=10, r=10, t=30, b=10),
+      height=180,
+      paper_bgcolor="rgba(0,0,0,0)",
+      plot_bgcolor="rgba(0,0,0,0)",
+      font=dict(color="white"),
+  )
   st.plotly_chart(fig_term, use_container_width=True)
 
   tab_compra, tab_venta = st.tabs(["🟢 Comprar Acciones", "🔴 Vender Acciones"])
@@ -1476,7 +1548,7 @@ elif menu == "📝 11. Tareas e Informe":
           st.rerun()
 
 elif menu == "👨‍🏫 11. Panel de Asignaciones (Profesor)":
-  st.title("👨‍🏫 Panel de Control Docente Avanzado")
+  st.title("👨‍‍🏫 Panel de Control Docente Avanzado")
   with st.form("form_p_panel"):
     t_tit = st.text_input("Título de Actividad:")
     t_desc = st.text_area("Descripción:")
@@ -1564,7 +1636,7 @@ elif menu in [
       "**Explicación Detallada del Conjunto:** Este módulo combina la"
       " simulación estocástica de Monte Carlo con un **selector libre de"
       " horizonte temporal** (días, semanas, meses o años) y gráficos"
-      " interactivos Plotly con bandas de confianza (95% y 5%)."
+      " interactivos Plotly adaptados al diseño oscuro institucional."
   )
 
   col_t1, col_t2 = st.columns(2)
@@ -1734,7 +1806,6 @@ elif menu in [
           st.success("¡Opción B aplicada con éxito!")
           st.rerun()
 
-    # Gráfico interactivo Plotly para Monte Carlo
     df_sim = pd.DataFrame(
         {
             "Paso": [f"Paso {i}" for i in range(len(st.session_state.sim_hist))],
@@ -1759,5 +1830,11 @@ elif menu in [
         ],
         title="Simulación Estocástica de Monte Carlo (Bandas de Confianza)",
     )
-    fig_mc.update_layout(margin=dict(l=10, r=10, t=30, b=10), height=350)
+    fig_mc.update_layout(
+        margin=dict(l=10, r=10, t=30, b=10),
+        height=350,
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="white"),
+    )
     st.plotly_chart(fig_mc, use_container_width=True)
