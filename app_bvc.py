@@ -18,7 +18,7 @@ st.set_page_config(
 )
 
 # ==========================================
-# ESTILOS CSS (PANTALLA GIGANTE JP + FINTECH PREMIUM)
+# ESTILOS CSS (FINTECH PREMIUM CORREGIDO)
 # ==========================================
 st.markdown(
     """
@@ -43,7 +43,7 @@ st.markdown(
             url("fondo-financiero.jpg") center/cover no-repeat fixed;
     }
 
-    /* Banner Global de Jp en la parte superior */
+    /* Banner Global de Jp */
     .jp-global-banner {
         background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
         border: 2px solid #facc15;
@@ -66,25 +66,25 @@ st.markdown(
         animation: floatJp 3.5s ease-in-out infinite;
     }
 
-    /* Hero de Masterclass Jp en Pantalla Gigante */
+    /* Hero Masterclass */
     .hero-jp-masterclass {
         background: radial-gradient(circle at top center, #1e293b 0%, #0f172a 100%);
         border: 2px solid #facc15;
         border-radius: 28px;
-        padding: 45px;
+        padding: 40px;
         text-align: center;
         margin-bottom: 30px;
-        box-shadow: 0 0 50px rgba(250, 204, 21, 0.25);
+        box-shadow: 0 0 40px rgba(250, 204, 21, 0.2);
     }
 
     .jp-masterclass-img {
-        width: 180px;
-        height: 180px;
+        width: 170px;
+        height: 170px;
         border-radius: 50%;
         object-fit: cover;
         border: 4px solid #facc15;
-        box-shadow: 0 0 35px rgba(250, 204, 21, 0.6);
-        margin-bottom: 18px;
+        box-shadow: 0 0 30px rgba(250, 204, 21, 0.6);
+        margin-bottom: 15px;
         animation: floatJp 3.5s ease-in-out infinite;
     }
 
@@ -94,37 +94,12 @@ st.markdown(
         100% { transform: translateY(0px) scale(1); }
     }
 
-    .asset-card {
+    .info-card {
         background: linear-gradient(135deg, #101622 0%, #1a2233 100%);
-        border: 1px solid rgba(31, 111, 235, 0.4);
-        border-radius: 20px;
-        padding: 28px;
-        margin-bottom: 24px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-    .asset-card:hover {
-        border-color: #58a6ff;
-        box-shadow: 0 12px 30px rgba(88, 166, 255, 0.25);
-    }
-
-    .concept-badge {
-        background: rgba(56, 189, 248, 0.15);
-        color: #38bdf8;
-        border: 1px solid rgba(56, 189, 248, 0.4);
-        padding: 5px 14px;
-        border-radius: 12px;
-        font-size: 0.82rem;
-        font-weight: 600;
-        text-transform: uppercase;
-    }
-
-    .motive-box {
-        background: rgba(35, 134, 54, 0.15);
-        border: 1px solid rgba(46, 160, 67, 0.5);
+        border: 1px solid rgba(31, 111, 235, 0.35);
         border-radius: 18px;
-        padding: 20px;
-        margin: 15px 0;
+        padding: 22px;
+        margin-bottom: 15px;
     }
 
     h1, h2, h3 { color: #58a6ff; font-weight: 700; }
@@ -134,7 +109,7 @@ st.markdown(
 )
 
 # ==========================================
-# BASE DE DATOS Y PERSISTENCIA (SQLITE)
+# BASE DE DATOS Y PERSISTENCIA
 # ==========================================
 DB_FILE = "bcv_database.db"
 
@@ -239,7 +214,7 @@ usuario_activo = st.session_state.current_user
 u_data = st.session_state.user_database[usuario_activo]
 
 # ==========================================
-# BANNER GLOBAL DE JP (PARTE SUPERIOR)
+# BANNER GLOBAL DE JP
 # ==========================================
 def render_guia_banner_global():
     has_img = os.path.exists("jp_foto.jpg")
@@ -258,7 +233,7 @@ def render_guia_banner_global():
             <div style="flex-grow: 1;">
                 <h3 style="color: #facc15; margin: 0; font-size: 1.35rem;">🟡 Jp - Tu Guía Virtual Unisucre</h3>
                 <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.95rem;">
-                    ¡Epa, <b>{usuario_activo}</b>! Bienvenido a la plataforma. Lee detenidamente la <b>Masterclass de Jp</b> para aprender por qué invertir no es un lujo, sino una necesidad para tu futuro profesional.
+                    ¡Epa, <b>{usuario_activo}</b>! Bienvenido a la plataforma. Revisa la <b>Masterclass de Jp</b> para aprender por qué invertir es la clave de tu futuro.
                 </p>
             </div>
         </div>
@@ -267,7 +242,7 @@ def render_guia_banner_global():
     )
 
 # ==========================================
-# SIDEBAR NAVEGACIÓN
+# SIDEBAR
 # ==========================================
 with st.sidebar:
     st.title("📈 BCV By Jp")
@@ -284,11 +259,10 @@ with st.sidebar:
         st.session_state.logged_in = False
         st.rerun()
 
-# RENDERIZAR BANNER GLOBAL EN TODAS LAS VISTAS
 render_guia_banner_global()
 
 # ==========================================
-# MÓDULO: MASTERCLASS COMPLETA Y ENRIQUECIDA CON JP
+# MASTERCLASS CORREGIDA Y LIMPIA
 # ==========================================
 if menu == "Masterclass BVC con Jp":
     has_img = os.path.exists("jp_foto.jpg")
@@ -300,174 +274,122 @@ if menu == "Masterclass BVC con Jp":
     else:
         img_hero_html = '<div style="font-size: 6rem;">👨‍💼</div>'
 
-    # HERO PANTALLA GIGANTE
     st.markdown(
         f"""
         <div class="hero-jp-masterclass">
             {img_hero_html}
-            <h1 style="color: #facc15; font-size: 2.6rem; margin-bottom: 8px;">🎓 Masterclass de Inversión y Bolsa de Valores (BVC)</h1>
-            <h3 style="color: #94a3b8; font-weight: 400; margin-bottom: 20px; font-size: 1.25rem;">
+            <h1 style="color: #facc15; font-size: 2.5rem; margin-bottom: 8px;">🎓 Masterclass de Inversión y Bolsa de Valores (BVC)</h1>
+            <h3 style="color: #94a3b8; font-weight: 400; margin-bottom: 15px; font-size: 1.2rem;">
                 Dictado por <b>Juan Pablo López Tarriba (Jp)</b> | Universidad de Sucre
             </h3>
-            <p style="font-size: 1.15rem; color: #cbd5e1; max-width: 900px; margin: 0 auto; line-height: 1.8;">
-                ¡Habla, cuadro! Si estás aquí es porque no quieres conformarte con dejar el dinero 'guardado bajo el colchón' viendo cómo pierde valor todos los días. 
-                Esta Masterclass está diseñada para romper el mito de que <i>"la bolsa es solo para millonarios"</i> y darte el conocimiento técnico, las herramientas reales y la confianza para tomar el control de tu futuro financiero desde hoy mismo.
+            <p style="font-size: 1.1rem; color: #cbd5e1; max-width: 850px; margin: 0 auto; line-height: 1.7;">
+                ¡Habla, cuadro! Esta guía está hecha para romper el mito de que <i>"la bolsa es solo para ricos"</i> y darte las herramientas reales para administrar con inteligencia tu saldo inicial de <b>$500.000 COP</b>.
             </p>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-    # NÚCLEO EDUCATIVO EN PROFUNDIDAD
-    st.markdown("## 🚀 Módulos Magistrales de Formación Bursátil")
-
     tab_m1, tab_m2, tab_m3, tab_m4, tab_m5 = st.tabs([
-        "💡 1. ¿Por qué Invertir? (El Poder del Capital)",
-        "🏛️️ 2. ¿Qué es la BVC y cómo Funciona?",
+        "💡 1. ¿Por qué Invertir?",
+        "🏛 2. ¿Qué es la BVC?",
         "⚖️ 3. Renta Variable vs. Renta Fija",
-        "🌎 4. Casos Reales de Éxito y Lecciones",
-        "🧠 5. Mente de Inversionista y Reglas de Oro"
+        "🌎 4. Casos Reales de Éxito",
+        "🧠 5. Mente de Inversionista"
     ])
 
     with tab_m1:
-        st.markdown(
-            """
-            <div class="asset-card">
-                <span class="concept-badge">El Despertar Financiero</span>
-                <h2 style="margin-top: 10px;">🔥 ¿Por qué Invertir no es Opcional?</h2>
-                <p style="font-size: 1.05rem; line-height: 1.8;">
-                    Mucha gente cree que ahorrar dinero en una cuenta de ahorros tradicional o debajo del colchón es seguro. <b>¡Gran error!</b> 
-                    Hay un enemigo silencioso llamado <b>INFLACIÓN</b>. La inflación es el aumento sostenido en los precios de las cosas (el pan, la gasolina, la matrícula universitaria). 
-                    Si la inflación en Colombia es del 7% anual y tu dinero guardado en el banco te da el 1%, en realidad <b>estás perdiendo un 6% de poder de compra cada año</b>.
-                </p>
-
-                <div class="motive-box">
-                    <h3 style="color: #2ea043; margin-top: 0;">✨ El Secreto del Interés Compuesto (La 8ª Maravilla del Mundo)</h3>
-                    <p style="font-size: 1rem; line-height: 1.7; color: #e2e8f0;">
-                        Albert Einstein decía que el interés compuesto es la fuerza más poderosa del universo. Consiste en reinvertir las ganancias generadas para que tus intereses generen más intereses. 
-                        <b>Ejemplo práctico:</b> Si inviertes $500.000 COP hoy con un retorno promedio del 12% anual y reinviertes tus ganancias, en lugar de crecer en línea recta, tu capital despega de forma exponencial con el paso del tiempo. ¡El dinero trabaja para ti mientras duermes!
-                    </p>
-                </div>
-            </div>
-            """, unsafe_allow_html=True
+        st.subheader("🔥 ¿Por qué Invertir no es Opcional?")
+        st.write(
+            "Mucha gente cree que ahorrar dinero en una cuenta tradicional o debajo del colchón es seguro. "
+            "**¡Gran error!** Existe un enemigo silencioso llamado **INFLACIÓN**. "
+            "Si la inflación en Colombia es del 7% anual y tu dinero guardado te da el 1%, en realidad **estás perdiendo un 6% de poder de compra cada año**."
+        )
+        st.info(
+            "✨ **El Secreto del Interés Compuesto:**\n\n"
+            "Albert Einstein decía que el interés compuesto es la fuerza más poderosa del universo. Consiste en reinvertir las ganancias generadas para que tus intereses generen más intereses. "
+            "Si inviertes $500.000 COP hoy con un retorno promedio del 12% anual y reinviertes tus ganancias, ¡tu dinero trabajará para ti de forma exponencial!"
         )
 
     with tab_m2:
-        st.markdown(
-            """
-            <div class="asset-card">
-                <span class="concept-badge">Mecanismo del Mercado</span>
-                <h2 style="margin-top: 10px;">🏛️ ¿Qué es la BVC y cuál es su Rol en Colombia?</h2>
-                <p style="font-size: 1.05rem; line-height: 1.8;">
-                    La <b>Bolsa de Valores de Colombia (BVC)</b> es la infraestructura tecnológica y legal donde se encuentran dos tipos de personas:
-                </p>
-                <ol style="font-size: 1.05rem; line-height: 1.8;">
-                    <li><b>Los Deficitarios (Empresas y Estado):</b> Necesitan dinero para construir infraestructura, expandir plantas o crear nuevos empleos. En lugar de pedirle todo a un banco, emiten acciones o bonos.</li>
-                    <li><b>Los Superavitarios (Inversionistas):</b> Personas e instituciones con capital libre que buscan colocar su dinero en proyectos productivos para obtener una rentabilidad superior.</li>
-                </ol>
-                <hr style="border-color: rgba(255,255,255,0.1);">
-                <h3>🛡️ ¿Es Seguro Invertir en la BVC?</h3>
-                <p style="font-size: 1rem; line-height: 1.7;">
-                    <b>¡Totalmente transparente!</b> El mercado de valores colombiano está rigurosamente regulado por la <b>Superintendencia Financiera de Colombia (SFC)</b> y auditado por el <b>Autoregulador del Mercado de Valores (AMV)</b>. Nadie puede 'desaparecer' con tu dinero porque los títulos quedan registrados en el Depósito Centralizado de Valores (DECEVAL).
-                </p>
-            </div>
-            """, unsafe_allow_html=True
+        st.subheader("🏛️ ¿Qué es la BVC y cuál es su Rol en Colombia?")
+        st.write(
+            "La **Bolsa de Valores de Colombia (BVC)** es la plaza de mercado oficial donde se conectan las empresas que necesitan capital para crecer con las personas e instituciones que tienen ahorros disponibles."
         )
+        col_c1, col_c2 = st.columns(2)
+        with col_c1:
+            st.markdown(
+                """
+                <div class="info-card">
+                    <h4>🏢 Empresas (Deficitarios)</h4>
+                    <p>Emiten acciones o bonos para construir infraestructura, expandir plantas y crear empleo sin endeudarse únicamente con bancos.</p>
+                </div>
+                """, unsafe_allow_html=True
+            )
+        with col_c2:
+            st.markdown(
+                """
+                <div class="info-card">
+                    <h4>💼 Inversionistas (Superavitarios)</h4>
+                    <p>Aportan capital a proyectos productivos a cambio de rentabilidades superiores a las de los métodos de ahorro tradicionales.</p>
+                </div>
+                """, unsafe_allow_html=True
+            )
+        st.success("🛡️ **Seguridad Garantizada:** El mercado está vigilado por la Superintendencia Financiera de Colombia (SFC) y el Autoregulador del Mercado de Valores (AMV).")
 
     with tab_m3:
         col_rv, col_rf = st.columns(2)
         with col_rv:
             st.markdown(
                 """
-                <div class="asset-card" style="min-height: 420px;">
-                    <span class="concept-badge">Crecimiento / Mayor Retorno</span>
-                    <h2 style="margin-top: 10px;">📈 Renta Variable (Acciones)</h2>
-                    <p style="font-size: 1rem; line-height: 1.7;">
-                        Te convierte en <b>socio copropietario real</b> de grandes compañías como Ecopetrol, Bancolombia o ISA.
-                    </p>
-                    <h4 style="color: #2ea043;">¿Cómo generas ganancias?</h4>
+                <div class="info-card">
+                    <h3 style="color: #58a6ff;">📈 Renta Variable (Acciones)</h3>
+                    <p>Te convierte en <b>socio copropietario</b> de empresas como Ecopetrol o Bancolombia.</p>
                     <ul>
-                        <li><b>Valorización del precio:</b> Si la empresa factura más y se expande, la acción sube de valor en el mercado secundario.</li>
-                        <li><b>Dividendos:</b> Reparto de utilidades en efectivo que las empresas pagan directamente a los accionistas.</li>
+                        <li><b>Valorización:</b> La acción sube de precio si la empresa crece.</li>
+                        <li><b>Dividendos:</b> Reparto periódico de utilidades generadas.</li>
                     </ul>
-                    <p style="color: #f87171; font-size: 0.9rem;">⚠️ <i>Requiere paciencia y tolerancia a la volatilidad a corto plazo.</i></p>
                 </div>
                 """, unsafe_allow_html=True
             )
         with col_rf:
             st.markdown(
                 """
-                <div class="asset-card" style="min-height: 420px;">
-                    <span class="concept-badge">Estabilidad y Protección</span>
-                    <h2 style="margin-top: 10px;">📜 Renta Fija (TES y CDT)</h2>
-                    <p style="font-size: 1rem; line-height: 1.7;">
-                        Te convierte en <b>acreedor (prestamista)</b> del Estado Colombiano o de bancos de primer nivel.
-                    </p>
-                    <h4 style="color: #2ea043;">¿Cómo generas ganancias?</h4>
+                <div class="info-card">
+                    <h3 style="color: #2ea043;">📜 Renta Fija (TES y CDT)</h3>
+                    <p>Te convierte en <b>prestamista</b> del Estado o instituciones bancarias.</p>
                     <ul>
-                        <li><b>Cupones e Intereses:</b> Conoces exactamente la tasa pactada (ej. 11.5% E.A.) y la fecha exacta en la que recibirás tu capital más rendimientos.</li>
-                        <li><b>Riesgo Mínimo:</b> Tienen respaldo del estado o seguro de depósito FOGAFIN.</li>
+                        <li><b>Intereses Conocidos:</b> Tasa pactada desde el primer día (ej. 11.5% E.A.).</li>
+                        <li><b>Riesgo Mínimo:</b> Respaldados por la Nación o el seguro FOGAFIN.</li>
                     </ul>
-                    <p style="color: #38bdf8; font-size: 0.9rem;">💡 <i>Ideal para armar la base sólida de tu portafolio.</i></p>
                 </div>
                 """, unsafe_allow_html=True
             )
 
     with tab_m4:
+        st.subheader("🌎 Casos Reales: Lo que nos Enseña la Historia")
         st.markdown(
             """
-            <div class="asset-card">
-                <span class="concept-badge">Aprendizaje con Historia</span>
-                <h2 style="margin-top: 10px;">🌎 Casos Reales: Lo que Nos Enseña la Historia</h2>
-                
-                <div style="margin-bottom: 20px;">
-                    <h3 style="color: #facc15;">🌟 Caso 1: Anne Scheiber (El Poder de la Disciplina)</h3>
-                    <p style="font-size: 1rem; line-height: 1.7;">
-                        Anne era una auditora del gobierno estadounidense con un salario modesto. Nunca ganó un sueldo astronómico, pero durante más de 50 años invirtió disciplinadamente pequeñas sumas de dinero en acciones de empresas sólidas (como Coca-Cola y Pfizer) y nunca vendió en momentos de pánico. 
-                        <b>¿El resultado?</b> Transformó unos pocos miles de dólares en un patrimonio de <b>más de $22 millones de dólares</b>.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 style="color: #58a6ff;">🇨🇴 Caso 2: El Histórico Pagador de Dividendos en Colombia (Ecopetrol y Bancolombia)</h3>
-                    <p style="font-size: 1rem; line-height: 1.7;">
-                        En Colombia, inversionistas que compraron acciones de Ecopetrol o Bancolombia a precios desvalorizados durante crisis globales y mantuvieron sus posiciones, han recibido durante años retornos en <b>dividendos de hasta el 10% - 15% anual sobre su compra inicial</b>, superando con creces cualquier cuenta de ahorros tradicional.
-                    </p>
-                </div>
+            <div class="info-card">
+                <h4 style="color: #facc15;">🌟 Caso 1: Anne Scheiber (El Poder de la Disciplina)</h4>
+                <p>Anne era una auditora estadounidense con un salario modesto. Durante más de 50 años invirtió disciplinadamente pequeñas sumas en acciones de empresas sólidas y nunca vendió en pánico. Transformó unos miles de dólares en un patrimonio de <b>más de $22 millones de dólares</b>.</p>
+            </div>
+            <div class="info-card">
+                <h4 style="color: #58a6ff;">🇨🇴 Caso 2: Dividendos en Colombia (Ecopetrol y Bancolombia)</h4>
+                <p>Inversionistas en Colombia que compraron acciones de Ecopetrol o Bancolombia durante momentos de crisis y mantuvieron sus posiciones, han recibido <b>retornos anuales en dividendos del 10% al 15% sobre su inversión inicial</b>.</p>
             </div>
             """, unsafe_allow_html=True
         )
 
     with tab_m5:
-        st.markdown(
-            """
-            <div class="asset-card">
-                <span class="concept-badge">Mentalidad Unisucre</span>
-                <h2 style="margin-top: 10px;">🧠 Las 4 Reglas de Oro de Jp para Operar con Éxito</h2>
-                <p style="font-size: 1.05rem; line-height: 1.8;">
-                    Para triunfar en este simulador y en la vida real, grábate estas reglas antes de tocar tus $500.000 COP iniciales:
-                </p>
-                <div style="display: flex; gap: 18px; flex-wrap: wrap; margin-top: 20px;">
-                    <div style="flex: 1; min-width: 220px; background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 16px; border: 1px solid rgba(250,204,21,0.4);">
-                        <h4 style="color: #facc15; margin-top: 0;">1. Nunca Inviertas a Ciegas</h4>
-                        <p style="font-size: 0.95rem; color: #cbd5e1;">Aprende sobre la empresa o activo antes de comprar. Revisa sus fundamentales y estados de resultados.</p>
-                    </div>
-                    <div style="flex: 1; min-width: 220px; background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 16px; border: 1px solid rgba(56,189,248,0.4);">
-                        <h4 style="color: #38bdf8; margin-top: 0;">2. Diversifica sin Miedo</h4>
-                        <p style="font-size: 0.95rem; color: #cbd5e1;">Combina acciones de varios sectores (energía, bancos, tecnología) con instrumentos de renta fija.</p>
-                    </div>
-                    <div style="flex: 1; min-width: 220px; background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 16px; border: 1px solid rgba(46,160,67,0.4);">
-                        <h4 style="color: #2ea043; margin-top: 0;">3. Controla las Emociones</h4>
-                        <p style="font-size: 0.95rem; color: #cbd5e1;">El mercado oscila todos los días. Mantén la calma en las caídas y no compres por euforia en los picos.</p>
-                    </div>
-                    <div style="flex: 1; min-width: 220px; background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 16px; border: 1px solid rgba(168,85,247,0.4);">
-                        <h4 style="color: #c084fc; margin-top: 0;">4. Visión a Largo Plazo</h4>
-                        <p style="font-size: 0.95rem; color: #cbd5e1;">La riqueza verdadera en la bolsa se construye con constancia, paciencia e interés compuesto.</p>
-                    </div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True
-        )
+        st.subheader("🧠 Las 4 Reglas de Oro de Jp")
+        c1, c2 = st.columns(2)
+        with c1:
+            st.warning("1. **Nunca Inviertas a Ciegas:** Conoce el activo y la empresa antes de comprar.")
+            st.info("2. **Diversifica:** Combina acciones de varios sectores con instrumentos de renta fija.")
+        with c2:
+            st.error("3. **Controla las Emociones:** No compres por euforia ni vendas con pánico.")
+            st.success("4. **Visión a Largo Plazo:** La riqueza real se genera con constancia e interés compuesto.")
 
 elif menu == "Terminal Bursátil":
     st.title("🛒 Terminal Bursátil de Compra y Venta")
