@@ -121,7 +121,6 @@ st.markdown(
         box-shadow: 0 15px 35px rgba(56, 189, 248, 0.35), 0 0 25px rgba(56, 189, 248, 0.25);
     }
 
-    /* TARJETAS NEÓN TRII POR COLORES SECTORIALES */
     .trii-card-blue {
         background: linear-gradient(135deg, rgba(10, 25, 47, 0.9) 0%, rgba(15, 30, 55, 0.9) 100%);
         border: 1px solid #38bdf8;
@@ -267,7 +266,7 @@ if "user_database" not in st.session_state:
     st.session_state.user_database = load_user_db_cached()
 
 # ==========================================
-# DICCIONARIO MAESTRO DE LAS 36 ACCIONES BVC / TRII
+# DICCIONARIO MAESTRO DE LAS 36 ACCIONES BVC
 # ==========================================
 bvc_36_actions_master = {
     "ECOPETROL": {"precio": 2685, "logo": "🛢️", "sector": "Petróleo y Gas", "color": "blue", "desc": "Empresa petrolera oficial de Colombia. Explora, refina y transporta hidrocarburos."},
@@ -280,7 +279,7 @@ bvc_36_actions_master = {
     "CEMARGOS": {"precio": 7800, "logo": "🏗️", "sector": "Materiales / Construcción", "color": "green", "desc": "Líder en producción y comercialización de cemento y concreto en las Américas."},
     "PFCEMARGOS": {"precio": 6100, "logo": "🧱", "sector": "Materiales / Construcción", "color": "green", "desc": "Acción preferencial de Cementos Argos S.A."},
     "GRUPOARGOS": {"precio": 14200, "logo": "🏙️", "sector": "Holding Infraestructura", "color": "green", "desc": "Holding de infraestructura, concesiones viales, aeropuertos y cementos."},
-    "PFGRUPOARG": {"precio": 10500, "logo": "🏛️", "sector": "Holding Infraestructura", "color": "green", "desc": "Acción preferencial de Grupo Argos."},
+    "PFGRUPOARG": {"precio": 10500, "logo": "🏛️️", "sector": "Holding Infraestructura", "color": "green", "desc": "Acción preferencial de Grupo Argos."},
     "NUTRESA": {"precio": 46000, "logo": "🍫", "sector": "Alimentos Procesados", "color": "purple", "desc": "Gigante multilatina procesadora de chocolates, galletas, carnes y cafés."},
     "PROMIGAS": {"precio": 6400, "logo": "🔥", "sector": "Gas Natural", "color": "blue", "desc": "Transporte y distribución masiva de gas natural en Colombia y Perú."},
     "CORFICOLCF": {"precio": 19800, "logo": "💼", "sector": "Corporación Financiera", "color": "gold", "desc": "Inversión en megaproyectos viales, infraestructura energética y banca."},
@@ -308,9 +307,7 @@ bvc_36_actions_master = {
     "PFCELSA": {"precio": 3900, "logo": "💡", "sector": "Energía", "color": "blue", "desc": "Acción preferencial de Celsia S.A."}
 }
 
-# ==========================================
-# CATÁLOGO COMPLETO DE 50 BANCOS Y ENTIDADES PARA CDTs
-# ==========================================
+# CATÁLOGO DE 50 BANCOS
 bancos_cdt_50 = [
     {"banco": "Bancolombia S.A.", "tasa_ea": 10.5, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏦"},
     {"banco": "Banco Davivienda", "tasa_ea": 10.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏛️"},
@@ -330,7 +327,7 @@ bancos_cdt_50 = [
     {"banco": "Banco Caja Social", "tasa_ea": 10.9, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏠"},
     {"banco": "Banco Pichincha Colombia", "tasa_ea": 11.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "🟡"},
     {"banco": "Bancoomeva", "tasa_ea": 11.4, "plazo_dias": 360, "min_inversion": 50000, "logo": "🟢"},
-    {"banco": "Financiera Juriscoop", "tasa_ea": 12.1, "plazo_dias": 360, "min_inversion": 50000, "logo": "⚖️️"},
+    {"banco": "Financiera Juriscoop", "tasa_ea": 12.1, "plazo_dias": 360, "min_inversion": 50000, "logo": "⚖️"},
     {"banco": "Banco Serfinanza", "tasa_ea": 11.9, "plazo_dias": 360, "min_inversion": 50000, "logo": "🛒"},
     {"banco": "Tuya C.F.", "tasa_ea": 12.3, "plazo_dias": 180, "min_inversion": 50000, "logo": "🛍️"},
     {"banco": "RCI Colombia S.A.", "tasa_ea": 11.7, "plazo_dias": 360, "min_inversion": 50000, "logo": "🚗"},
@@ -364,6 +361,15 @@ bancos_cdt_50 = [
     {"banco": "Fiduciaria Davivienda", "tasa_ea": 10.7, "plazo_dias": 360, "min_inversion": 50000, "logo": "🔴"}
 ]
 
+# CATÁLOGO DE BONOS DE RENTA FIJA
+bonos_rf_master = [
+    {"id": "TES_2028", "nombre": "Bono TES Clase B 2028", "emisor": "Nación Colombiana (MinHacienda)", "tasa_ea": 10.5, "plazo_anios": 2, "min_inv": 50000, "logo": "🇨🇴", "color": "blue", "desc": "Deuda pública garantizada por la República de Colombia. Riesgo mínimo soberano."},
+    {"id": "TES_2032", "nombre": "Bono TES Clase B 2032", "emisor": "Nación Colombiana (MinHacienda)", "tasa_ea": 11.2, "plazo_anios": 6, "min_inv": 50000, "logo": "🇨🇴", "color": "blue", "desc": "Bono de mediano plazo para financiar infraestructura nacional."},
+    {"id": "TES_UVR_2030", "nombre": "Bono TES UVR 2030 (Anti-Inflación)", "emisor": "Nación Colombiana", "tasa_ea": 6.8, "plazo_anios": 4, "min_inv": 50000, "logo": "🛡️", "color": "green", "desc": "Protege tu dinero ajustando el capital según la inflación colombiana (UVR)."},
+    {"id": "BONO_ECOPETROL_2029", "nombre": "Bono Corporativo Ecopetrol 2029", "emisor": "Ecopetrol S.A. (Calificación AAA)", "tasa_ea": 12.1, "plazo_anios": 3, "min_inv": 50000, "logo": "🛢️", "color": "purple", "desc": "Financiamiento de proyectos de transición energética y refinerías."},
+    {"id": "BONO_ISA_2031", "nombre": "Bono Corporativo ISA 2031", "emisor": "Interconexión Eléctrica S.A. (AAA)", "tasa_ea": 11.8, "plazo_anios": 5, "min_inv": 50000, "logo": "⚡", "color": "gold", "desc": "Inversión en redes de transmisión eléctrica de alta tensión en Latinoamérica."}
+]
+
 st.session_state.prices_dict = bvc_36_actions_master
 if "prices" not in st.session_state or len(st.session_state.prices) < 36:
     st.session_state.prices = {k: v["precio"] for k, v in bvc_36_actions_master.items()}
@@ -372,7 +378,7 @@ if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
 # ==========================================
-# LOGIN
+# LOGIN CON ASIGNACIÓN AUTOMÁTICA DE $500.000 COP
 # ==========================================
 if not st.session_state.logged_in:
     st.markdown(
@@ -405,8 +411,8 @@ if not st.session_state.logged_in:
 usuario_activo = st.session_state.current_user
 u_data = st.session_state.user_database[usuario_activo]
 
-# Garantizar $500.000 COP siempre por defecto
-if u_data.get("cash") is None:
+# Garantizar $500.000 COP siempre por defecto a usuarios nuevos
+if u_data.get("cash") is None or u_data.get("cash") == 0 and not u_data.get("portfolio_acciones") and not u_data.get("cdt_list") and not u_data.get("renta_fija_list"):
     u_data["cash"] = 500000.0
     u_data["presupuesto_inicial"] = 500000.0
 
@@ -430,7 +436,7 @@ def render_guia_banner_global():
             <div style="flex-grow: 1;">
                 <h3 style="color: #facc15; margin: 0; font-size: 1.35rem; text-shadow: 0 0 10px rgba(250, 204, 21, 0.4);">🟡 Jp - Tu Guía Virtual Unisucre</h3>
                 <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.95rem;">
-                    ¡Epa, <b>{usuario_activo}</b>! Tienes un saldo libre inicial de <b>$500.000 COP</b> para comprar acciones y constituir CDTs en 50 bancos.
+                    ¡Epa, <b>{usuario_activo}</b>! Tienes un saldo libre inicial de <b>$500.000 COP</b> para comprar acciones, CDTs y Bonos TES de Renta Fija.
                 </p>
             </div>
         </div>
@@ -450,19 +456,21 @@ with st.sidebar:
         for tk, qty in u_data.get("portfolio_acciones", {}).items()
     )
     val_cdt_total = sum(c.get("monto", 0) for c in u_data.get("cdt_list", []))
-    patrimonio_total = u_data["cash"] + val_acciones_total + val_cdt_total
+    val_rf_total = sum(r.get("monto", 0) for r in u_data.get("renta_fija_list", []))
+    patrimonio_total = u_data["cash"] + val_acciones_total + val_cdt_total + val_rf_total
 
     st.markdown("### 💼 Tu Patrimonio Total")
     st.markdown(f"<h2 style='color:#2ea043; margin:0;'>${patrimonio_total:,.0f} COP</h2>", unsafe_allow_html=True)
     st.caption(f"💵 Efectivo Libre: `${u_data['cash']:,.0f} COP`")
     st.caption(f"📈 En Acciones: `${val_acciones_total:,.0f} COP`")
     st.caption(f"📜 En CDTs: `${val_cdt_total:,.0f} COP`")
+    st.caption(f"🇨🇴 En Bonos TES: `${val_rf_total:,.0f} COP`")
 
     st.markdown("---")
     menu = option_menu(
         "Navegación Principal",
-        ["Masterclass BVC con Jp", "Terminal Bursátil", "CDT Bancarios (50 Bancos)", "Simulador Proyectivo", "Renta Fija y Bonos TES"],
-        icons=["camera-reels", "cart", "bank", "calculator", "shield-check"],
+        ["Masterclass BVC con Jp", "Terminal Bursátil", "Mi Portafolio e Historial", "Estrategia con Acciones (Jp)", "CDT Bancarios (50 Bancos)", "Renta Fija y Bonos TES", "Simulador Proyectivo"],
+        icons=["camera-reels", "cart", "journal-check", "lightbulb", "bank", "shield-check", "calculator"],
         menu_icon="compass", default_index=0
     )
 
@@ -667,11 +675,11 @@ if menu == "Masterclass BVC con Jp":
             )
 
 # ==========================================
-# TERMINAL BURSÁTIL CON CÁLCULOS REALES
+# TERMINAL BURSÁTIL DE ACCIONES
 # ==========================================
 elif menu == "Terminal Bursátil":
     st.title("🛒 Terminal Bursátil: Mercado de Acciones BVC")
-    st.caption("36 Activos Oficiales de la Bolsa de Valores de Colombia con Valoración Real de Portafolio")
+    st.caption("36 Activos Oficiales de la Bolsa de Valores de Colombia")
 
     col_hdr1, col_hdr2 = st.columns([0.7, 0.3])
     with col_hdr1:
@@ -683,35 +691,6 @@ elif menu == "Terminal Bursátil":
                 st.session_state.prices[tk] = max(10, int(st.session_state.prices[tk] * (1 + var)))
             st.success("¡Cotizaciones actualizadas con éxito!")
             st.rerun()
-
-    st.markdown("### 📊 Estado Actual de tu Portafolio en Acciones")
-    if u_data.get("portfolio_acciones"):
-        resumen_data = []
-        tot_valor_mercado = 0
-
-        for tk_p, cant_p in u_data["portfolio_acciones"].items():
-            if cant_p > 0:
-                prc_mkt = st.session_state.prices.get(tk_p, bvc_36_actions_master.get(tk_p, {}).get("precio", 0))
-                val_mkt = cant_p * prc_mkt
-                tot_valor_mercado += val_mkt
-                resumen_data.append({
-                    "Ticker": tk_p,
-                    "Sector": bvc_36_actions_master.get(tk_p, {}).get("sector", "General"),
-                    "Cantidad": cant_p,
-                    "Precio Mercado": f"${prc_mkt:,.0f} COP",
-                    "Valor Total Mercado": f"${val_mkt:,.0f} COP"
-                })
-
-        if resumen_data:
-            df_port = pd.DataFrame(resumen_data)
-            st.dataframe(df_port, use_container_width=True)
-            st.success(f"💎 **Valor Total de tu Portafolio de Acciones a Precio de Mercado:** `${tot_valor_mercado:,.0f} COP`")
-        else:
-            st.info("Aún no tienes acciones en tu portafolio.")
-    else:
-        st.info("Tu portafolio está vacío. Compra tus primeras acciones abajo.")
-
-    st.markdown("---")
 
     items_acciones = list(bvc_36_actions_master.items())
     cols_grid = st.columns(3)
@@ -777,13 +756,135 @@ elif menu == "Terminal Bursátil":
                         st.caption("No posees acciones de esta empresa.")
 
 # ==========================================
-# MÓDULO: CDT BANCARIOS (50 BANCOS + CALCULADORA INTERÉS COMPUESTO)
+# MÓDULO NUEVO: MI PORTAFOLIO E HISTORIAL DE ARTÍCULOS COMPRADOS
+# ==========================================
+elif menu == "Mi Portafolio e Historial":
+    st.title("💼 Mi Portafolio e Historial de Inversiones")
+    st.caption("Revisión detallada de cada activo y título comprado en tu cuenta")
+
+    tab_p1, tab_p2, tab_p3 = st.tabs(["📈 Acciones Compradas", "📜 CDTs Vigentes", "🇨🇴 Bonos TES de Renta Fija"])
+
+    with tab_p1:
+        st.subheader("📈 Tus Acciones en Custodia")
+        if u_data.get("portfolio_acciones"):
+            items_p = []
+            tot_v_mkt = 0
+            for tk_x, c_x in u_data["portfolio_acciones"].items():
+                if c_x > 0:
+                    pr_x = st.session_state.prices.get(tk_x, bvc_36_actions_master.get(tk_x, {}).get("precio", 0))
+                    vm_x = c_x * pr_x
+                    tot_v_mkt += vm_x
+                    items_p.append({
+                        "Acción Ticker": tk_x,
+                        "Sector": bvc_36_actions_master.get(tk_x, {}).get("sector", "General"),
+                        "Cantidad Comprada": f"{c_x} Títulos",
+                        "Precio Mercado Actual": f"${pr_x:,.0f} COP",
+                        "Valor Total": f"${vm_x:,.0f} COP"
+                    })
+            if items_p:
+                st.dataframe(pd.DataFrame(items_p), use_container_width=True)
+                st.success(f"💰 **Valor Total de tus Acciones:** `${tot_v_mkt:,.0f} COP`")
+            else:
+                st.info("No tienes acciones compradas actualmente.")
+        else:
+            st.info("No has adquirido acciones todavía.")
+
+    with tab_p2:
+        st.subheader("📜 Tus CDTs Bancarios Constituidos")
+        if u_data.get("cdt_list"):
+            st.dataframe(pd.DataFrame(u_data["cdt_list"]), use_container_width=True)
+            tot_c_val = sum(c.get("monto", 0) for c in u_data["cdt_list"])
+            st.success(f"💰 **Monto Total Depositado en CDTs:** `${tot_c_val:,.0f} COP`")
+        else:
+            st.info("No has constituido ningún CDT aún.")
+
+    with tab_p3:
+        st.subheader("🇨🇴 Tus Bonos TES de Renta Fija")
+        if u_data.get("renta_fija_list"):
+            st.dataframe(pd.DataFrame(u_data["renta_fija_list"]), use_container_width=True)
+            tot_rf_val = sum(r.get("monto", 0) for r in u_data["renta_fija_list"])
+            st.success(f"💰 **Monto Total Invertido en Bonos:** `${tot_rf_val:,.0f} COP`")
+        else:
+            st.info("No tienes Bonos TES ni Renta Fija en tu inventario.")
+
+# ==========================================
+# MÓDULO NUEVO: ESTRATEGIA Y MANEJO DE ACCIONES POR JP
+# ==========================================
+elif menu == "Estrategia con Acciones (Jp)":
+    st.title("🧠 Guía de Estrategia y Gestión de Mercado con Jp")
+    st.caption("Aprende a proyectar, reaccionar ante obstáculos y gestionar tus acciones como un profesional")
+
+    st.markdown(
+        """
+        <div class="neon-card-green">
+            <h2 style="color: #2ea043; margin-top:0;">🧭 Claridad y Dominio del Mercado de Valores</h2>
+            <p style="color: #e2e8f0; font-size: 1.05rem; line-height: 1.7;">
+                Invertir en acciones no es apostar a la suerte; es adquirir una fracción real de un negocio en marcha. 
+                Aquí aprenderás las 3 claves esenciales para administrar tus títulos en la BVC sin caer en el pánico ni la euforia.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    t_est1, t_est2, t_est3 = st.tabs([
+        "📊 1. ¿Cómo se Proyecta una Acción?",
+        "🛡️ 2. ¿Qué hacer ante los Obstáculos del Mercado?",
+        "💡 3. ¿Qué Hacer con tus Acciones Compradas?"
+    ])
+
+    with t_est1:
+        st.markdown(
+            """
+            <div class="neon-card">
+                <span class="concept-badge">Análisis Fundamental y Técnico</span>
+                <h3 style="color: #38bdf8;">🔮 Los 3 Pilares para Proyectar el Valor Futuro</h3>
+                <ol style="color: #cbd5e1; line-height: 1.8; font-size: 1rem;">
+                    <li><b>Proyección de Crecimiento de Utilidades (EBITDA):</b> Si una empresa como Bancolombia o Celsia aumenta sus ingresos año tras año, la acción tiende a subir a largo plazo.</li>
+                    <li><b>Rendimiento por Dividendos (Dividend Yield):</b> Empresas maduras como Ecopetrol reparten utilidades directamente en efectivo a sus accionistas.</li>
+                    <li><b>Ciclos del Sector:</b> Los sectores de energía e infraestructura sufren variaciones con los precios del petróleo, las tasas del Banco de la República y la inflación.</li>
+                </ol>
+            </div>
+            """, unsafe_allow_html=True
+        )
+
+    with t_est2:
+        st.markdown(
+            """
+            <div class="neon-card">
+                <span class="concept-badge">Gestión de Riesgo y Resiliencia</span>
+                <h3 style="color: #f87171;">🛡️ Cómo Enfrentar los Obstáculos y la Volatilidad</h3>
+                <p style="color: #e2e8f0; line-height: 1.7;">
+                    <b>1. Caída Temporal de Precios:</b> Si el precio de tu acción cae por miedo general del mercado pero la empresa sigue siendo rentable, ¡no vendas en pánico! Las crisis suelen ser oportunidades de compra a descuento.<br><br>
+                    <b>2. Inflación o Subida de Tasas de Interés:</b> Durante periodos de altas tasas, equilibra tu portafolio combinando acciones defensivas (energía/alimentos) con CDTs de alta tasa.<br><br>
+                    <b>3. Diversificación por Sectores:</b> Nunca coloques tus $500.000 COP en una sola empresa. Repártelos entre finanzas, energía, construcción y consumo.
+                </p>
+            </div>
+            """, unsafe_allow_html=True
+        )
+
+    with t_est3:
+        st.markdown(
+            """
+            <div class="neon-card">
+                <span class="concept-badge">Estrategias de Inversionista</span>
+                <h3 style="color: #facc15;">💡 ¿Qué hacer con tus Acciones?</h3>
+                <ul style="color: #cbd5e1; line-height: 1.8; font-size: 1rem;">
+                    <li><b>Estrategia de Buy & Hold (Comprar y Mantener):</b> Mantén las mejores empresas durante años para recibir dividendos periódicos y aprovechar la valorización por interés compuesto.</li>
+                    <li><b>Rebalanceo Periódico:</b> Si una acción ha subido demasiado y representa el 80% de tu patrimonio, vende una parte para tomar utilidades y diversificar en Renta Fija (CDTs/TES).</li>
+                    <li><b>Reinversión de Dividendos:</b> Utiliza el efectivo que ganas por dividendos para comprar más títulos sin necesidad de ingresar nuevo capital.</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True
+        )
+
+# ==========================================
+# MÓDULO: CDT BANCARIOS (50 BANCOS)
 # ==========================================
 elif menu == "CDT Bancarios (50 Bancos)":
     st.title("🏦 Certificados de Depósito a Término (CDT) en Colombia")
     st.caption("50 Entidades Bancarias con Calculadora de Interés Compuesto Futuro")
 
-    # 🧮 CALCULADORA DE INTERÉS COMPUESTO DE CDTs
     st.markdown(
         """
         <div class="neon-card-green">
@@ -807,7 +908,6 @@ elif menu == "CDT Bancarios (50 Bancos)":
         st.markdown('</div>', unsafe_allow_html=True)
 
     with c_calc2:
-        # Fórmula de Interés Compuesto: Vf = Vi * (1 + i)^n
         vf_final = monto_c * ((1 + (tasa_c/100))**anios_c)
         ganancia_neta = vf_final - monto_c
 
@@ -817,7 +917,6 @@ elif menu == "CDT Bancarios (50 Bancos)":
         with col_r2:
             st.metric("Intereses Ganados", f"+${ganancia_neta:,.0f} COP", f"+{(ganancia_neta/monto_c)*100:.1f}%")
 
-        # Gráfico Plotly
         eje_anios = list(range(0, anios_c + 1))
         eje_valores = [monto_c * ((1 + (tasa_c/100))**a) for a in eje_anios]
 
@@ -829,15 +928,6 @@ elif menu == "CDT Bancarios (50 Bancos)":
 
     st.markdown("---")
 
-    # Mostrar CDTs constituidos activos
-    if u_data.get("cdt_list"):
-        st.subheader("📜 Tus CDTs Constituidos Activos")
-        df_mis_cdts = pd.DataFrame(u_data["cdt_list"])
-        st.dataframe(df_mis_cdts, use_container_width=True)
-        st.markdown("---")
-
-    st.subheader("🏛️ Oferta de CDTs en 50 Entidades Bancarias de Colombia")
-    
     cash_libre = float(u_data.get("cash", 500000.0))
     cols_banco = st.columns(3)
 
@@ -895,57 +985,76 @@ elif menu == "CDT Bancarios (50 Bancos)":
                     st.warning(f"Necesitas mínimo ${min_req:,.0f} COP disponibles. Tu efectivo libre actual es de ${cash_libre:,.0f} COP.")
 
 # ==========================================
-# MÓDULO: RENTA FIJA Y BONOS TES
+# MÓDULO HABILITADO: RENTA FIJA Y BONOS TES (CON COMPRA HABILITADA)
 # ==========================================
 elif menu == "Renta Fija y Bonos TES":
     st.title("📜 Renta Fija Sostenible y Bonos del Estado Colombiano (TES)")
-    st.caption("Financiamiento de Infraestructura Pública y Deuda Soberana")
+    st.caption("Adquiere Títulos de Deuda Pública Soberana y Bonos Corporativos AAA")
 
     st.markdown(
         """
         <div class="neon-card">
-            <span class="concept-badge">Deuda Soberana de Colombia</span>
-            <h3 style="margin-top: 5px;">🏛️ ¿Qué son los Bonos TES y la Renta Fija Pública?</h3>
+            <span class="concept-badge">Mercado de Renta Fija Colombiano</span>
+            <h3 style="margin-top: 5px;">🏛️️ Invierte en la Deuda de la Nación y Grandes Corporaciones</h3>
             <p style="color: #cbd5e1; line-height: 1.7;">
-                Los <b>Bonos TES (Títulos de Tesorería)</b> son la principal herramienta de deuda pública emitida por el Ministerio de Hacienda y Crédito Público de Colombia. 
-                Al comprar un Bono TES, le estás prestando dinero directamente a la Nación Colombiana para financiar hospitales, colegios e infraestructura, a cambio de un cupón de interés fijo semestral o anual. Es considerado el activo con <b>el menor riesgo crediticio del país</b>.
+                Los Bonos TES son emitidos por el Ministerio de Hacienda para financiar proyectos nacionales. Cuentan con cupón de rendimiento garantizado.
             </p>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-    col_bono1, col_bono2 = st.columns(2)
+    cash_libre_rf = float(u_data.get("cash", 500000.0))
+    cols_rf = st.columns(2)
 
-    with col_bono1:
-        st.markdown(
-            """
-            <div class="trii-card-blue">
-                <h3 style="color: #38bdf8;">🇨🇴 Bonos TES Clase B (Tasa Fija en Pesos)</h3>
-                <p style="color: #cbd5e1;">Emisiones directas del Estado colombiano a plazos de 3, 5, 10 y 30 años.</p>
-                <ul>
-                    <li><b>Rendimiento Promedio:</b> 10.2% - 11.5% E.A.</li>
-                    <li><b>Pagos:</b> Cupones Anuales Fijos.</li>
-                    <li><b>Riesgo:</b> Soberano (Nación Colombiana).</li>
-                </ul>
-            </div>
-            """, unsafe_allow_html=True
-        )
+    for idx_rf, bono in enumerate(bonos_rf_master):
+        col_dest_rf = cols_rf[idx_rf % 2]
+        color_rf_class = f"trii-card-{bono['color']}"
+        min_rf = float(bono['min_inv'])
 
-    with col_bono2:
-        st.markdown(
-            """
-            <div class="trii-card-purple">
-                <h3 style="color: #c084fc;">🏗️ Bonos Corporativos AAA (Ecopetrol / ISA)</h3>
-                <p style="color: #cbd5e1;">Deuda emitida por grandes corporaciones industriales para ampliaciones de planta.</p>
-                <ul>
-                    <li><b>Rendimiento Promedio:</b> 11.8% - 12.8% E.A.</li>
-                    <li><b>Pagos:</b> Cupones Semestrales.</li>
-                    <li><b>Riesgo:</b> Corporativo con máxima calificación Crediticia AAA.</li>
-                </ul>
-            </div>
-            """, unsafe_allow_html=True
-        )
+        with col_dest_rf:
+            st.markdown(
+                f"""
+                <div class="{color_rf_class}">
+                    <h3 style="margin:0; font-size: 1.2rem;">{bono['logo']} {bono['nombre']}</h3>
+                    <h2 style="color: #38bdf8; margin: 4px 0;">{bono['tasa_ea']}% E.A.</h2>
+                    <p style="color: #94a3b8; font-size: 0.85rem; margin:0;">🏛️ <b>Emisor:</b> {bono['emisor']}</p>
+                    <p style="color: #cbd5e1; font-size: 0.88rem; margin-top: 6px;">{bono['desc']}</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            with st.expander(f"🛒 Adquirir {bono['nombre']}"):
+                if cash_libre_rf >= min_rf:
+                    monto_rf = st.number_input(
+                        f"Monto a comprar en ({bono['id']}):",
+                        min_value=int(min_rf),
+                        max_value=int(cash_libre_rf),
+                        value=min(100000, int(cash_libre_rf)),
+                        step=10000,
+                        key=f"monto_rf_{idx_rf}"
+                    )
+                    
+                    interes_estimado_rf = monto_rf * ((1 + bono['tasa_ea']/100)**bono['plazo_anios'] - 1)
+                    st.caption(f"💰 Rentabilidad Estimada a {bono['plazo_anios']} años: **+${interes_estimado_rf:,.0f} COP**")
+
+                    if st.button(f"Comprar Bono", key=f"btn_rf_{idx_rf}"):
+                        u_data["cash"] -= monto_rf
+                        nuevo_bono = {
+                            "bono": bono['nombre'],
+                            "monto": monto_rf,
+                            "tasa_ea": f"{bono['tasa_ea']}% E.A.",
+                            "plazo": f"{bono['plazo_anios']} Años",
+                            "ganancia_estimada": f"${interes_estimado_rf:,.0f} COP",
+                            "fecha": datetime.datetime.now().strftime("%Y-%m-%d")
+                        }
+                        u_data.setdefault("renta_fija_list", []).append(nuevo_bono)
+                        save_user_to_db(usuario_activo, u_data)
+                        st.success(f"¡Has adquirido exitosamente {bono['nombre']}!")
+                        st.rerun()
+                else:
+                    st.warning(f"Necesitas mínimo ${min_rf:,.0f} COP disponibles. Tu efectivo libre actual es de ${cash_libre_rf:,.0f} COP.")
 
 # ==========================================
 # SIMULADOR PROYECTIVO Y ANÁLISIS
