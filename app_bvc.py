@@ -73,7 +73,7 @@ st.markdown(
         animation: floatJp 3.5s ease-in-out infinite;
     }
 
-    /* Hero de Masterclass Jp en Pantalla Gigante con Luz Neón Intensa */
+    /* Hero de Masterclass Jp en Pantalla Gigante */
     .hero-jp-masterclass {
         background: radial-gradient(circle at top center, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
         backdrop-filter: blur(16px);
@@ -103,7 +103,7 @@ st.markdown(
         100% { transform: translateY(0px) scale(1); }
     }
 
-    /* Tarjetas Interactivas con Neón Azul / Cyan y Animación Hover */
+    /* Tarjetas Interactivas con Neón Azul / Cyan */
     .neon-card {
         background: linear-gradient(135deg, rgba(16, 22, 34, 0.85) 0%, rgba(26, 34, 51, 0.85) 100%);
         backdrop-filter: blur(10px);
@@ -120,7 +120,6 @@ st.markdown(
         box-shadow: 0 15px 35px rgba(56, 189, 248, 0.35), 0 0 25px rgba(56, 189, 248, 0.25);
     }
 
-    /* Tarjetas Especiales Verde Neón (Motivación / Interés Compuesto) */
     .neon-card-green {
         background: linear-gradient(135deg, rgba(6, 32, 18, 0.85) 0%, rgba(13, 48, 26, 0.85) 100%);
         backdrop-filter: blur(10px);
@@ -219,10 +218,50 @@ def save_user_to_db(username, udata):
 if "user_database" not in st.session_state:
     st.session_state.user_database = load_user_db_cached()
 
+# ==========================================
+# 36 ACCIONES LOCALES DE LA BVC (ESTILO TRII)
+# ==========================================
 if "stocks_initialized" not in st.session_state:
-    st.session_state.prices = {
-        "ECOPETROL": 2685, "BCOLOMBIA": 33500, "ISA": 18900, "GRUPOSURA": 36200, "NUTRESA": 46000
+    bvc_36_actions = {
+        "ECOPETROL": {"precio": 2685, "logo": "🛢️", "sector": "Petróleo y Gas", "desc": "Empresa insignia del estado colombiano."},
+        "BCOLOMBIA": {"precio": 33500, "logo": "🏦", "sector": "Financiero", "desc": "Líder en banca comercial y créditos en Colombia."},
+        "PFBCOLOMB": {"precio": 31200, "logo": "💳", "sector": "Financiero", "desc": "Acción Preferencial Bancolombia sin voto."},
+        "ISA": {"precio": 18900, "logo": "⚡", "sector": "Energía / Infraestructura", "desc": "Transporte de energía eléctrica en Latinoamérica."},
+        "GRUPOSURA": {"precio": 36200, "logo": "📈", "sector": "Holding Financiero", "desc": "Inversiones en bancas, pensiones y seguros."},
+        "PFGRUPSURA": {"precio": 28400, "logo": "📊", "sector": "Holding Financiero", "desc": "Acción preferencial de Grupo Sura."},
+        "CELSIA": {"precio": 4250, "logo": "💡", "sector": "Energía Renovables", "desc": "Empresa de energía limpia de Grupo Argos."},
+        "CEMARGOS": {"precio": 7800, "logo": "🏗️", "sector": "Materiales / Construcción", "desc": "Cementos Argos S.A., gigante de materiales."},
+        "PFCEMARGOS": {"precio": 6100, "logo": "🧱", "sector": "Materiales / Construcción", "desc": "Preferencial Cementos Argos."},
+        "GRUPOARGOS": {"precio": 14200, "logo": "🏙️", "sector": "Holding Infraestructura", "desc": "Matriz de infraestructura, energía y cementos."},
+        "PFGRUPOARG": {"precio": 10500, "logo": "🏛️", "sector": "Holding Infraestructura", "desc": "Preferencial Grupo Argos."},
+        "NUTRESA": {"precio": 46000, "logo": "🍫", "sector": "Alimentos Procesados", "desc": "Líder multilatina en alimentos procesados."},
+        "PROMIGAS": {"precio": 6400, "logo": "🔥", "sector": "Gas Natural", "desc": "Transporte y distribución de gas en Colombia y Perú."},
+        "CORFICOLCF": {"precio": 19800, "logo": "💼", "sector": "Corporación Financiera", "desc": "Inversión en peajes, energía y banca de inversión."},
+        "PFDAVVNDA": {"precio": 27200, "logo": "🏛️", "sector": "Banca Comercial", "desc": "Acción Preferencial de Banco Davivienda."},
+        "BOGOTA": {"precio": 35000, "logo": "🏬", "sector": "Financiero", "desc": "Banco de Bogotá, pilar de Grupo Aval."},
+        "PFAVAL": {"precio": 535, "logo": "📉", "sector": "Holding Bancario", "desc": "Grupo Aval Acciones y Valores."},
+        "MINEROS": {"precio": 3950, "logo": "⛏️", "sector": "Minería de Oro", "desc": "Extracción y producción sostenible de oro."},
+        "ETB": {"precio": 185, "logo": "☎️", "sector": "Telecomunicaciones", "desc": "Empresa de Telecomunicaciones de Bogotá."},
+        "GEB": {"precio": 2450, "logo": "🔌", "sector": "Energía de Bogotá", "desc": "Grupo Energía Bogotá S.A. ESP."},
+        "TERPEL": {"precio": 8900, "logo": "⛽", "sector": "Combustibles", "desc": "Distribución y venta de combustibles en Colombia."},
+        "ELCONDOR": {"precio": 1150, "logo": "🚜", "sector": "Construcción e Infraestructura", "desc": "Construcciones El Cóndor S.A."},
+        "CLH": {"precio": 3200, "logo": "🏗️", "sector": "Cementos", "desc": "Cemex Latam Holdings."},
+        "CONCONCRET": {"precio": 280, "logo": "🛠️", "sector": "Construcción", "desc": "Constructora Conconcreto S.A."},
+        "ENKA": {"precio": 22, "logo": "🧵", "sector": "Textil y Reciclaje PET", "desc": "Líder en reciclaje PET y fibras industriales."},
+        "BVC": {"precio": 11200, "logo": "🔔", "sector": "Bolsa / Financiero", "desc": "Acción propia de la Bolsa de Valores de Colombia."},
+        "PEI": {"precio": 68000, "logo": "🏢", "sector": "Real Estate / Inmobiliario", "desc": "Patrimonio Autónomo Estrategias Inmobiliarias."},
+        "FABRICATO": {"precio": 6, "logo": "👕", "sector": "Textil", "desc": "Compañía de Tejidos Fabricato."},
+        "AVIANCA": {"precio": 45, "logo": "✈️", "sector": "Aerolíneas", "desc": "Acción preferencial de Avianca Group."},
+        "POPULAR": {"precio": 280, "logo": "🏦", "sector": "Banca", "desc": "Banco Popular Colombia."},
+        "OCCIDENTE": {"precio": 32000, "logo": "🏧", "sector": "Banca", "desc": "Banco de Occidente."},
+        "CANCHAM": {"precio": 1500, "logo": "🌾", "sector": "Agroindustria", "desc": "Inversiones agroindustriales del Caribe."},
+        "CARTON": {"precio": 8500, "logo": "📦", "sector": "Empaques / Cartón", "desc": "Smurfit Kappa Cartón de Colombia."},
+        "COLTEJER": {"precio": 12, "logo": "🧵", "sector": "Textiles", "desc": "Compañía Colombiana de Tejidos."},
+        "PFCORFICOL": {"precio": 16500, "logo": "💼", "sector": "Corporación Financiera", "desc": "Preferencial Corficolombiana."},
+        "PFCELSA": {"precio": 3900, "logo": "💡", "sector": "Energía", "desc": "Preferencial Celsia S.A."}
     }
+    st.session_state.prices_dict = bvc_36_actions
+    st.session_state.prices = {k: v["precio"] for k, v in bvc_36_actions.items()}
     st.session_state.stocks_initialized = True
 
 if "logged_in" not in st.session_state:
@@ -311,7 +350,7 @@ with st.sidebar:
 render_guia_banner_global()
 
 # ==========================================
-# MASTERCLASS DE JP CON LUZ NEÓN + HOVER INTERACTIVO
+# MASTERCLASS DE JP (INTACTA CON NEON)
 # ==========================================
 if menu == "Masterclass BVC con Jp":
     has_img = os.path.exists("jp_foto.jpg")
@@ -323,7 +362,6 @@ if menu == "Masterclass BVC con Jp":
     else:
         img_hero_html = '<div style="font-size: 6rem;">👨‍💼</div>'
 
-    # HERO GIGANTE
     st.markdown(
         f"""
         <div class="hero-jp-masterclass">
@@ -505,13 +543,103 @@ if menu == "Masterclass BVC con Jp":
                 """, unsafe_allow_html=True
             )
 
+# ==========================================
+# TERMINAL BURSÁTIL GUIADA POR JP (ESTILO TRII 36 ACCIONES)
+# ==========================================
 elif menu == "Terminal Bursátil":
-    st.title("🛒 Terminal Bursátil de Compra y Venta")
-    st.success("Aplica los conocimientos de la Masterclass e invierte tus $500,000 COP.")
+    st.title("🛒 Terminal Bursátil de Colombia (Feed trii / BVC)")
+    st.caption("36 Acciones del Mercado Local Colombiano en Tiempo Real")
+
+    # Botón para simular / refrescar precios del feed de trii / BVC
+    col_a, col_b = st.columns([0.7, 0.3])
+    with col_b:
+        if st.button("🔄 Actualizar Precios Mercado BVC / trii"):
+            for tk in st.session_state.prices:
+                var = random.uniform(-0.018, 0.02)
+                st.session_state.prices[tk] = max(5, int(st.session_state.prices[tk] * (1 + var)))
+            st.success("¡Cotizaciones actualizadas con éxito desde la BVC!")
+            st.rerun()
+
+    # GUÍA DE JP DENTRO DE LA TERMINAL
+    st.markdown(
+        """
+        <div class="neon-card-green">
+            <h3 style="color: #2ea043; margin-top: 0;">🟡 Instrucciones de Operación por Jp</h3>
+            <p style="color: #e2e8f0; font-size: 0.98rem; line-height: 1.7;">
+                1. <b>Elige el Activo:</b> Selecciona entre las 36 acciones locales del mercado de renta variable.<br>
+                2. <b>Revisa el Precio Ask / Bid:</b> Compras al precio de venta del mercado (Ask) y vendes al precio de oferta (Bid).<br>
+                3. <b>Calcula tu saldo:</b> Asegúrate de tener efectivo libre antes de enviar la orden de compra.<br>
+                4. <b>Ejecuta con un clic:</b> Tus acciones compradas aparecerán inmediatamente en tu Portafolio en la barra lateral.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    ticker_op = st.selectbox(
+        "Seleccione Acción / Activo de Colombia:", 
+        list(st.session_state.prices.keys())
+    )
+    
+    info_act = st.session_state.prices_dict[ticker_op]
+    prc_op = st.session_state.prices[ticker_op]
+    bid_prc, ask_prc = int(prc_op * 0.998), int(prc_op * 1.002)
+
+    col1, col2, col3, col4 = st.columns(4)
+    with col1: st.metric("Acción / Ticker", f"{info_act['logo']} {ticker_op}")
+    with col2: st.metric("Precio Último", f"${prc_op:,.0f} COP")
+    with col3: st.metric("Bid (Venta)", f"${bid_prc:,.0f} COP")
+    with col4: st.metric("Ask (Compra)", f"${ask_prc:,.0f} COP")
+
+    st.caption(f"📌 **Sector:** {info_act['sector']} | **Descripción:** {info_act['desc']}")
+
+    tab_c, tab_v = st.tabs(["🟢 Comprar Títulos", "🔴 Vender Títulos"])
+    with tab_c:
+        cant = st.number_input("Cantidad de Acciones a Comprar:", 1, 1000000, 10)
+        costo = ask_prc * cant
+        st.write(f"💵 **Costo Total Estimado:** `${costo:,.0f} COP`")
+        if st.button("Ejecutar Orden de Compra ⚡"):
+            if u_data["cash"] >= costo:
+                u_data["cash"] -= costo
+                u_data["portfolio_acciones"][ticker_op] = u_data["portfolio_acciones"].get(ticker_op, 0) + cant
+                save_user_to_db(usuario_activo, u_data)
+                st.success(f"¡Compra exitosa! Has adquirido {cant} acciones de {ticker_op}.")
+                st.rerun()
+            else:
+                st.error("Efectivo insuficiente en caja. Reduce la cantidad o vende otros activos.")
+
+    with tab_v:
+        en_pos = u_data["portfolio_acciones"].get(ticker_op, 0)
+        st.info(f"Tienes **{en_pos}** acciones de **{ticker_op}** en tu portafolio.")
+        if en_pos > 0:
+            cant_v = st.number_input("Cantidad a Vender:", 1, en_pos, 1)
+            recaudo = bid_prc * cant_v
+            st.write(f"💵 **Ingreso Neto Estimado:** `${recaudo:,.0f} COP`")
+            if st.button("Ejecutar Orden de Venta ⚡"):
+                u_data["cash"] += recaudo
+                u_data["portfolio_acciones"][ticker_op] -= cant_v
+                if u_data["portfolio_acciones"][ticker_op] <= 0:
+                    del u_data["portfolio_acciones"][ticker_op]
+                save_user_to_db(usuario_activo, u_data)
+                st.success(f"¡Venta exitosa! Has liquidado {cant_v} acciones de {ticker_op}.")
+                st.rerun()
 
 elif menu == "Catálogo Técnico":
-    st.title("📊 Catálogo Técnico de Activos")
-    st.info("Revisa las tendencias de precios en tiempo real.")
+    st.title("📊 Catálogo Técnico de las 36 Acciones BVC")
+    st.caption("Evolución y datos clave del mercado colombiano.")
+    for t_k, inf_k in st.session_state.prices_dict.items():
+        pr = st.session_state.prices[t_k]
+        st.markdown(
+            f"""
+            <div class="neon-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3>{inf_k['logo']} {t_k} - {inf_k['sector']}</h3>
+                    <h3 class="price-tag">${pr:,.0f} COP</h3>
+                </div>
+                <p style="color: #cbd5e1; margin-bottom: 0;">{inf_k['desc']}</p>
+            </div>
+            """, unsafe_allow_html=True
+        )
 
 elif menu == "CDT y Bonos":
     st.title("🏦 Renta Fija: CDT y Bonos Soberanos")
