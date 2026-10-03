@@ -282,7 +282,7 @@ bvc_36_actions_master = {
     "NUTRESA": {"precio": 46000, "logo": "🍫", "sector": "Alimentos Procesados", "color": "purple", "desc": "Gigante multilatina procesadora de chocolates, galletas, carnes y cafés."},
     "PROMIGAS": {"precio": 6400, "logo": "🔥", "sector": "Gas Natural", "color": "blue", "desc": "Transporte y distribución masiva de gas natural en Colombia y Perú."},
     "CORFICOLCF": {"precio": 19800, "logo": "💼", "sector": "Corporación Financiera", "color": "gold", "desc": "Inversión en megaproyectos viales, infraestructura energética y banca."},
-    "PFDAVVNDA": {"precio": 27200, "logo": "🏛️", "sector": "Banca Comercial", "color": "gold", "desc": "Acción preferencial de Banco Davivienda y plataforma Daviplata."},
+    "PFDAVVNDA": {"precio": 27200, "logo": "🏛️️", "sector": "Banca Comercial", "color": "gold", "desc": "Acción preferencial de Banco Davivienda y plataforma Daviplata."},
     "BOGOTA": {"precio": 35000, "logo": "🏬", "sector": "Financiero", "color": "gold", "desc": "Banco de Bogotá, una de las instituciones bancarias más antiguas de Colombia."},
     "PFAVAL": {"precio": 535, "logo": "📉", "sector": "Holding Bancario", "color": "gold", "desc": "Grupo Aval, conglomerado dueño de Banco de Bogotá, Occidente y Porvenir."},
     "MINEROS": {"precio": 3950, "logo": "⛏️", "sector": "Minería de Oro", "color": "green", "desc": "Exploración y producción responsable de oro en Colombia y Argentina."},
@@ -295,10 +295,10 @@ bvc_36_actions_master = {
     "ENKA": {"precio": 22, "logo": "🧵", "sector": "Textil y Reciclaje PET", "color": "purple", "desc": "Transformación de botellas recicladas en resinas y hilos sintéticos."},
     "BVC": {"precio": 11200, "logo": "🔔", "sector": "Bolsa / Financiero", "color": "gold", "desc": "La propia empresa administradora del mercado de valores de Colombia."},
     "PEI": {"precio": 68000, "logo": "🏢", "sector": "Real Estate / Inmobiliario", "color": "purple", "desc": "Fondo de inversión inmobiliario en centros comerciales, oficinas y bodegas."},
-    "FABRICATO": {"precio": 6, "logo": "👕", "sector": "Textil", "desc": "Compañía textilera colombiana procesadora de telas y confecciones."},
+    "FABRICATO": {"precio": 6, "logo": "👕", "sector": "Textil", "color": "purple", "desc": "Compañía textilera colombiana procesadora de telas y confecciones."},
     "AVIANCA": {"precio": 45, "logo": "✈️", "sector": "Aerolíneas", "color": "purple", "desc": "Línea aérea insignia de transporte de pasajeros y carga."},
     "POPULAR": {"precio": 280, "logo": "🏦", "sector": "Banca", "color": "gold", "desc": "Banco Popular Colombia, filial de Grupo Aval especializada en crédito bancario."},
-    "OCCIDENTE": {"precio": 32000, "logo": "🏧", "sector": "Banca", "color": "gold", "desc": "Banco de Occidente, soluciones financieras corporativas y personales."},
+    "OCCIDENTE": {"precio": 32000, "logo": "ATM", "sector": "Banca", "color": "gold", "desc": "Banco de Occidente, soluciones financieras corporativas y personales."},
     "CANCHAM": {"precio": 1500, "logo": "🌾", "sector": "Agroindustria", "color": "green", "desc": "Desarrollo de proyectos agrícolas y procesamiento agroindustrial."},
     "CARTON": {"precio": 8500, "logo": "📦", "sector": "Empaques / Cartón", "color": "purple", "desc": "Smurfit Kappa Cartón de Colombia, fabricación de empaques de papel."},
     "COLTEJER": {"precio": 12, "logo": "🧵", "sector": "Textiles", "color": "purple", "desc": "Compañía Colombiana de Tejidos fundada en Medellín."},
@@ -306,7 +306,6 @@ bvc_36_actions_master = {
     "PFCELSA": {"precio": 3900, "logo": "💡", "sector": "Energía", "color": "blue", "desc": "Acción preferencial de Celsia S.A."}
 }
 
-# Inicializar o actualizar forzadamente para prevenir KeyError
 st.session_state.prices_dict = bvc_36_actions_master
 if "prices" not in st.session_state or len(st.session_state.prices) < 36:
     st.session_state.prices = {k: v["precio"] for k, v in bvc_36_actions_master.items()}
@@ -385,8 +384,8 @@ with st.sidebar:
     
     menu = option_menu(
         "Navegación Principal",
-        ["Masterclass BVC con Jp", "Terminal Bursátil", "Catálogo Técnico", "CDT y Bonos", "Fondo ESG"],
-        icons=["camera-reels", "cart", "graph-up", "bank", "tree"],
+        ["Masterclass BVC con Jp", "Terminal Bursátil", "Simulador Proyectivo", "CDT y Bonos", "Fondo ESG"],
+        icons=["camera-reels", "cart", "calculator", "bank", "tree"],
         menu_icon="compass", default_index=0
     )
 
@@ -428,7 +427,7 @@ if menu == "Masterclass BVC con Jp":
     tab_m1, tab_m2, tab_m3, tab_m4, tab_m5 = st.tabs([
         "💡 1. ¿Por qué Invertir?",
         "🏛 2. ¿Qué es la BVC?",
-        "⚖️ 3. Renta Variable vs. Renta Fija",
+        "⚖️️ 3. Renta Variable vs. Renta Fija",
         "🌎 4. Casos Reales de Éxito",
         "🧠 5. Mente de Inversionista"
     ])
@@ -591,16 +590,15 @@ if menu == "Masterclass BVC con Jp":
             )
 
 # ==========================================
-# TERMINAL BURSÁTIL: GRID NEÓN DE LAS 36 ACCIONES (ESTILO TRII)
+# TERMINAL BURSÁTIL (SIN LA PALABRA NEÓN EN SUBTÍTULO)
 # ==========================================
 elif menu == "Terminal Bursátil":
     st.title("🛒 Terminal Bursátil: Mercado de Acciones BVC / trii")
-    st.caption("36 Activos Oficiales de la Bolsa de Valores de Colombia con Tarjetas Neón")
+    st.caption("36 Activos Oficiales de la Bolsa de Valores de Colombia")
 
-    # Botón para simular / refrescar precios del feed de trii / BVC
     col_hdr1, col_hdr2 = st.columns([0.7, 0.3])
     with col_hdr1:
-        st.write(f"💵 **Efectivo Libre Disponibles:** `${u_data['cash']:,.0f} COP`")
+        st.write(f"💵 **Efectivo Libre Disponible:** `${u_data['cash']:,.0f} COP`")
     with col_hdr2:
         if st.button("🔄 Actualizar Precios Mercado BVC"):
             for tk in st.session_state.prices:
@@ -611,7 +609,6 @@ elif menu == "Terminal Bursátil":
 
     st.markdown("---")
 
-    # Renderizar las 36 acciones en cuadrícula de 3 columnas
     items_acciones = list(bvc_36_actions_master.items())
     cols_grid = st.columns(3)
 
@@ -639,7 +636,6 @@ elif menu == "Terminal Bursátil":
                 unsafe_allow_html=True
             )
 
-            # Panel Desplegable Operativo de Compra y Venta por Tarjeta
             with st.expander(f"⚡ Operar {ticker}"):
                 pos_actual = u_data["portfolio_acciones"].get(ticker, 0)
                 st.caption(f"Tienes **{pos_actual}** acciones en tu portafolio.")
@@ -676,22 +672,102 @@ elif menu == "Terminal Bursátil":
                     else:
                         st.caption("No posees acciones de esta empresa.")
 
-elif menu == "Catálogo Técnico":
-    st.title("📊 Catálogo Técnico de las 36 Acciones BVC")
-    st.caption("Evolución y datos clave del mercado colombiano.")
-    for t_k, inf_k in bvc_36_actions_master.items():
-        pr = st.session_state.prices.get(t_k, inf_k["precio"])
-        st.markdown(
-            f"""
-            <div class="neon-card">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3>{inf_k['logo']} {t_k} - {inf_k['sector']}</h3>
-                    <h3 class="price-tag">${pr:,.0f} COP</h3>
-                </div>
-                <p style="color: #cbd5e1; margin-bottom: 0;">{inf_k['desc']}</p>
-            </div>
-            """, unsafe_allow_html=True
+# ==========================================
+# MÓDULO NUEVO: SIMULADOR PROYECTIVO Y ANÁLISIS DE INVERSIÓN
+# ==========================================
+elif menu == "Simulador Proyectivo":
+    st.title("🧮 Simulador Proyectivo de Inversión (BVC / Jp)")
+    st.caption("Herramienta de simulación de rendimientos futuros con escenarios de mercado")
+
+    st.markdown(
+        """
+        <div class="neon-card">
+            <span class="concept-badge">Laboratorio Financiero Unisucre</span>
+            <h3 style="margin-top: 5px;">📊 Simula el Rendimiento Futuro de tu Capital</h3>
+            <p style="color: #cbd5e1; line-height: 1.6;">
+                Antes de colocar dinero en el mercado real, un buen administrador simula escenarios de retorno basándose en la valorización esperada del activo y el pago histórico de dividendos.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    col_sim1, col_sim2 = st.columns([0.4, 0.6])
+
+    with col_sim1:
+        st.markdown('<div class="neon-card">', unsafe_allow_html=True)
+        st.subheader("⚙️ Configuración del Ensayo")
+        
+        acc_selected = st.selectbox(
+            "Selecciona la Acción a Simular:",
+            list(bvc_36_actions_master.keys())
         )
+        
+        info_sim = bvc_36_actions_master[acc_selected]
+        prc_sim = st.session_state.prices.get(acc_selected, info_sim["precio"])
+
+        monto_inv = st.number_input(
+            "Monto de Inversión Simulado (COP):",
+            min_value=50000, max_value=50000000, value=500000, step=50000
+        )
+
+        plazo_meses = st.slider("Plazo de Inversión (Meses):", 1, 36, 12)
+
+        st.markdown("---")
+        st.caption(f"📌 **{info_sim['logo']} {acc_selected}** | Precio Actual: **${prc_sim:,.0f} COP**")
+        st.caption(f"ℹ️ {info_sim['desc']}")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with col_sim2:
+        # Cálculos de los 3 escenarios
+        # Moderado: 12.5% E.A. | Optimista: 22% E.A. | Pesimista: -5% E.A.
+        tasa_mod = (1 + 0.125)**(plazo_meses/12) - 1
+        tasa_opt = (1 + 0.220)**(plazo_meses/12) - 1
+        tasa_pes = (1 - 0.050)**(plazo_meses/12) - 1
+
+        val_mod = monto_inv * (1 + tasa_mod)
+        val_opt = monto_inv * (1 + tasa_opt)
+        val_pes = monto_inv * (1 + tasa_pes)
+
+        st.subheader("🔮 Resultados de la Proyección")
+
+        res_c1, res_c2, res_c3 = st.columns(3)
+        with res_c1:
+            st.metric("Escenario Moderado", f"${val_mod:,.0f} COP", f"+{tasa_mod*100:.1f}%")
+        with res_c2:
+            st.metric("Escenario Optimista", f"${val_opt:,.0f} COP", f"+{tasa_opt*100:.1f}%")
+        with res_c3:
+            st.metric("Escenario Pesimista", f"${val_pes:,.0f} COP", f"{tasa_pes*100:.1f}%", delta_color="inverse")
+
+        # Generar Curva Temporal de Proyección con Plotly
+        meses_eje = list(range(0, plazo_meses + 1))
+        curve_mod = [monto_inv * ((1 + 0.125)**(m/12)) for m in meses_eje]
+        curve_opt = [monto_inv * ((1 + 0.220)**(m/12)) for m in meses_eje]
+        curve_pes = [monto_inv * ((1 - 0.050)**(m/12)) for m in meses_eje]
+
+        df_chart = pd.DataFrame({
+            "Mes": meses_eje,
+            "Moderado (Promedio)": curve_mod,
+            "Optimista (Alcista)": curve_opt,
+            "Pesimista (Corrección)": curve_pes
+        })
+
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=df_chart["Mes"], y=df_chart["Optimista (Alcista)"], name="Optimista", line=dict(color='#2ea043', width=3)))
+        fig.add_trace(go.Scatter(x=df_chart["Mes"], y=df_chart["Moderado (Promedio)"], name="Moderado", line=dict(color='#38bdf8', width=3)))
+        fig.add_trace(go.Scatter(x=df_chart["Mes"], y=df_chart["Pesimista (Corrección)"], name="Pesimista", line=dict(color='#f87171', width=2, dash='dash')))
+
+        fig.update_layout(
+            title=f"Evolución Estimada de ${monto_inv:,.0f} COP en {acc_selected}",
+            xaxis_title="Meses de Transcurso",
+            yaxis_title="Valor del Capital (COP)",
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(13, 20, 36, 0.7)',
+            font=dict(color='#e2e8f0'),
+            legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01)
+        )
+
+        st.plotly_chart(fig, use_container_width=True)
 
 elif menu == "CDT y Bonos":
     st.title("🏦 Renta Fija: CDT y Bonos Soberanos")
