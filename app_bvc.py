@@ -44,7 +44,6 @@ st.markdown(
             url("fondo-financiero.jpg") center/cover no-repeat fixed;
     }
 
-    /* Banner Global de Jp en la parte superior con Neón Dorado */
     .jp-global-banner {
         background: linear-gradient(135deg, rgba(13, 27, 42, 0.9) 0%, rgba(27, 38, 59, 0.9) 100%);
         backdrop-filter: blur(12px);
@@ -74,7 +73,6 @@ st.markdown(
         animation: floatJp 3.5s ease-in-out infinite;
     }
 
-    /* Hero de Masterclass Jp en Pantalla Gigante */
     .hero-jp-masterclass {
         background: radial-gradient(circle at top center, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
         backdrop-filter: blur(16px);
@@ -104,7 +102,6 @@ st.markdown(
         100% { transform: translateY(0px) scale(1); }
     }
 
-    /* Tarjetas Genéricas y Neón */
     .neon-card {
         background: linear-gradient(135deg, rgba(16, 22, 34, 0.85) 0%, rgba(26, 34, 51, 0.85) 100%);
         backdrop-filter: blur(10px);
@@ -121,6 +118,16 @@ st.markdown(
         box-shadow: 0 15px 35px rgba(56, 189, 248, 0.35), 0 0 25px rgba(56, 189, 248, 0.25);
     }
 
+    .neon-card-green {
+        background: linear-gradient(135deg, rgba(6, 32, 18, 0.85) 0%, rgba(13, 48, 26, 0.85) 100%);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(46, 160, 67, 0.5);
+        border-radius: 20px;
+        padding: 22px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(46, 160, 67, 0.2);
+    }
+
     .trii-card-blue {
         background: linear-gradient(135deg, rgba(10, 25, 47, 0.9) 0%, rgba(15, 30, 55, 0.9) 100%);
         border: 1px solid #38bdf8;
@@ -129,11 +136,6 @@ st.markdown(
         margin-bottom: 20px;
         box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
         transition: all 0.3s ease;
-    }
-    .trii-card-blue:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 0 30px rgba(56, 189, 248, 0.45);
-        border-color: #7dd3fc;
     }
 
     .trii-card-gold {
@@ -145,11 +147,6 @@ st.markdown(
         box-shadow: 0 0 20px rgba(250, 204, 21, 0.2);
         transition: all 0.3s ease;
     }
-    .trii-card-gold:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 0 30px rgba(250, 204, 21, 0.45);
-        border-color: #fde047;
-    }
 
     .trii-card-green {
         background: linear-gradient(135deg, rgba(6, 32, 18, 0.9) 0%, rgba(13, 48, 26, 0.9) 100%);
@@ -160,11 +157,6 @@ st.markdown(
         box-shadow: 0 0 20px rgba(46, 160, 67, 0.2);
         transition: all 0.3s ease;
     }
-    .trii-card-green:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 0 30px rgba(46, 160, 67, 0.45);
-        border-color: #4ade80;
-    }
 
     .trii-card-purple {
         background: linear-gradient(135deg, rgba(28, 15, 45, 0.9) 0%, rgba(40, 20, 65, 0.9) 100%);
@@ -174,11 +166,6 @@ st.markdown(
         margin-bottom: 20px;
         box-shadow: 0 0 20px rgba(192, 132, 252, 0.2);
         transition: all 0.3s ease;
-    }
-    .trii-card-purple:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 0 30px rgba(192, 132, 252, 0.45);
-        border-color: #e9d5ff;
     }
 
     .concept-badge {
@@ -266,7 +253,7 @@ if "user_database" not in st.session_state:
     st.session_state.user_database = load_user_db_cached()
 
 # ==========================================
-# DICCIONARIO MAESTRO DE LAS 36 ACCIONES BVC
+# DICCIONARIOS Y CATÁLOGOS
 # ==========================================
 bvc_36_actions_master = {
     "ECOPETROL": {"precio": 2685, "logo": "🛢️", "sector": "Petróleo y Gas", "color": "blue", "desc": "Empresa petrolera oficial de Colombia. Explora, refina y transporta hidrocarburos."},
@@ -279,11 +266,11 @@ bvc_36_actions_master = {
     "CEMARGOS": {"precio": 7800, "logo": "🏗️", "sector": "Materiales / Construcción", "color": "green", "desc": "Líder en producción y comercialización de cemento y concreto en las Américas."},
     "PFCEMARGOS": {"precio": 6100, "logo": "🧱", "sector": "Materiales / Construcción", "color": "green", "desc": "Acción preferencial de Cementos Argos S.A."},
     "GRUPOARGOS": {"precio": 14200, "logo": "🏙️", "sector": "Holding Infraestructura", "color": "green", "desc": "Holding de infraestructura, concesiones viales, aeropuertos y cementos."},
-    "PFGRUPOARG": {"precio": 10500, "logo": "🏛️️", "sector": "Holding Infraestructura", "color": "green", "desc": "Acción preferencial de Grupo Argos."},
+    "PFGRUPOARG": {"precio": 10500, "logo": "🏛️", "sector": "Holding Infraestructura", "color": "green", "desc": "Acción preferencial de Grupo Argos."},
     "NUTRESA": {"precio": 46000, "logo": "🍫", "sector": "Alimentos Procesados", "color": "purple", "desc": "Gigante multilatina procesadora de chocolates, galletas, carnes y cafés."},
     "PROMIGAS": {"precio": 6400, "logo": "🔥", "sector": "Gas Natural", "color": "blue", "desc": "Transporte y distribución masiva de gas natural en Colombia y Perú."},
     "CORFICOLCF": {"precio": 19800, "logo": "💼", "sector": "Corporación Financiera", "color": "gold", "desc": "Inversión en megaproyectos viales, infraestructura energética y banca."},
-    "PFDAVVNDA": {"precio": 27200, "logo": "🏛️", "sector": "Banca Comercial", "color": "gold", "desc": "Acción preferencial de Banco Davivienda y plataforma Daviplata."},
+    "PFDAVVNDA": {"precio": 27200, "logo": "🏛️️", "sector": "Banca Comercial", "color": "gold", "desc": "Acción preferencial de Banco Davivienda y plataforma Daviplata."},
     "BOGOTA": {"precio": 35000, "logo": "🏬", "sector": "Financiero", "color": "gold", "desc": "Banco de Bogotá, una de las instituciones bancarias más antiguas de Colombia."},
     "PFAVAL": {"precio": 535, "logo": "📉", "sector": "Holding Bancario", "color": "gold", "desc": "Grupo Aval, conglomerado dueño de Banco de Bogotá, Occidente y Porvenir."},
     "MINEROS": {"precio": 3950, "logo": "⛏️", "sector": "Minería de Oro", "color": "green", "desc": "Exploración y producción responsable de oro en Colombia y Argentina."},
@@ -307,10 +294,9 @@ bvc_36_actions_master = {
     "PFCELSA": {"precio": 3900, "logo": "💡", "sector": "Energía", "color": "blue", "desc": "Acción preferencial de Celsia S.A."}
 }
 
-# CATÁLOGO DE 50 BANCOS
 bancos_cdt_50 = [
     {"banco": "Bancolombia S.A.", "tasa_ea": 10.5, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏦"},
-    {"banco": "Banco Davivienda", "tasa_ea": 10.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏛️"},
+    {"banco": "Banco Davivienda", "tasa_ea": 10.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏛️️"},
     {"banco": "Nu Colombia C.F.", "tasa_ea": 12.5, "plazo_dias": 180, "min_inversion": 10000, "logo": "🟣"},
     {"banco": "Lulo Bank S.A.", "tasa_ea": 12.2, "plazo_dias": 180, "min_inversion": 10000, "logo": "🟢"},
     {"banco": "Banco de Bogotá", "tasa_ea": 10.2, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏬"},
@@ -361,13 +347,12 @@ bancos_cdt_50 = [
     {"banco": "Fiduciaria Davivienda", "tasa_ea": 10.7, "plazo_dias": 360, "min_inversion": 50000, "logo": "🔴"}
 ]
 
-# CATÁLOGO DE BONOS DE RENTA FIJA
 bonos_rf_master = [
-    {"id": "TES_2028", "nombre": "Bono TES Clase B 2028", "emisor": "Nación Colombiana (MinHacienda)", "tasa_ea": 10.5, "plazo_anios": 2, "min_inv": 50000, "logo": "🇨🇴", "color": "blue", "desc": "Deuda pública garantizada por la República de Colombia. Riesgo mínimo soberano."},
-    {"id": "TES_2032", "nombre": "Bono TES Clase B 2032", "emisor": "Nación Colombiana (MinHacienda)", "tasa_ea": 11.2, "plazo_anios": 6, "min_inv": 50000, "logo": "🇨🇴", "color": "blue", "desc": "Bono de mediano plazo para financiar infraestructura nacional."},
-    {"id": "TES_UVR_2030", "nombre": "Bono TES UVR 2030 (Anti-Inflación)", "emisor": "Nación Colombiana", "tasa_ea": 6.8, "plazo_anios": 4, "min_inv": 50000, "logo": "🛡️", "color": "green", "desc": "Protege tu dinero ajustando el capital según la inflación colombiana (UVR)."},
-    {"id": "BONO_ECOPETROL_2029", "nombre": "Bono Corporativo Ecopetrol 2029", "emisor": "Ecopetrol S.A. (Calificación AAA)", "tasa_ea": 12.1, "plazo_anios": 3, "min_inv": 50000, "logo": "🛢️", "color": "purple", "desc": "Financiamiento de proyectos de transición energética y refinerías."},
-    {"id": "BONO_ISA_2031", "nombre": "Bono Corporativo ISA 2031", "emisor": "Interconexión Eléctrica S.A. (AAA)", "tasa_ea": 11.8, "plazo_anios": 5, "min_inv": 50000, "logo": "⚡", "color": "gold", "desc": "Inversión en redes de transmisión eléctrica de alta tensión en Latinoamérica."}
+    {"id": "TES_2028", "nombre": "Bono TES Clase B 2028", "emisor": "Nación Colombiana", "tasa_ea": 10.5, "plazo_anios": 2, "min_inv": 50000, "logo": "🇨🇴", "color": "blue", "desc": "Deuda pública garantizada por la República de Colombia."},
+    {"id": "TES_2032", "nombre": "Bono TES Clase B 2032", "emisor": "Nación Colombiana", "tasa_ea": 11.2, "plazo_anios": 6, "min_inv": 50000, "logo": "🇨🇴", "color": "blue", "desc": "Bono de mediano plazo para financiar infraestructura nacional."},
+    {"id": "TES_UVR_2030", "nombre": "Bono TES UVR 2030", "emisor": "Nación Colombiana", "tasa_ea": 6.8, "plazo_anios": 4, "min_inv": 50000, "logo": "🛡️", "color": "green", "desc": "Protección anti-inflación ajustada por UVR."},
+    {"id": "BONO_ECOPETROL_2029", "nombre": "Bono Corporativo Ecopetrol 2029", "emisor": "Ecopetrol S.A.", "tasa_ea": 12.1, "plazo_anios": 3, "min_inv": 50000, "logo": "🛢️", "color": "purple", "desc": "Financiamiento de transición energética."},
+    {"id": "BONO_ISA_2031", "nombre": "Bono Corporativo ISA 2031", "emisor": "Interconexión Eléctrica S.A.", "tasa_ea": 11.8, "plazo_anios": 5, "min_inv": 50000, "logo": "⚡", "color": "gold", "desc": "Inversión en redes de transmisión eléctrica."}
 ]
 
 st.session_state.prices_dict = bvc_36_actions_master
@@ -377,9 +362,7 @@ if "prices" not in st.session_state or len(st.session_state.prices) < 36:
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
-# ==========================================
-# LOGIN CON ASIGNACIÓN AUTOMÁTICA DE $500.000 COP
-# ==========================================
+# LOGIN
 if not st.session_state.logged_in:
     st.markdown(
         """
@@ -411,14 +394,10 @@ if not st.session_state.logged_in:
 usuario_activo = st.session_state.current_user
 u_data = st.session_state.user_database[usuario_activo]
 
-# Garantizar $500.000 COP siempre por defecto a usuarios nuevos
-if u_data.get("cash") is None or u_data.get("cash") == 0 and not u_data.get("portfolio_acciones") and not u_data.get("cdt_list") and not u_data.get("renta_fija_list"):
+if u_data.get("cash") is None:
     u_data["cash"] = 500000.0
     u_data["presupuesto_inicial"] = 500000.0
 
-# ==========================================
-# BANNER GLOBAL DE JP
-# ==========================================
 def render_guia_banner_global():
     has_img = os.path.exists("jp_foto.jpg")
     img_html = ""
@@ -436,7 +415,7 @@ def render_guia_banner_global():
             <div style="flex-grow: 1;">
                 <h3 style="color: #facc15; margin: 0; font-size: 1.35rem; text-shadow: 0 0 10px rgba(250, 204, 21, 0.4);">🟡 Jp - Tu Guía Virtual Unisucre</h3>
                 <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.95rem;">
-                    ¡Epa, <b>{usuario_activo}</b>! Tienes un saldo libre inicial de <b>$500.000 COP</b> para comprar acciones, CDTs y Bonos TES de Renta Fija.
+                    ¡Epa, <b>{usuario_activo}</b>! Tu saldo libre actual es de <b>${u_data['cash']:,.0f} COP</b>. Revisa tu portafolio y los gráficos de rendimiento abajo.
                 </p>
             </div>
         </div>
@@ -444,9 +423,7 @@ def render_guia_banner_global():
         unsafe_allow_html=True
     )
 
-# ==========================================
 # SIDEBAR NAVEGACIÓN
-# ==========================================
 with st.sidebar:
     st.title("📈 BCV By Jp")
     st.success(f"👤 **{usuario_activo}**")
@@ -481,7 +458,7 @@ with st.sidebar:
 render_guia_banner_global()
 
 # ==========================================
-# MASTERCLASS DE JP (INTACTA CON NEON)
+# MASTERCLASS
 # ==========================================
 if menu == "Masterclass BVC con Jp":
     has_img = os.path.exists("jp_foto.jpg")
@@ -756,19 +733,21 @@ elif menu == "Terminal Bursátil":
                         st.caption("No posees acciones de esta empresa.")
 
 # ==========================================
-# MÓDULO NUEVO: MI PORTAFOLIO E HISTORIAL DE ARTÍCULOS COMPRADOS
+# MÓDULO PORTAFOLIO CON GRÁFICOS DE COMPORTAMIENTO Y PROYECCIÓN
 # ==========================================
 elif menu == "Mi Portafolio e Historial":
     st.title("💼 Mi Portafolio e Historial de Inversiones")
-    st.caption("Revisión detallada de cada activo y título comprado en tu cuenta")
+    st.caption("Revisión detallada de activos con gráficos de comportamiento histórico y proyección de valor")
 
     tab_p1, tab_p2, tab_p3 = st.tabs(["📈 Acciones Compradas", "📜 CDTs Vigentes", "🇨🇴 Bonos TES de Renta Fija"])
 
+    # 1. ACCIONES CON GRÁFICO HISTÓRICO
     with tab_p1:
-        st.subheader("📈 Tus Acciones en Custodia")
-        if u_data.get("portfolio_acciones"):
+        st.subheader("📈 Tus Acciones y Comportamiento Reciente de Mercado")
+        if u_data.get("portfolio_acciones") and any(v > 0 for v in u_data["portfolio_acciones"].values()):
             items_p = []
             tot_v_mkt = 0
+            
             for tk_x, c_x in u_data["portfolio_acciones"].items():
                 if c_x > 0:
                     pr_x = st.session_state.prices.get(tk_x, bvc_36_actions_master.get(tk_x, {}).get("precio", 0))
@@ -777,38 +756,106 @@ elif menu == "Mi Portafolio e Historial":
                     items_p.append({
                         "Acción Ticker": tk_x,
                         "Sector": bvc_36_actions_master.get(tk_x, {}).get("sector", "General"),
-                        "Cantidad Comprada": f"{c_x} Títulos",
-                        "Precio Mercado Actual": f"${pr_x:,.0f} COP",
-                        "Valor Total": f"${vm_x:,.0f} COP"
+                        "Cantidad Títulos": f"{c_x}",
+                        "Precio Actual": f"${pr_x:,.0f} COP",
+                        "Valor Total Mercado": f"${vm_x:,.0f} COP"
                     })
-            if items_p:
-                st.dataframe(pd.DataFrame(items_p), use_container_width=True)
-                st.success(f"💰 **Valor Total de tus Acciones:** `${tot_v_mkt:,.0f} COP`")
-            else:
-                st.info("No tienes acciones compradas actualmente.")
-        else:
-            st.info("No has adquirido acciones todavía.")
+            
+            st.dataframe(pd.DataFrame(items_p), use_container_width=True)
+            st.success(f"💎 **Valor Total de tus Acciones:** `${tot_v_mkt:,.0f} COP`")
 
+            st.markdown("---")
+            st.subheader("📊 Gráfica de Comportamiento Histórico del Activo")
+            
+            acciones_compradas = [tk for tk, q in u_data["portfolio_acciones"].items() if q > 0]
+            acc_select_graph = st.selectbox("Selecciona una de tus acciones para ver su comportamiento:", acciones_compradas)
+
+            if acc_select_graph:
+                p_base = bvc_36_actions_master.get(acc_select_graph, {}).get("precio", 1000)
+                # Generar serie histórica simulada con bajadas y subidas reales
+                random.seed(42 + ord(acc_select_graph[0]))
+                dias_hist = list(range(1, 31))
+                precios_hist = [p_base]
+                for d in range(1, 30):
+                    var = random.uniform(-0.035, 0.04)
+                    precios_hist.append(int(precios_hist[-1] * (1 + var)))
+
+                df_hist_acc = pd.DataFrame({"Día": dias_hist, "Precio (COP)": precios_hist})
+                
+                fig_acc = px.line(
+                    df_hist_acc, x="Día", y="Precio (COP)", markers=True,
+                    title=f"Evolución de Precio Últimos 30 Días ({acc_select_graph})"
+                )
+                fig_acc.update_traces(line_color='#38bdf8', line_width=3)
+                fig_acc.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(13, 20, 36, 0.7)', font=dict(color='#e2e8f0'))
+                st.plotly_chart(fig_acc, use_container_width=True)
+                st.caption("💡 *Nota: Esta gráfica muestra la volatilidad del activo (bajadas y recuperaciones) para ayudarte a tomar decisiones de mantener o vender.*")
+        else:
+            st.info("No tienes acciones compradas actualmente. Adquiere algunas en la Terminal Bursátil.")
+
+    # 2. CDTs CON GRÁFICO DE PROYECCIÓN DE VALOR
     with tab_p2:
-        st.subheader("📜 Tus CDTs Bancarios Constituidos")
+        st.subheader("📜 Tus CDTs Bancarios y Curva de Rendimiento Esperado")
         if u_data.get("cdt_list"):
             st.dataframe(pd.DataFrame(u_data["cdt_list"]), use_container_width=True)
             tot_c_val = sum(c.get("monto", 0) for c in u_data["cdt_list"])
             st.success(f"💰 **Monto Total Depositado en CDTs:** `${tot_c_val:,.0f} COP`")
+
+            st.markdown("---")
+            st.subheader("📈 Proyección de Crecimiento del CDT con el Tiempo")
+            
+            cdts_titulos = [f"{i+1}. {c['banco']} (${c['monto']:,.0f} COP)" for i, c in enumerate(u_data["cdt_list"])]
+            cdt_sel_idx = st.selectbox("Selecciona un CDT para ver su curva de ganancia futura:", range(len(cdts_titulos)), format_func=lambda x: cdts_titulos[x])
+
+            if cdt_sel_idx is not None:
+                cdt_obj = u_data["cdt_list"][cdt_sel_idx]
+                m_cdt = float(cdt_obj.get("monto", 100000))
+                t_ea = float(cdt_obj.get("tasa_ea", "10%").replace("%", "").strip())
+                p_dias = int(cdt_obj.get("plazo_dias", 360))
+
+                eje_dias = list(range(0, p_dias + 1, max(1, p_dias // 12)))
+                eje_val_cdt = [m_cdt * ((1 + (t_ea/100))**(d/365)) for d in eje_dias]
+
+                df_proj_cdt = pd.DataFrame({"Días Transcurridos": eje_dias, "Valor Acumulado (COP)": eje_val_cdt})
+                fig_p_cdt = px.line(df_proj_cdt, x="Días Transcurridos", y="Valor Acumulado (COP)", markers=True, title=f"Curva de Crecimiento Garatizada: {cdt_obj['banco']}")
+                fig_p_cdt.update_traces(line_color='#2ea043', line_width=3)
+                fig_p_cdt.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(13, 20, 36, 0.7)', font=dict(color='#e2e8f0'))
+                st.plotly_chart(fig_p_cdt, use_container_width=True)
         else:
             st.info("No has constituido ningún CDT aún.")
 
+    # 3. BONOS TES CON GRÁFICO DE PROYECCIÓN DE VALOR
     with tab_p3:
-        st.subheader("🇨🇴 Tus Bonos TES de Renta Fija")
+        st.subheader("🇨🇴 Tus Bonos TES de Renta Fija y Proyección de Cupones")
         if u_data.get("renta_fija_list"):
             st.dataframe(pd.DataFrame(u_data["renta_fija_list"]), use_container_width=True)
             tot_rf_val = sum(r.get("monto", 0) for r in u_data["renta_fija_list"])
             st.success(f"💰 **Monto Total Invertido en Bonos:** `${tot_rf_val:,.0f} COP`")
+
+            st.markdown("---")
+            st.subheader("📈 Proyección del Valor Esperado del Bono")
+            
+            rf_titulos = [f"{i+1}. {r['bono']} (${r['monto']:,.0f} COP)" for i, r in enumerate(u_data["renta_fija_list"])]
+            rf_sel_idx = st.selectbox("Selecciona un Bono para proyectar su rendimiento:", range(len(rf_titulos)), format_func=lambda x: rf_titulos[x])
+
+            if rf_sel_idx is not None:
+                rf_obj = u_data["renta_fija_list"][rf_sel_idx]
+                m_rf = float(rf_obj.get("monto", 100000))
+                t_ea_rf = float(rf_obj.get("tasa_ea", "10%").replace("%", "").replace("E.A.", "").strip())
+                
+                eje_anios_rf = list(range(0, 6))
+                eje_val_rf = [m_rf * ((1 + (t_ea_rf/100))**a) for a in eje_anios_rf]
+
+                df_proj_rf = pd.DataFrame({"Años": eje_anios_rf, "Valor del Bono + Cupones (COP)": eje_val_rf})
+                fig_p_rf = px.line(df_proj_rf, x="Años", y="Valor del Bono + Cupones (COP)", markers=True, title=f"Proyección de Cupón Soberano: {rf_obj['bono']}")
+                fig_p_rf.update_traces(line_color='#c084fc', line_width=3)
+                fig_p_rf.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(13, 20, 36, 0.7)', font=dict(color='#e2e8f0'))
+                st.plotly_chart(fig_p_rf, use_container_width=True)
         else:
             st.info("No tienes Bonos TES ni Renta Fija en tu inventario.")
 
 # ==========================================
-# MÓDULO NUEVO: ESTRATEGIA Y MANEJO DE ACCIONES POR JP
+# ESTRATEGIA CON ACCIONES
 # ==========================================
 elif menu == "Estrategia con Acciones (Jp)":
     st.title("🧠 Guía de Estrategia y Gestión de Mercado con Jp")
@@ -879,7 +926,7 @@ elif menu == "Estrategia con Acciones (Jp)":
         )
 
 # ==========================================
-# MÓDULO: CDT BANCARIOS (50 BANCOS)
+# CDT BANCARIOS
 # ==========================================
 elif menu == "CDT Bancarios (50 Bancos)":
     st.title("🏦 Certificados de Depósito a Término (CDT) en Colombia")
@@ -985,7 +1032,7 @@ elif menu == "CDT Bancarios (50 Bancos)":
                     st.warning(f"Necesitas mínimo ${min_req:,.0f} COP disponibles. Tu efectivo libre actual es de ${cash_libre:,.0f} COP.")
 
 # ==========================================
-# MÓDULO HABILITADO: RENTA FIJA Y BONOS TES (CON COMPRA HABILITADA)
+# RENTA FIJA Y BONOS TES
 # ==========================================
 elif menu == "Renta Fija y Bonos TES":
     st.title("📜 Renta Fija Sostenible y Bonos del Estado Colombiano (TES)")
@@ -995,7 +1042,7 @@ elif menu == "Renta Fija y Bonos TES":
         """
         <div class="neon-card">
             <span class="concept-badge">Mercado de Renta Fija Colombiano</span>
-            <h3 style="margin-top: 5px;">🏛️️ Invierte en la Deuda de la Nación y Grandes Corporaciones</h3>
+            <h3 style="margin-top: 5px;">🏛️ Invierte en la Deuda de la Nación y Grandes Corporaciones</h3>
             <p style="color: #cbd5e1; line-height: 1.7;">
                 Los Bonos TES son emitidos por el Ministerio de Hacienda para financiar proyectos nacionales. Cuentan con cupón de rendimiento garantizado.
             </p>
@@ -1057,7 +1104,7 @@ elif menu == "Renta Fija y Bonos TES":
                     st.warning(f"Necesitas mínimo ${min_rf:,.0f} COP disponibles. Tu efectivo libre actual es de ${cash_libre_rf:,.0f} COP.")
 
 # ==========================================
-# SIMULADOR PROYECTIVO Y ANÁLISIS
+# SIMULADOR PROYECTIVO
 # ==========================================
 elif menu == "Simulador Proyectivo":
     st.title("🧮 Simulador Proyectivo de Inversión (BVC / Jp)")
