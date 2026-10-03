@@ -282,7 +282,7 @@ bvc_36_actions_master = {
     "NUTRESA": {"precio": 46000, "logo": "🍫", "sector": "Alimentos Procesados", "color": "purple", "desc": "Gigante multilatina procesadora de chocolates, galletas, carnes y cafés."},
     "PROMIGAS": {"precio": 6400, "logo": "🔥", "sector": "Gas Natural", "color": "blue", "desc": "Transporte y distribución masiva de gas natural en Colombia y Perú."},
     "CORFICOLCF": {"precio": 19800, "logo": "💼", "sector": "Corporación Financiera", "color": "gold", "desc": "Inversión en megaproyectos viales, infraestructura energética y banca."},
-    "PFDAVVNDA": {"precio": 27200, "logo": "🏛️️", "sector": "Banca Comercial", "color": "gold", "desc": "Acción preferencial de Banco Davivienda y plataforma Daviplata."},
+    "PFDAVVNDA": {"precio": 27200, "logo": "🏛️", "sector": "Banca Comercial", "color": "gold", "desc": "Acción preferencial de Banco Davivienda y plataforma Daviplata."},
     "BOGOTA": {"precio": 35000, "logo": "🏬", "sector": "Financiero", "color": "gold", "desc": "Banco de Bogotá, una de las instituciones bancarias más antiguas de Colombia."},
     "PFAVAL": {"precio": 535, "logo": "📉", "sector": "Holding Bancario", "color": "gold", "desc": "Grupo Aval, conglomerado dueño de Banco de Bogotá, Occidente y Porvenir."},
     "MINEROS": {"precio": 3950, "logo": "⛏️", "sector": "Minería de Oro", "color": "green", "desc": "Exploración y producción responsable de oro en Colombia y Argentina."},
@@ -298,12 +298,24 @@ bvc_36_actions_master = {
     "FABRICATO": {"precio": 6, "logo": "👕", "sector": "Textil", "color": "purple", "desc": "Compañía textilera colombiana procesadora de telas y confecciones."},
     "AVIANCA": {"precio": 45, "logo": "✈️", "sector": "Aerolíneas", "color": "purple", "desc": "Línea aérea insignia de transporte de pasajeros y carga."},
     "POPULAR": {"precio": 280, "logo": "🏦", "sector": "Banca", "color": "gold", "desc": "Banco Popular Colombia, filial de Grupo Aval especializada en crédito bancario."},
-    "OCCIDENTE": {"precio": 32000, "logo": "ATM", "sector": "Banca", "color": "gold", "desc": "Banco de Occidente, soluciones financieras corporativas y personales."},
+    "OCCIDENTE": {"precio": 32000, "logo": "🏧", "sector": "Banca", "color": "gold", "desc": "Banco de Occidente, soluciones financieras corporativas y personales."},
     "CANCHAM": {"precio": 1500, "logo": "🌾", "sector": "Agroindustria", "color": "green", "desc": "Desarrollo de proyectos agrícolas y procesamiento agroindustrial."},
     "CARTON": {"precio": 8500, "logo": "📦", "sector": "Empaques / Cartón", "color": "purple", "desc": "Smurfit Kappa Cartón de Colombia, fabricación de empaques de papel."},
     "COLTEJER": {"precio": 12, "logo": "🧵", "sector": "Textiles", "color": "purple", "desc": "Compañía Colombiana de Tejidos fundada en Medellín."},
     "PFCORFICOL": {"precio": 16500, "logo": "💼", "sector": "Corporación Financiera", "color": "gold", "desc": "Acción preferencial de Corficolombiana."},
     "PFCELSA": {"precio": 3900, "logo": "💡", "sector": "Energía", "color": "blue", "desc": "Acción preferencial de Celsia S.A."}
+}
+
+# ==========================================
+# DICCIONARIO MAESTRO DE FONDOS DE INVERSIÓN (FICs / trii)
+# ==========================================
+trii_fics_master = {
+    "FIC_ACCIONES": {"nombre": "trii Acciones Colombia", "gestor": "Acciones & Valores S.A.", "rentabilidad_ea": "14.2% E.A.", "riesgo": "Alto", "logo": "🚀", "color": "blue", "desc": "Fondo enfocado en la canasta del índice MSCI COLCAP y las mejores acciones de la BVC."},
+    "FIC_RENTA_FIJA": {"nombre": "trii Renta Fija Liquidez", "gestor": "Acciones & Valores S.A.", "rentabilidad_ea": "10.8% E.A.", "riesgo": "Bajo", "logo": "🛡️", "color": "green", "desc": "Fondo de liquidez invertido en TES del gobierno y CDTs bancarios de alta calificación."},
+    "FIC_ACCIVAL_VISTA": {"nombre": "Accival Vista Liquidez", "gestor": "Acciones & Valores S.A.", "rentabilidad_ea": "11.1% E.A.", "riesgo": "Bajo", "logo": "💧", "color": "green", "desc": "Fondo vista de alta seguridad y disponibilidad diaria de capital para perfiles conservadores."},
+    "FIC_GLOBAL": {"nombre": "trii Global / Tech ETF", "gestor": "Acciones & Valores S.A.", "rentabilidad_ea": "16.5% E.A.", "riesgo": "Moderado-Alto", "logo": "🌐", "color": "purple", "desc": "Diversificación en dólares e inversión en las empresas tecnológicas más grandes del mundo."},
+    "FIC_INMOBILIARIO": {"nombre": "trii Renta Inmobiliaria", "gestor": "Acciones & Valores S.A.", "rentabilidad_ea": "12.0% E.A.", "riesgo": "Moderado", "logo": "🏢", "color": "gold", "desc": "Inversión colectiva en inmuebles comerciales, logísticos y de oficinas de alta rentabilidad."},
+    "FIC_SOSTENIBLE": {"nombre": "trii Sostenible ESG", "gestor": "Acciones & Valores S.A.", "rentabilidad_ea": "13.1% E.A.", "riesgo": "Moderado", "logo": "🌱", "color": "green", "desc": "Portafolio enfocado exclusivamente en empresas con altos estándares ambientales y sociales."}
 }
 
 st.session_state.prices_dict = bvc_36_actions_master
@@ -384,8 +396,8 @@ with st.sidebar:
     
     menu = option_menu(
         "Navegación Principal",
-        ["Masterclass BVC con Jp", "Terminal Bursátil", "Simulador Proyectivo", "CDT y Bonos", "Fondo ESG"],
-        icons=["camera-reels", "cart", "calculator", "bank", "tree"],
+        ["Masterclass BVC con Jp", "Terminal Bursátil", "Fondos de Inversión (trii)", "Simulador Proyectivo", "CDT y Bonos", "Fondo ESG"],
+        icons=["camera-reels", "cart", "layers", "calculator", "bank", "tree"],
         menu_icon="compass", default_index=0
     )
 
@@ -427,7 +439,7 @@ if menu == "Masterclass BVC con Jp":
     tab_m1, tab_m2, tab_m3, tab_m4, tab_m5 = st.tabs([
         "💡 1. ¿Por qué Invertir?",
         "🏛 2. ¿Qué es la BVC?",
-        "⚖️️ 3. Renta Variable vs. Renta Fija",
+        "⚖️ 3. Renta Variable vs. Renta Fija",
         "🌎 4. Casos Reales de Éxito",
         "🧠 5. Mente de Inversionista"
     ])
@@ -458,7 +470,7 @@ if menu == "Masterclass BVC con Jp":
             """
             <div class="neon-card">
                 <span class="concept-badge">Mecanismo de Mercado</span>
-                <h2 style="margin-top: 5px;">🏛️ ¿Qué es la BVC y cuál es su Rol en Colombia?</h2>
+                <h2 style="margin-top: 5px;">🏛️️ ¿Qué es la BVC y cuál es su Rol en Colombia?</h2>
                 <p style="font-size: 1.05rem; line-height: 1.8; color: #e2e8f0;">
                     La <b>Bolsa de Valores de Colombia (BVC)</b> es la plaza de mercado oficial donde se conectan las empresas que necesitan capital para crecer con las personas e instituciones que tienen ahorros disponibles.
                 </p>
@@ -590,7 +602,7 @@ if menu == "Masterclass BVC con Jp":
             )
 
 # ==========================================
-# TERMINAL BURSÁTIL (SIN LA PALABRA NEÓN EN SUBTÍTULO)
+# TERMINAL BURSÁTIL (ACCIONES)
 # ==========================================
 elif menu == "Terminal Bursátil":
     st.title("🛒 Terminal Bursátil: Mercado de Acciones BVC / trii")
@@ -673,7 +685,64 @@ elif menu == "Terminal Bursátil":
                         st.caption("No posees acciones de esta empresa.")
 
 # ==========================================
-# MÓDULO NUEVO: SIMULADOR PROYECTIVO Y ANÁLISIS DE INVERSIÓN
+# MÓDULO FONDOS DE INVERSIÓN COLECTIVA (trii FICs)
+# ==========================================
+elif menu == "Fondos de Inversión (trii)":
+    st.title("🏦 Fondos de Inversión Colectiva (FICs) - Alianza trii")
+    st.caption("Portafolios administrados profesionalmente por Acciones & Valores S.A.")
+
+    st.markdown(
+        """
+        <div class="neon-card">
+            <span class="concept-badge">Gestión Profesional Diversificada</span>
+            <h3 style="margin-top: 5px;">💼 Invierte en Fondos Colectivos con un Clic</h3>
+            <p style="color: #cbd5e1; line-height: 1.6;">
+                Los Fondos de Inversión Colectiva (FICs) te permiten invertir en canastas diversificadas administradas por profesionales. Ideal para combinar rentabilidad y seguridad.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    fics_list = list(trii_fics_master.items())
+    cols_fic = st.columns(3)
+
+    for idx, (fic_key, data_fic) in enumerate(fics_list):
+        col_f = cols_fic[idx % 3]
+        color_f_class = f"trii-card-{data_fic['color']}"
+
+        with col_f:
+            st.markdown(
+                f"""
+                <div class="{color_f_class}">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="margin:0; font-size: 1.2rem;">{data_fic['logo']} {data_fic['nombre']}</h3>
+                    </div>
+                    <p style="color: #facc15; font-weight:700; font-size: 1.1rem; margin: 6px 0;">📈 {data_fic['rentabilidad_ea']}</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem; margin:0;">🏛️ <b>Gestor:</b> {data_fic['gestor']}</p>
+                    <p style="color: #94a3b8; font-size: 0.8rem; margin-bottom:8px;">⚠️ <b>Riesgo:</b> {data_fic['riesgo']}</p>
+                    <p style="color: #cbd5e1; font-size: 0.88rem; min-height: 55px; line-height:1.4;">
+                        {data_fic['desc']}
+                    </p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            with st.expander(f"📥 Invertir en {data_fic['nombre']}"):
+                monto_fic = st.number_input(f"Monto a aportar (COP):", min_value=10000, max_value=int(u_data["cash"] + 1), value=50000, step=10000, key=f"monto_{fic_key}")
+                if st.button(f"Suscribir Fondo", key=f"btn_fic_{fic_key}"):
+                    if u_data["cash"] >= monto_fic:
+                        u_data["cash"] -= monto_fic
+                        u_data["esg_fund"] = u_data.get("esg_fund", 0) + monto_fic
+                        save_user_to_db(usuario_activo, u_data)
+                        st.success(f"¡Suscripción exitosa de ${monto_fic:,.0f} COP en {data_fic['nombre']}!")
+                        st.rerun()
+                    else:
+                        st.error("Efectivo libre insuficiente.")
+
+# ==========================================
+# SIMULADOR PROYECTIVO Y ANÁLISIS
 # ==========================================
 elif menu == "Simulador Proyectivo":
     st.title("🧮 Simulador Proyectivo de Inversión (BVC / Jp)")
@@ -719,8 +788,6 @@ elif menu == "Simulador Proyectivo":
         st.markdown('</div>', unsafe_allow_html=True)
 
     with col_sim2:
-        # Cálculos de los 3 escenarios
-        # Moderado: 12.5% E.A. | Optimista: 22% E.A. | Pesimista: -5% E.A.
         tasa_mod = (1 + 0.125)**(plazo_meses/12) - 1
         tasa_opt = (1 + 0.220)**(plazo_meses/12) - 1
         tasa_pes = (1 - 0.050)**(plazo_meses/12) - 1
@@ -739,7 +806,6 @@ elif menu == "Simulador Proyectivo":
         with res_c3:
             st.metric("Escenario Pesimista", f"${val_pes:,.0f} COP", f"{tasa_pes*100:.1f}%", delta_color="inverse")
 
-        # Generar Curva Temporal de Proyección con Plotly
         meses_eje = list(range(0, plazo_meses + 1))
         curve_mod = [monto_inv * ((1 + 0.125)**(m/12)) for m in meses_eje]
         curve_opt = [monto_inv * ((1 + 0.220)**(m/12)) for m in meses_eje]
