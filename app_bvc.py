@@ -445,26 +445,23 @@ if menu == "Masterclass BVC con Jp":
             )
 
     with tab_m4:
+        st.subheader("🌎 Casos Reales: Lo que nos Enseña la Historia")
+        st.caption("Lecciones con Historia")
+        
         st.markdown(
             """
             <div class="neon-card">
-                <span class="concept-badge">Lecciones con Historia</span>
-                <h2 style="margin-top: 5px;">🌎 Casos Reales: Lo que nos Enseña la Historia</h2>
-                
-                <div style="margin-bottom: 25px;">
-                    <h4 style="color: #facc15; font-size: 1.2rem;">🌟 Caso 1: Anne Scheiber (El Poder de la Disciplina)</h4>
-                    <p style="color: #cbd5e1; line-height: 1.7;">
-                        Anne era una auditora estadounidense con un salario modesto. Durante más de 50 años invirtió disciplinadamente pequeñas sumas en acciones de empresas sólidas y nunca vendió en pánico. 
-                        Transformó unos pocos miles de dólares en un patrimonio de <b>más de $22 millones de dólares</b>.
-                    </p>
-                </div>
-
-                <div>
-                    <h4 style="color: #58a6ff; font-size: 1.2rem;">🇨🇴 Caso 2: Dividendos en Colombia (Ecopetrol y Bancolombia)</h4>
-                    <p style="color: #cbd5e1; line-height: 1.7;">
-                        Inversionistas en Colombia que compraron acciones de Ecopetrol o Bancolombia durante momentos de crisis y mantuvieron sus posiciones, han recibido <b>retornos anuales en dividendos del 10% al 15% sobre su inversión inicial</b>.
-                    </p>
-                </div>
+                <h4 style="color: #facc15; font-size: 1.2rem; margin-top: 0;">🌟 Caso 1: Anne Scheiber (El Poder de la Disciplina)</h4>
+                <p style="color: #cbd5e1; line-height: 1.7; font-size: 0.98rem;">
+                    Anne era una auditora estadounidense con un salario modesto. Durante más de 50 años invirtió disciplinadamente pequeñas sumas en acciones de empresas sólidas y nunca vendió en momentos de pánico. 
+                    Transformó unos pocos miles de dólares en un patrimonio de <b>más de $22 millones de dólares</b>.
+                </p>
+            </div>
+            <div class="neon-card">
+                <h4 style="color: #58a6ff; font-size: 1.2rem; margin-top: 0;">🇨🇴 Caso 2: Dividendos en Colombia (Ecopetrol y Bancolombia)</h4>
+                <p style="color: #cbd5e1; line-height: 1.7; font-size: 0.98rem;">
+                    Inversionistas en Colombia que compraron acciones de Ecopetrol o Bancolombia durante momentos de crisis y mantuvieron sus posiciones, han recibido <b>retornos anuales en dividendos del 10% al 15% sobre su inversión inicial</b>.
+                </p>
             </div>
             """, unsafe_allow_html=True
         )
