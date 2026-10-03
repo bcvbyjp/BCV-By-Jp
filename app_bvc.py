@@ -18,7 +18,7 @@ st.set_page_config(
 )
 
 # ==========================================
-# ESTILOS CSS (BANNER DE JP FLOTANTE EN TODAS LAS PÁGINAS)
+# ESTILOS CSS (PANTALLA GIGANTE JP + GLASSMORPHISM)
 # ==========================================
 st.markdown(
     """
@@ -43,12 +43,12 @@ st.markdown(
             url("fondo-financiero.jpg") center/cover no-repeat fixed;
     }
 
-    /* Banner Global de Jp */
+    /* Banner Global de Jp en la parte superior */
     .jp-global-banner {
         background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
         border: 2px solid #facc15;
         border-radius: 20px;
-        padding: 18px 25px;
+        padding: 16px 22px;
         margin-bottom: 25px;
         box-shadow: 0 0 25px rgba(250, 204, 21, 0.2);
         display: flex;
@@ -57,8 +57,8 @@ st.markdown(
     }
 
     .jp-avatar-img {
-        width: 85px;
-        height: 85px;
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
         object-fit: cover;
         border: 3px solid #facc15;
@@ -66,9 +66,31 @@ st.markdown(
         animation: floatJp 3.5s ease-in-out infinite;
     }
 
+    /* Pantalla Gigante / Hero de Masterclass Jp */
+    .hero-jp-masterclass {
+        background: radial-gradient(circle at top center, #1e293b 0%, #0f172a 100%);
+        border: 2px solid #facc15;
+        border-radius: 28px;
+        padding: 40px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 0 45px rgba(250, 204, 21, 0.25);
+    }
+
+    .jp-masterclass-img {
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #facc15;
+        box-shadow: 0 0 30px rgba(250, 204, 21, 0.6);
+        margin-bottom: 15px;
+        animation: floatJp 3.5s ease-in-out infinite;
+    }
+
     @keyframes floatJp {
         0% { transform: translateY(0px) scale(1); }
-        50% { transform: translateY(-5px) scale(1.03); }
+        50% { transform: translateY(-6px) scale(1.02); }
         100% { transform: translateY(0px) scale(1); }
     }
 
@@ -76,10 +98,25 @@ st.markdown(
         background: linear-gradient(135deg, #101622 0%, #1a2233 100%);
         border: 1px solid rgba(31, 111, 235, 0.4);
         border-radius: 20px;
-        padding: 24px;
-        margin-bottom: 20px;
+        padding: 26px;
+        margin-bottom: 22px;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
         transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    .asset-card:hover {
+        border-color: #58a6ff;
+        box-shadow: 0 12px 30px rgba(88, 166, 255, 0.25);
+    }
+
+    .concept-badge {
+        background: rgba(56, 189, 248, 0.15);
+        color: #38bdf8;
+        border: 1px solid rgba(56, 189, 248, 0.4);
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-transform: uppercase;
     }
 
     h1, h2, h3 { color: #58a6ff; font-weight: 700; }
@@ -89,7 +126,7 @@ st.markdown(
 )
 
 # ==========================================
-# BASE DE DATOS Y PERSISTENCIA
+# BASE DE DATOS Y PERSISTENCIA (SQLITE)
 # ==========================================
 DB_FILE = "bcv_database.db"
 
@@ -172,7 +209,7 @@ if not st.session_state.logged_in:
         """, unsafe_allow_html=True
     )
     with st.form("form_login"):
-        user_input = st.text_input("Nombre de Usuario:")
+        user_input = st.text_input("Nombre Completo:")
         pass_input = st.text_input("Contraseña:", type="password")
         if st.form_submit_button("Ingresar al Portal 🚀"):
             if user_input.strip() and pass_input.strip():
@@ -194,7 +231,7 @@ usuario_activo = st.session_state.current_user
 u_data = st.session_state.user_database[usuario_activo]
 
 # ==========================================
-# CÓDIGO DEL BANNER DE JP EN TODAS LAS PÁGINAS
+# BANNER GLOBAL DE JP (PARTE SUPERIOR)
 # ==========================================
 def render_guia_banner_global():
     has_img = os.path.exists("jp_foto.jpg")
@@ -204,16 +241,16 @@ def render_guia_banner_global():
             img_b64 = base64.b64encode(f.read()).decode()
         img_html = f'<img src="data:image/jpeg;base64,{img_b64}" class="jp-avatar-img" />'
     else:
-        img_html = '<div style="font-size: 3.5rem;">👨‍💼</div>'
+        img_html = '<div style="font-size: 3.5rem;">👨‍‍💼</div>'
 
     st.markdown(
         f"""
         <div class="jp-global-banner">
             <div>{img_html}</div>
             <div style="flex-grow: 1;">
-                <h3 style="color: #facc15; margin: 0; font-size: 1.4rem;">🟡 Jp - Tu Guía Virtual Unisucre</h3>
-                <p style="color: #e2e8f0; margin: 5px 0 0 0; font-size: 0.95rem;">
-                    ¡Habla, <b>{usuario_activo}</b>! Bienvenido a la terminal. Recuerda revisar la sección de <b>Introducción a la BVC</b> para aprender a dominar el mercado colombiano.
+                <h3 style="color: #facc15; margin: 0; font-size: 1.35rem;">🟡 Jp - Tu Guía Virtual Unisucre</h3>
+                <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.95rem;">
+                    ¡Epa, <b>{usuario_activo}</b>! Estás en la plataforma oficial de simulación bursátil de Unisucre. Revisa la <b>Masterclass de Jp</b> para aprender la teoría antes de hacer tu primera operación.
                 </p>
             </div>
         </div>
@@ -230,8 +267,8 @@ with st.sidebar:
     
     menu = option_menu(
         "Navegación Principal",
-        ["Introducción BVC", "Terminal Bursátil", "Catálogo Técnico", "CDT y Bonos", "Fondo ESG"],
-        icons=["book-half", "cart", "graph-up", "bank", "tree"],
+        ["Masterclass BVC con Jp", "Terminal Bursátil", "Catálogo Técnico", "CDT y Bonos", "Fondo ESG"],
+        icons=["camera-reels", "cart", "graph-up", "bank", "tree"],
         menu_icon="compass", default_index=0
     )
 
@@ -239,85 +276,163 @@ with st.sidebar:
         st.session_state.logged_in = False
         st.rerun()
 
-# MOSTRAR EL GUÍA JP EN ABSOLUTAMENTE TODAS LAS VISTAS
+# RENDERIZAR BANNER GLOBAL EN TODAS LAS VISTAS
 render_guia_banner_global()
 
 # ==========================================
-# MÓDULO: INTRODUCCIÓN ATRACTIVA A LA BVC
+# MÓDULO: MASTERCLASS PANTALLA GIGANTE CON JP
 # ==========================================
-if menu == "Introducción BVC":
-    st.title("🇨🇴 Todo lo que debes saber sobre la Bolsa de Valores de Colombia (BVC)")
-    st.caption("Aprende a operar como un profesional del mercado colombiano con la guía de Jp.")
+if menu == "Masterclass BVC con Jp":
+    has_img = os.path.exists("jp_foto.jpg")
+    img_hero_html = ""
+    if has_img:
+        with open("jp_foto.jpg", "rb") as f:
+            img_b64 = base64.b64encode(f.read()).decode()
+        img_hero_html = f'<img src="data:image/jpeg;base64,{img_b64}" class="jp-masterclass-img" />'
+    else:
+        img_hero_html = '<div style="font-size: 6rem;">👨‍💼</div>'
 
+    # PANTALLA GIGANTE / HERO
     st.markdown(
-        """
-        <div class="asset-card">
-            <h2>🔥 ¿Qué es la BVC y cómo funciona?</h2>
-            <p style="font-size: 1.05rem; line-height: 1.7;">
-                Imagina la <b>Bolsa de Valores de Colombia (BVC)</b> como el mercado más grande y seguro del país, pero en vez de comprar y vender yuca o suero, 
-                aquí se negocian <b>partes de las empresas más potentes de Colombia</b> (Ecopetrol, Bancolombia, ISA) y <b>deuda pública del Estado (TES)</b>.
-            </p>
-            <p style="font-size: 1.05rem; line-height: 1.7;">
-                Su función principal es conectar a las empresas que necesitan dinero para financiar sus proyectos con las personas o instituciones que tienen capital ahorrado y quieren rentabilizarlo.
+        f"""
+        <div class="hero-jp-masterclass">
+            {img_hero_html}
+            <h1 style="color: #facc15; font-size: 2.5rem; margin-bottom: 8px;">🎓 Masterclass de Bolsa de Valores de Colombia (BVC)</h1>
+            <h3 style="color: #94a3b8; font-weight: 400; margin-bottom: 20px; font-size: 1.2rem;">
+                Dictado por <b>Juan Pablo López Tarriba (Jp)</b> | Universidad de Sucre
+            </h3>
+            <p style="font-size: 1.1rem; color: #cbd5e1; max-width: 850px; margin: 0 auto; line-height: 1.7;">
+                ¡Habla, equipo! Si nunca has escuchado sobre acciones, dividendos, tasas de interés o gráficos bursátiles, <b>¡tranquilo, estás en el lugar correcto!</b> 
+                Esta guía interactiva fue pensada para que pases de cero a entender exactamente cómo funciona el mercado de capitales colombiano y administres con cabeza tu bono inicial de <b>$500.000 COP</b>.
             </p>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-    col1, col2, col3 = st.columns(3)
-    with col1:
+    # NUCLEO EDUCATIVO EN PROFUNDIDAD
+    st.markdown("## 📚 Módulos Fundamentales de Formación Financiera")
+
+    tab_m1, tab_m2, tab_m3, tab_m4 = st.tabs([
+        "🏛️ 1. ¿Qué es la BVC y su Rol?",
+        "⚖️ 2. Renta Variable vs. Renta Fija",
+        "📊 3. El Índice COLCAP y Activos",
+        "🧠 4. Psicología y Gestión del Riesgo"
+    ])
+
+    with tab_m1:
         st.markdown(
             """
-            <div class="asset-card" style="min-height: 280px;">
-                <h3>📈 1. Renta Variable (Acciones)</h3>
-                <p>Te convierte en <b>socio copropietario</b> de la empresa.</p>
+            <div class="asset-card">
+                <span class="concept-badge">Fundamentos Institucionales</span>
+                <h2 style="margin-top: 10px;">🏛️ La Bolsa de Valores de Colombia (BVC)</h2>
+                <p style="font-size: 1.05rem; line-height: 1.8;">
+                    La <b>Bolsa de Valores de Colombia (BVC)</b> es una entidad privada encargada de administrar los mercados de acciones, bonos, divisas y derivados en nuestro país. 
+                    Funciona como la gran plaza de mercado oficial donde las empresas colombianas consiguen dinero para construir carreteras, expansionar fábricas o lanzar productos, y donde los inversionistas (como tú) ponen a rentar su capital.
+                </p>
+                <hr style="border-color: rgba(255,255,255,0.1);">
+                <h3>🛡️ Entidades que Vigilan y Protegen el Mercado:</h3>
                 <ul>
-                    <li><b>Ganancia por Valorización:</b> Si la empresa crece, la acción sube de precio.</li>
-                    <li><b>Dividendos:</b> Reparto periódico de las utilidades fijado por la asamblea.</li>
-                </ul>
-            </div>
-            """, unsafe_allow_html=True
-        )
-    with col2:
-        st.markdown(
-            """
-            <div class="asset-card" style="min-height: 280px;">
-                <h3>📜 2. Renta Fija (TES y Bonos)</h3>
-                <p>Le prestas tu dinero al Estado o a empresas corporativas.</p>
-                <ul>
-                    <li><b>Rendimiento Seguro:</b> Conoces de antemano la tasa de interés (E.A.).</li>
-                    <li><b>Bajo Riesgo:</b> Ideal para proteger el capital contra la inflación.</li>
-                </ul>
-            </div>
-            """, unsafe_allow_html=True
-        )
-    with col3:
-        st.markdown(
-            """
-            <div class="asset-card" style="min-height: 280px;">
-                <h3>🇨🇴 3. El Índice COLCAP</h3>
-                <p>El termómetro oficial de la bolsa colombiana.</p>
-                <ul>
-                    <li>Mide el comportamiento de las <b>20 acciones más líquidas y transadas</b> del país.</li>
-                    <li>Si el COLCAP sube, indica salud y confianza económica en Colombia.</li>
+                    <li><b>Superintendencia Financiera de Colombia (SFC):</b> Inspecciona y vigila que todas las operaciones de la bolsa cumplan la ley y protejan al inversionista.</li>
+                    <li><b>Autoregulador del Mercado de Valores (AMV):</b> Vela por la ética y la transparencia de los corredores y traders profesionales.</li>
                 </ul>
             </div>
             """, unsafe_allow_html=True
         )
 
-    st.markdown("### 📊 Principales Activos que Vas a Operar en este Simulador")
-    df_activos = pd.DataFrame([
-        {"Ticker": "ECOPETROL", "Sector": "Energético / Petróleo", "Por qué operar": "Empresa insignia de Colombia, destaca por pagar dividendos atractivos."},
-        {"Ticker": "BCOLOMBIA", "Sector": "Financiero", "Por qué operar": "Líder del sistema bancario, con presencia masiva en todo el país."},
-        {"Ticker": "ISA", "Sector": "Infraestructura / Energía", "Por qué operar": "Flujos de caja muy estables por contratos de transmisión de energía a largo plazo."},
-        {"Ticker": "GRUPOSURA", "Sector": "Holding / Inversiones", "Por qué operar": "Diversificación en servicios financieros, pensiones y seguros en Latinoamérica."}
-    ])
-    st.table(df_activos)
+    with tab_m2:
+        col_rv, col_rf = st.columns(2)
+        with col_rv:
+            st.markdown(
+                """
+                <div class="asset-card" style="min-height: 380px;">
+                    <span class="concept-badge">Mayor Riesgo / Mayor Retorno</span>
+                    <h2 style="margin-top: 10px;">📈 Renta Variable (Acciones)</h2>
+                    <p style="font-size: 1rem; line-height: 1.7;">
+                        Cuando compras una acción (ej. <b>Ecopetrol</b> o <b>Bancolombia</b>), te conviertes en <b>socio copropietario</b> directo de esa empresa en proporción a tus títulos.
+                    </p>
+                    <h4 style="color: #2ea043;">¿Cómo ganas dinero aquí?</h4>
+                    <ol>
+                        <li><b>Valorización del Precio:</b> Compras la acción a $2.500 COP y sube a $3.000 COP gracias al crecimiento de la empresa.</li>
+                        <li><b>Dividendos:</b> La asamblea de accionistas reparte periódicamente las ganancias generadas a todos los dueños.</li>
+                    </ol>
+                    <p style="color: #f87171; font-size: 0.9rem;">⚠️ <i>El precio puede subir o bajar diariamente según la oferta, la demanda y las noticias económicas.</i></p>
+                </div>
+                """, unsafe_allow_html=True
+            )
+        with col_rf:
+            st.markdown(
+                """
+                <div class="asset-card" style="min-height: 380px;">
+                    <span class="concept-badge">Seguridad y Previsibilidad</span>
+                    <h2 style="margin-top: 10px;">📜 Renta Fija (TES y CDT)</h2>
+                    <p style="font-size: 1rem; line-height: 1.7;">
+                        Aquí no te conviertes en socio, sino en <b>prestamista</b>. Le prestas tu dinero al Estado Colombiano (mediante Títulos TES) o a Bancos (CDT).
+                    </p>
+                    <h4 style="color: #2ea043;">¿Cómo ganas dinero aquí?</h4>
+                    <ol>
+                        <li><b>Tasa de Interés Conocida:</b> Desde el día 1 acuerdas pactar una tasa fija (ej. 11.5% Efectivo Anual).</li>
+                        <li><b>Preservación de Capital:</b> El riesgo de impago es extremadamente bajo porque está respaldado por la Nación o Fogafin.</li>
+                    </ol>
+                    <p style="color: #38bdf8; font-size: 0.9rem;">💡 <i>Ideal para proteger tu capital contra la inflación y mantener saldo seguro.</i></p>
+                </div>
+                """, unsafe_allow_html=True
+            )
+
+    with tab_m3:
+        st.markdown(
+            """
+            <div class="asset-card">
+                <span class="concept-badge">Indicador Clave</span>
+                <h2 style="margin-top: 10px;">🇨🇴 El Índice MSCI COLCAP</h2>
+                <p style="font-size: 1.05rem; line-height: 1.8;">
+                    Es el <b>termómetro de la economía colombiana</b>. El COLCAP agrupa las <b>20 acciones más líquidas e importantes</b> del mercado local. 
+                    Si el índice COLCAP sube en el día, significa que en general las grandes empresas del país están ganando valor y confianza.
+                </p>
+            </div>
+            """, unsafe_allow_html=True
+        )
+
+        st.markdown("### 🏢 Activos Colombianos Emblemáticos en tu Terminal")
+        df_empresas = pd.DataFrame([
+            {"Ticker": "ECOPETROL", "Sector": "Petróleo y Gas", "Importancia en Colombia": "La empresa más grande del país. Representa gran parte de los ingresos fiscales del Estado."},
+            {"Ticker": "BCOLOMBIA", "Sector": "Banca / Financiero", "Importancia en Colombia": "El banco líder en activos y clientes. Mide directamente la salud del consumo de las familias."},
+            {"Ticker": "ISA", "Sector": "Infraestructura Eléctrica", "Importancia en Colombia": "Transporta la mayor parte de la energía de Colombia y Latinoamérica con contratos a muy largo plazo."},
+            {"Ticker": "GRUPOSURA", "Sector": "Holding Financiero", "Importancia en Colombia": "Conglomerado dueño de fondos de pensiones, seguros y participaciones bancarias regionales."}
+        ])
+        st.table(df_empresas)
+
+    with tab_m4:
+        st.markdown(
+            """
+            <div class="asset-card">
+                <span class="concept-badge">Mente de Trader Exitoso</span>
+                <h2 style="margin-top: 10px;">🧠 Psicología Bursátil y Gestión de Riesgo por Jp</h2>
+                <p style="font-size: 1.05rem; line-height: 1.8;">
+                    En los mercados financieros, el mayor enemigo no es el gráfico ni las noticias, <b>¡es la falta de disciplina!</b> 
+                    Para conservar tus $500.000 COP e ir escalando en el Ranking de la Universidad de Sucre, aplica las 3 reglas de oro de Jp:
+                </p>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
+                    <div style="flex: 1; min-width: 240px; background: rgba(15, 23, 42, 0.8); padding: 18px; border-radius: 16px; border: 1px solid rgba(250,204,21,0.3);">
+                        <h4 style="color: #facc15;">1. Diversificación Inteligente</h4>
+                        <p style="font-size: 0.95rem;">Nunca gastes el 100% de tu dinero en un solo activo. Divide tu capital entre acciones, CDT y efectivo libre.</p>
+                    </div>
+                    <div style="flex: 1; min-width: 240px; background: rgba(15, 23, 42, 0.8); padding: 18px; border-radius: 16px; border: 1px solid rgba(56,189,248,0.3);">
+                        <h4 style="color: #38bdf8;">2. Control de Emociones</h4>
+                        <p style="font-size: 0.95rem;">No compres desesperado cuando los precios estén en máximos, ni vendas con pánico cuando haya caídas temporales.</p>
+                    </div>
+                    <div style="flex: 1; min-width: 240px; background: rgba(15, 23, 42, 0.8); padding: 18px; border-radius: 16px; border: 1px solid rgba(46,160,67,0.3);">
+                        <h4 style="color: #2ea043;">3. Monitoreo Constante</h4>
+                        <p style="font-size: 0.95rem;">Revisa las alertas de riesgo y analiza los indicadores técnicos (SMA / RSI) antes de tomar una decisión.</p>
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True
+        )
 
 elif menu == "Terminal Bursátil":
     st.title("🛒 Terminal Bursátil de Compra y Venta")
-    st.success("Aquí puedes aplicar lo aprendido e invertir tus $500,000 COP iniciales.")
+    st.success("Aplica los conocimientos de la Masterclass e invierte tus $500,000 COP.")
 
 elif menu == "Catálogo Técnico":
     st.title("📊 Catálogo Técnico de Activos")
