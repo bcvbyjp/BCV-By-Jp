@@ -309,12 +309,12 @@ bvc_36_actions_master = {
 }
 
 # ==========================================
-# 50 BANCOS Y ENTIDADES FINANCIERAS PARA CDTs EN COLOMBIA
+# CATÁLOGO COMPLETO DE 50 BANCOS Y ENTIDADES PARA CDTs
 # ==========================================
 bancos_cdt_50 = [
     {"banco": "Bancolombia S.A.", "tasa_ea": 10.5, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏦"},
     {"banco": "Banco Davivienda", "tasa_ea": 10.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏛️"},
-    {"banco": "Nu Colombia Compañía de Financiamiento", "tasa_ea": 12.5, "plazo_dias": 180, "min_inversion": 10000, "logo": "🟣"},
+    {"banco": "Nu Colombia C.F.", "tasa_ea": 12.5, "plazo_dias": 180, "min_inversion": 10000, "logo": "🟣"},
     {"banco": "Lulo Bank S.A.", "tasa_ea": 12.2, "plazo_dias": 180, "min_inversion": 10000, "logo": "🟢"},
     {"banco": "Banco de Bogotá", "tasa_ea": 10.2, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏬"},
     {"banco": "Banco Falabella S.A.", "tasa_ea": 11.5, "plazo_dias": 360, "min_inversion": 50000, "logo": "💳"},
@@ -324,32 +324,32 @@ bancos_cdt_50 = [
     {"banco": "Banco de Occidente", "tasa_ea": 10.3, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏧"},
     {"banco": "Banco Popular S.A.", "tasa_ea": 10.7, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏦"},
     {"banco": "Banco AV Villas", "tasa_ea": 10.5, "plazo_dias": 360, "min_inversion": 50000, "logo": "🔴"},
-    {"banco": "Banco Itaú Colombia", "tasa_ea": 10.6, "plazo_dias": 360, "min_inversion": 100000, "logo": "🟧"},
-    {"banco": "Banco GNB Sudameris", "tasa_ea": 11.1, "plazo_dias": 360, "min_inversion": 100000, "logo": "🏛️"},
+    {"banco": "Banco Itaú Colombia", "tasa_ea": 10.6, "plazo_dias": 360, "min_inversion": 50000, "logo": "🟧"},
+    {"banco": "Banco GNB Sudameris", "tasa_ea": 11.1, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏛️"},
     {"banco": "Banco W S.A.", "tasa_ea": 12.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "💼"},
     {"banco": "Banco Caja Social", "tasa_ea": 10.9, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏠"},
     {"banco": "Banco Pichincha Colombia", "tasa_ea": 11.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "🟡"},
     {"banco": "Bancoomeva", "tasa_ea": 11.4, "plazo_dias": 360, "min_inversion": 50000, "logo": "🟢"},
-    {"banco": "Financiera Juriscoop", "tasa_ea": 12.1, "plazo_dias": 360, "min_inversion": 50000, "logo": "⚖️"},
+    {"banco": "Financiera Juriscoop", "tasa_ea": 12.1, "plazo_dias": 360, "min_inversion": 50000, "logo": "⚖️️"},
     {"banco": "Banco Serfinanza", "tasa_ea": 11.9, "plazo_dias": 360, "min_inversion": 50000, "logo": "🛒"},
-    {"banco": "Tuya Compañía de Financiamiento", "tasa_ea": 12.3, "plazo_dias": 180, "min_inversion": 50000, "logo": "🛍️"},
-    {"banco": "RCI Colombia S.A.", "tasa_ea": 11.7, "plazo_dias": 360, "min_inversion": 100000, "logo": "🚗"},
-    {"banco": "Credifamilia Compañía de Financiamiento", "tasa_ea": 12.6, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏡"},
-    {"banco": "CFA Cooperativa Financiera", "tasa_ea": 12.0, "plazo_dias": 360, "min_inversion": 50000, "logo": "🤝"},
-    {"banco": "Cotrafa Cooperativa Financiera", "tasa_ea": 11.9, "plazo_dias": 360, "min_inversion": 50000, "logo": "👥"},
-    {"banco": "Confiar Cooperativa Financiera", "tasa_ea": 11.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "🌱"},
-    {"banco": "Financiera Codeden", "tasa_ea": 12.2, "plazo_dias": 360, "min_inversion": 50000, "logo": "📈"},
+    {"banco": "Tuya C.F.", "tasa_ea": 12.3, "plazo_dias": 180, "min_inversion": 50000, "logo": "🛍️"},
+    {"banco": "RCI Colombia S.A.", "tasa_ea": 11.7, "plazo_dias": 360, "min_inversion": 50000, "logo": "🚗"},
+    {"banco": "Credifamilia C.F.", "tasa_ea": 12.6, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏡"},
+    {"banco": "CFA Coop. Financiera", "tasa_ea": 12.0, "plazo_dias": 360, "min_inversion": 50000, "logo": "🤝"},
+    {"banco": "Cotrafa Coop. Financiera", "tasa_ea": 11.9, "plazo_dias": 360, "min_inversion": 50000, "logo": "👥"},
+    {"banco": "Confiar Coop. Financiera", "tasa_ea": 11.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "🌱"},
+    {"banco": "Financiera Coedenden", "tasa_ea": 12.2, "plazo_dias": 360, "min_inversion": 50000, "logo": "📈"},
     {"banco": "Giros y Finanzas C.F.", "tasa_ea": 11.6, "plazo_dias": 360, "min_inversion": 50000, "logo": "💸"},
-    {"banco": "Mibanco S.A. (Antes Encaja)", "tasa_ea": 12.7, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏬"},
+    {"banco": "Mibanco S.A.", "tasa_ea": 12.7, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏬"},
     {"banco": "Banco Mundo Mujer", "tasa_ea": 12.9, "plazo_dias": 360, "min_inversion": 50000, "logo": "👩"},
     {"banco": "Coopcentral", "tasa_ea": 11.7, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏦"},
-    {"banco": "JPMorgan Chase Bank Colombia", "tasa_ea": 9.8, "plazo_dias": 360, "min_inversion": 500000, "logo": "🏛️"},
-    {"banco": "BTG Pactual Colombia", "tasa_ea": 11.2, "plazo_dias": 360, "min_inversion": 100000, "logo": "🌐"},
-    {"banco": "Credicorp Bank Colombia", "tasa_ea": 11.0, "plazo_dias": 360, "min_inversion": 100000, "logo": "💼"},
-    {"banco": "Citibank Colombia", "tasa_ea": 9.9, "plazo_dias": 360, "min_inversion": 500000, "logo": "🔵"},
-    {"banco": "Banco Santander Colombia", "tasa_ea": 10.4, "plazo_dias": 360, "min_inversion": 100000, "logo": "🔴"},
+    {"banco": "JPMorgan Chase Colombia", "tasa_ea": 9.8, "plazo_dias": 360, "min_inversion": 100000, "logo": "🏛️"},
+    {"banco": "BTG Pactual Colombia", "tasa_ea": 11.2, "plazo_dias": 360, "min_inversion": 50000, "logo": "🌐"},
+    {"banco": "Credicorp Bank Colombia", "tasa_ea": 11.0, "plazo_dias": 360, "min_inversion": 50000, "logo": "💼"},
+    {"banco": "Citibank Colombia", "tasa_ea": 9.9, "plazo_dias": 360, "min_inversion": 100000, "logo": "🔵"},
+    {"banco": "Banco Santander Colombia", "tasa_ea": 10.4, "plazo_dias": 360, "min_inversion": 50000, "logo": "🔴"},
     {"banco": "Finandina Banco Digital", "tasa_ea": 11.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "📱"},
-    {"banco": "Irsi Compañía de Financiamiento", "tasa_ea": 12.0, "plazo_dias": 360, "min_inversion": 50000, "logo": "📊"},
+    {"banco": "Irsi C.F.", "tasa_ea": 12.0, "plazo_dias": 360, "min_inversion": 50000, "logo": "📊"},
     {"banco": "Financiera Progresar", "tasa_ea": 12.1, "plazo_dias": 360, "min_inversion": 50000, "logo": "🚀"},
     {"banco": "Coltefinanciera S.A.", "tasa_ea": 12.4, "plazo_dias": 360, "min_inversion": 50000, "logo": "🧵"},
     {"banco": "Danacop Cooperativa", "tasa_ea": 12.2, "plazo_dias": 360, "min_inversion": 50000, "logo": "🤝"},
@@ -358,9 +358,9 @@ bancos_cdt_50 = [
     {"banco": "Cohemprender Financiera", "tasa_ea": 12.5, "plazo_dias": 360, "min_inversion": 50000, "logo": "💡"},
     {"banco": "Banco Coopserp", "tasa_ea": 11.9, "plazo_dias": 360, "min_inversion": 50000, "logo": "👥"},
     {"banco": "Mercantil Colpatria", "tasa_ea": 10.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏢"},
-    {"banco": "Corficolombiana Banca Privada", "tasa_ea": 11.0, "plazo_dias": 360, "min_inversion": 100000, "logo": "💼"},
+    {"banco": "Corficolombiana Private", "tasa_ea": 11.0, "plazo_dias": 360, "min_inversion": 50000, "logo": "💼"},
     {"banco": "Fiduciaria Bancolombia", "tasa_ea": 10.6, "plazo_dias": 360, "min_inversion": 50000, "logo": "📜"},
-    {"banco": "Fiduciaria Bogota S.A.", "tasa_ea": 10.3, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏬"},
+    {"banco": "Fiduciaria Bogotá S.A.", "tasa_ea": 10.3, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏬"},
     {"banco": "Fiduciaria Davivienda", "tasa_ea": 10.7, "plazo_dias": 360, "min_inversion": 50000, "logo": "🔴"}
 ]
 
@@ -405,7 +405,7 @@ if not st.session_state.logged_in:
 usuario_activo = st.session_state.current_user
 u_data = st.session_state.user_database[usuario_activo]
 
-# Garantizar que el usuario tenga por defecto sus $500,000 COP
+# Garantizar $500.000 COP siempre por defecto
 if u_data.get("cash") is None:
     u_data["cash"] = 500000.0
     u_data["presupuesto_inicial"] = 500000.0
@@ -430,7 +430,7 @@ def render_guia_banner_global():
             <div style="flex-grow: 1;">
                 <h3 style="color: #facc15; margin: 0; font-size: 1.35rem; text-shadow: 0 0 10px rgba(250, 204, 21, 0.4);">🟡 Jp - Tu Guía Virtual Unisucre</h3>
                 <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.95rem;">
-                    ¡Epa, <b>{usuario_activo}</b>! Bienvenido a la plataforma. Tienes un saldo inicial garantizado de <b>$500.000 COP</b> para operar en la bolsa y constituir CDTs.
+                    ¡Epa, <b>{usuario_activo}</b>! Tienes un saldo libre inicial de <b>$500.000 COP</b> para comprar acciones y constituir CDTs en 50 bancos.
                 </p>
             </div>
         </div>
@@ -445,7 +445,6 @@ with st.sidebar:
     st.title("📈 BCV By Jp")
     st.success(f"👤 **{usuario_activo}**")
     
-    # RESUMEN RÁPIDO DE PORTAFOLIO EN SIDEBAR
     val_acciones_total = sum(
         qty * st.session_state.prices.get(tk, bvc_36_actions_master.get(tk, {}).get("precio", 0))
         for tk, qty in u_data.get("portfolio_acciones", {}).items()
@@ -462,8 +461,8 @@ with st.sidebar:
     st.markdown("---")
     menu = option_menu(
         "Navegación Principal",
-        ["Masterclass BVC con Jp", "Terminal Bursátil", "Simulador Proyectivo", "CDT Bancarios (50 Bancos)", "Renta Fija y Bonos TES"],
-        icons=["camera-reels", "cart", "calculator", "bank", "shield-check"],
+        ["Masterclass BVC con Jp", "Terminal Bursátil", "CDT Bancarios (50 Bancos)", "Simulador Proyectivo", "Renta Fija y Bonos TES"],
+        icons=["camera-reels", "cart", "bank", "calculator", "shield-check"],
         menu_icon="compass", default_index=0
     )
 
@@ -668,7 +667,7 @@ if menu == "Masterclass BVC con Jp":
             )
 
 # ==========================================
-# TERMINAL BURSÁTIL CON CÁLCULOS MATEMÁTICOS REALES
+# TERMINAL BURSÁTIL CON CÁLCULOS REALES
 # ==========================================
 elif menu == "Terminal Bursátil":
     st.title("🛒 Terminal Bursátil: Mercado de Acciones BVC")
@@ -685,11 +684,9 @@ elif menu == "Terminal Bursátil":
             st.success("¡Cotizaciones actualizadas con éxito!")
             st.rerun()
 
-    # CÁLCULOS REALES EN VIVO
     st.markdown("### 📊 Estado Actual de tu Portafolio en Acciones")
     if u_data.get("portfolio_acciones"):
         resumen_data = []
-        tot_valor_compra = 0
         tot_valor_mercado = 0
 
         for tk_p, cant_p in u_data["portfolio_acciones"].items():
@@ -699,7 +696,7 @@ elif menu == "Terminal Bursátil":
                 tot_valor_mercado += val_mkt
                 resumen_data.append({
                     "Ticker": tk_p,
-                    "Empresa": bvc_36_actions_master.get(tk_p, {}).get("sector", "General"),
+                    "Sector": bvc_36_actions_master.get(tk_p, {}).get("sector", "General"),
                     "Cantidad": cant_p,
                     "Precio Mercado": f"${prc_mkt:,.0f} COP",
                     "Valor Total Mercado": f"${val_mkt:,.0f} COP"
@@ -780,67 +777,107 @@ elif menu == "Terminal Bursátil":
                         st.caption("No posees acciones de esta empresa.")
 
 # ==========================================
-# MÓDULO: CDT BANCARIOS CON 50 BANCOS COLOMBIANOS
+# MÓDULO: CDT BANCARIOS (50 BANCOS + CALCULADORA INTERÉS COMPUESTO)
 # ==========================================
 elif menu == "CDT Bancarios (50 Bancos)":
     st.title("🏦 Certificados de Depósito a Término (CDT) en Colombia")
-    st.caption("Asegura rentabilidad fija y garantizada respaldada por Fogafín en 50 Entidades Financieras")
+    st.caption("50 Entidades Bancarias con Calculadora de Interés Compuesto Futuro")
 
+    # 🧮 CALCULADORA DE INTERÉS COMPUESTO DE CDTs
     st.markdown(
         """
-        <div class="neon-card">
-            <span class="concept-badge">Renta Fija Garantizada</span>
-            <h3 style="margin-top: 5px;">📜 ¿Qué es un CDT Bancario y cómo Funciona?</h3>
-            <p style="color: #cbd5e1; line-height: 1.7;">
-                Un <b>CDT (Certificado de Depósito a Término)</b> es un título valor emitido por un banco donde le entregas un dinero a un plazo fijo (ejemplo: 180 o 360 días) a cambio de una tasa de interés <b>Efectiva Anual (E.A.)</b> pactada de antemano. 
-                Es una inversión de <b>Riesgo Bajo</b> asegurada por el seguro de depósitos <b>Fogafín</b> hasta por $50.000.000 COP por entidad.
+        <div class="neon-card-green">
+            <h3 style="color: #2ea043; margin-top: 0;">🧮 Calculadora de Interés Compuesto Futuro para CDTs</h3>
+            <p style="color: #e2e8f0; font-size: 0.95rem;">
+                Averigua cuánto crecerá tu capital si dejas tu CDT produciendo intereses y reinviertes tus rendimientos periodo a periodo.
             </p>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-    # Mostrar CDTs constituidos por el usuario
+    c_calc1, c_calc2 = st.columns([0.4, 0.6])
+
+    with c_calc1:
+        st.markdown('<div class="neon-card">', unsafe_allow_html=True)
+        st.subheader("⚙️ Parámetros de Inversión")
+        monto_c = st.number_input("Monto Inicial a Invertir (COP):", min_value=10000, max_value=100000000, value=500000, step=50000)
+        tasa_c = st.number_input("Tasa Efectiva Anual (E.A. %):", min_value=1.0, max_value=30.0, value=12.0, step=0.5)
+        anios_c = st.slider("Años de Reinversión Continua:", 1, 10, 3)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with c_calc2:
+        # Fórmula de Interés Compuesto: Vf = Vi * (1 + i)^n
+        vf_final = monto_c * ((1 + (tasa_c/100))**anios_c)
+        ganancia_neta = vf_final - monto_c
+
+        col_r1, col_r2 = st.columns(2)
+        with col_r1:
+            st.metric("Capital Futuro Total", f"${vf_final:,.0f} COP")
+        with col_r2:
+            st.metric("Intereses Ganados", f"+${ganancia_neta:,.0f} COP", f"+{(ganancia_neta/monto_c)*100:.1f}%")
+
+        # Gráfico Plotly
+        eje_anios = list(range(0, anios_c + 1))
+        eje_valores = [monto_c * ((1 + (tasa_c/100))**a) for a in eje_anios]
+
+        df_cdt_comp = pd.DataFrame({"Año": eje_anios, "Valor acumulado": eje_valores})
+        fig_cdt = px.line(df_cdt_comp, x="Año", y="Valor acumulado", markers=True, title=f"Proyección a {anios_c} Años con {tasa_c}% E.A.")
+        fig_cdt.update_traces(line_color='#2ea043', line_width=3)
+        fig_cdt.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(13, 20, 36, 0.7)', font=dict(color='#e2e8f0'))
+        st.plotly_chart(fig_cdt, use_container_width=True)
+
+    st.markdown("---")
+
+    # Mostrar CDTs constituidos activos
     if u_data.get("cdt_list"):
         st.subheader("📜 Tus CDTs Constituidos Activos")
         df_mis_cdts = pd.DataFrame(u_data["cdt_list"])
         st.dataframe(df_mis_cdts, use_container_width=True)
         st.markdown("---")
 
-    st.subheader("🏛️ Catálogo Oficial de CDTs de 50 Bancos y Financieras")
+    st.subheader("🏛️ Oferta de CDTs en 50 Entidades Bancarias de Colombia")
+    
+    cash_libre = float(u_data.get("cash", 500000.0))
     cols_banco = st.columns(3)
 
     for idx_b, item_b in enumerate(bancos_cdt_50):
         c_b = cols_banco[idx_b % 3]
+        min_req = float(item_b['min_inversion'])
+        
         with c_b:
             st.markdown(
                 f"""
                 <div class="trii-card-green">
-                    <h3 style="margin:0; font-size: 1.15rem;">{item_b['logo']} {item_b['banco']}</h3>
-                    <h2 style="color: #2ea043; margin: 5px 0;">{item_b['tasa_ea']}% E.A.</h2>
-                    <p style="color: #cbd5e1; font-size: 0.85rem; margin:0;">🗓️ <b>Plazo sugerido:</b> {item_b['plazo_dias']} Días</p>
-                    <p style="color: #cbd5e1; font-size: 0.85rem; margin:0;">💵 <b>Mínimo:</b> ${item_b['min_inversion']:,.0f} COP</p>
+                    <h3 style="margin:0; font-size: 1.1rem;">{item_b['logo']} {item_b['banco']}</h3>
+                    <h2 style="color: #2ea043; margin: 4px 0;">{item_b['tasa_ea']}% E.A.</h2>
+                    <p style="color: #cbd5e1; font-size: 0.82rem; margin:0;">🗓️ <b>Plazo:</b> {item_b['plazo_dias']} Días</p>
+                    <p style="color: #cbd5e1; font-size: 0.82rem; margin:0;">💵 <b>Mínimo:</b> ${min_req:,.0f} COP</p>
                 </div>
                 """,
                 unsafe_allow_html=True
             )
 
             with st.expander(f"📥 Abrir CDT en {item_b['banco']}"):
-                monto_apert = st.number_input(
-                    f"Monto a invertir ({item_b['banco']}):",
-                    min_value=item_b['min_inversion'],
-                    max_value=int(u_data["cash"] + 1),
-                    value=min(100000, int(u_data["cash"])),
-                    step=10000,
-                    key=f"monto_cdt_{idx_b}"
-                )
-                
-                # Cálculo de rentabilidad al vencimiento
-                renta_estimada = monto_apert * ((1 + item_b['tasa_ea']/100)**(item_b['plazo_dias']/365) - 1)
-                st.caption(f"💰 Rendimiento al Vencimiento: **+${renta_estimada:,.0f} COP**")
+                if cash_libre >= min_req:
+                    max_inversion_posible = int(cash_libre)
+                    val_default = min(100000, max_inversion_posible)
+                    if val_default < min_req:
+                        val_default = int(min_req)
 
-                if st.button(f"Constituir CDT", key=f"btn_cdt_{idx_b}"):
-                    if u_data["cash"] >= monto_apert:
+                    monto_apert = st.number_input(
+                        f"Monto a invertir ({item_b['banco']}):",
+                        min_value=int(min_req),
+                        max_value=max_inversion_posible,
+                        value=val_default,
+                        step=10000,
+                        key=f"monto_cdt_{idx_b}"
+                    )
+                    
+                    renta_estimada = monto_apert * ((1 + item_b['tasa_ea']/100)**(item_b['plazo_dias']/365) - 1)
+                    st.caption(f"💰 Rendimiento Neto Estimado: **+${renta_estimada:,.0f} COP**")
+
+                    if st.button(f"Constituir CDT", key=f"btn_cdt_{idx_b}"):
                         u_data["cash"] -= monto_apert
                         nuevo_cdt = {
                             "banco": item_b['banco'],
@@ -854,11 +891,11 @@ elif menu == "CDT Bancarios (50 Bancos)":
                         save_user_to_db(usuario_activo, u_data)
                         st.success(f"¡CDT constituido con éxito en {item_b['banco']}!")
                         st.rerun()
-                    else:
-                        st.error("Efectivo libre insuficiente para abrir este CDT.")
+                else:
+                    st.warning(f"Necesitas mínimo ${min_req:,.0f} COP disponibles. Tu efectivo libre actual es de ${cash_libre:,.0f} COP.")
 
 # ==========================================
-# MÓDULO: RENTA FIJA Y BONOS DE LA NACIÓN (TES)
+# MÓDULO: RENTA FIJA Y BONOS TES
 # ==========================================
 elif menu == "Renta Fija y Bonos TES":
     st.title("📜 Renta Fija Sostenible y Bonos del Estado Colombiano (TES)")
