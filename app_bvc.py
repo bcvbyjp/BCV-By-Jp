@@ -18,7 +18,7 @@ st.set_page_config(
 )
 
 # ==========================================
-# ESTILOS CSS CON EFECTOS NEÓN + GLASSMORPHISM + HOVER INTERACTIVO
+# ESTILOS CSS CON EFECTOS NEÓN MULTICOLOR + GLASSMORPHISM
 # ==========================================
 st.markdown(
     """
@@ -35,6 +35,7 @@ st.markdown(
         font-family: 'Roboto Mono', monospace;
         font-weight: 700;
         color: #2ea043;
+        font-size: 1.25rem;
     }
 
     body {
@@ -103,13 +104,13 @@ st.markdown(
         100% { transform: translateY(0px) scale(1); }
     }
 
-    /* Tarjetas Interactivas con Neón Azul / Cyan */
+    /* Tarjetas Genéricas y Neón */
     .neon-card {
         background: linear-gradient(135deg, rgba(16, 22, 34, 0.85) 0%, rgba(26, 34, 51, 0.85) 100%);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(88, 166, 255, 0.35);
         border-radius: 20px;
-        padding: 25px;
+        padding: 22px;
         margin-bottom: 20px;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.1);
         transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -120,20 +121,65 @@ st.markdown(
         box-shadow: 0 15px 35px rgba(56, 189, 248, 0.35), 0 0 25px rgba(56, 189, 248, 0.25);
     }
 
-    .neon-card-green {
-        background: linear-gradient(135deg, rgba(6, 32, 18, 0.85) 0%, rgba(13, 48, 26, 0.85) 100%);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(46, 160, 67, 0.5);
+    /* TARJETAS NEÓN TRII POR COLORES SECTORIALES */
+    .trii-card-blue {
+        background: linear-gradient(135deg, rgba(10, 25, 47, 0.9) 0%, rgba(15, 30, 55, 0.9) 100%);
+        border: 1px solid #38bdf8;
         border-radius: 20px;
-        padding: 25px;
+        padding: 20px;
         margin-bottom: 20px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(46, 160, 67, 0.2);
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+        transition: all 0.3s ease;
     }
-    .neon-card-green:hover {
-        transform: translateY(-7px);
-        border-color: #2ea043;
-        box-shadow: 0 15px 35px rgba(46, 160, 67, 0.45), 0 0 30px rgba(46, 160, 67, 0.3);
+    .trii-card-blue:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 30px rgba(56, 189, 248, 0.45);
+        border-color: #7dd3fc;
+    }
+
+    .trii-card-gold {
+        background: linear-gradient(135deg, rgba(30, 25, 10, 0.9) 0%, rgba(45, 35, 15, 0.9) 100%);
+        border: 1px solid #facc15;
+        border-radius: 20px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 20px rgba(250, 204, 21, 0.2);
+        transition: all 0.3s ease;
+    }
+    .trii-card-gold:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 30px rgba(250, 204, 21, 0.45);
+        border-color: #fde047;
+    }
+
+    .trii-card-green {
+        background: linear-gradient(135deg, rgba(6, 32, 18, 0.9) 0%, rgba(13, 48, 26, 0.9) 100%);
+        border: 1px solid #2ea043;
+        border-radius: 20px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 20px rgba(46, 160, 67, 0.2);
+        transition: all 0.3s ease;
+    }
+    .trii-card-green:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 30px rgba(46, 160, 67, 0.45);
+        border-color: #4ade80;
+    }
+
+    .trii-card-purple {
+        background: linear-gradient(135deg, rgba(28, 15, 45, 0.9) 0%, rgba(40, 20, 65, 0.9) 100%);
+        border: 1px solid #c084fc;
+        border-radius: 20px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 20px rgba(192, 132, 252, 0.2);
+        transition: all 0.3s ease;
+    }
+    .trii-card-purple:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 30px rgba(192, 132, 252, 0.45);
+        border-color: #e9d5ff;
     }
 
     .concept-badge {
@@ -219,50 +265,51 @@ if "user_database" not in st.session_state:
     st.session_state.user_database = load_user_db_cached()
 
 # ==========================================
-# 36 ACCIONES LOCALES DE LA BVC (ESTILO TRII)
+# DICCIONARIO MAESTRO DE LAS 36 ACCIONES BVC / TRII
 # ==========================================
-if "stocks_initialized" not in st.session_state:
-    bvc_36_actions = {
-        "ECOPETROL": {"precio": 2685, "logo": "🛢️", "sector": "Petróleo y Gas", "desc": "Empresa insignia del estado colombiano."},
-        "BCOLOMBIA": {"precio": 33500, "logo": "🏦", "sector": "Financiero", "desc": "Líder en banca comercial y créditos en Colombia."},
-        "PFBCOLOMB": {"precio": 31200, "logo": "💳", "sector": "Financiero", "desc": "Acción Preferencial Bancolombia sin voto."},
-        "ISA": {"precio": 18900, "logo": "⚡", "sector": "Energía / Infraestructura", "desc": "Transporte de energía eléctrica en Latinoamérica."},
-        "GRUPOSURA": {"precio": 36200, "logo": "📈", "sector": "Holding Financiero", "desc": "Inversiones en bancas, pensiones y seguros."},
-        "PFGRUPSURA": {"precio": 28400, "logo": "📊", "sector": "Holding Financiero", "desc": "Acción preferencial de Grupo Sura."},
-        "CELSIA": {"precio": 4250, "logo": "💡", "sector": "Energía Renovables", "desc": "Empresa de energía limpia de Grupo Argos."},
-        "CEMARGOS": {"precio": 7800, "logo": "🏗️", "sector": "Materiales / Construcción", "desc": "Cementos Argos S.A., gigante de materiales."},
-        "PFCEMARGOS": {"precio": 6100, "logo": "🧱", "sector": "Materiales / Construcción", "desc": "Preferencial Cementos Argos."},
-        "GRUPOARGOS": {"precio": 14200, "logo": "🏙️", "sector": "Holding Infraestructura", "desc": "Matriz de infraestructura, energía y cementos."},
-        "PFGRUPOARG": {"precio": 10500, "logo": "🏛️", "sector": "Holding Infraestructura", "desc": "Preferencial Grupo Argos."},
-        "NUTRESA": {"precio": 46000, "logo": "🍫", "sector": "Alimentos Procesados", "desc": "Líder multilatina en alimentos procesados."},
-        "PROMIGAS": {"precio": 6400, "logo": "🔥", "sector": "Gas Natural", "desc": "Transporte y distribución de gas en Colombia y Perú."},
-        "CORFICOLCF": {"precio": 19800, "logo": "💼", "sector": "Corporación Financiera", "desc": "Inversión en peajes, energía y banca de inversión."},
-        "PFDAVVNDA": {"precio": 27200, "logo": "🏛️", "sector": "Banca Comercial", "desc": "Acción Preferencial de Banco Davivienda."},
-        "BOGOTA": {"precio": 35000, "logo": "🏬", "sector": "Financiero", "desc": "Banco de Bogotá, pilar de Grupo Aval."},
-        "PFAVAL": {"precio": 535, "logo": "📉", "sector": "Holding Bancario", "desc": "Grupo Aval Acciones y Valores."},
-        "MINEROS": {"precio": 3950, "logo": "⛏️", "sector": "Minería de Oro", "desc": "Extracción y producción sostenible de oro."},
-        "ETB": {"precio": 185, "logo": "☎️", "sector": "Telecomunicaciones", "desc": "Empresa de Telecomunicaciones de Bogotá."},
-        "GEB": {"precio": 2450, "logo": "🔌", "sector": "Energía de Bogotá", "desc": "Grupo Energía Bogotá S.A. ESP."},
-        "TERPEL": {"precio": 8900, "logo": "⛽", "sector": "Combustibles", "desc": "Distribución y venta de combustibles en Colombia."},
-        "ELCONDOR": {"precio": 1150, "logo": "🚜", "sector": "Construcción e Infraestructura", "desc": "Construcciones El Cóndor S.A."},
-        "CLH": {"precio": 3200, "logo": "🏗️", "sector": "Cementos", "desc": "Cemex Latam Holdings."},
-        "CONCONCRET": {"precio": 280, "logo": "🛠️", "sector": "Construcción", "desc": "Constructora Conconcreto S.A."},
-        "ENKA": {"precio": 22, "logo": "🧵", "sector": "Textil y Reciclaje PET", "desc": "Líder en reciclaje PET y fibras industriales."},
-        "BVC": {"precio": 11200, "logo": "🔔", "sector": "Bolsa / Financiero", "desc": "Acción propia de la Bolsa de Valores de Colombia."},
-        "PEI": {"precio": 68000, "logo": "🏢", "sector": "Real Estate / Inmobiliario", "desc": "Patrimonio Autónomo Estrategias Inmobiliarias."},
-        "FABRICATO": {"precio": 6, "logo": "👕", "sector": "Textil", "desc": "Compañía de Tejidos Fabricato."},
-        "AVIANCA": {"precio": 45, "logo": "✈️", "sector": "Aerolíneas", "desc": "Acción preferencial de Avianca Group."},
-        "POPULAR": {"precio": 280, "logo": "🏦", "sector": "Banca", "desc": "Banco Popular Colombia."},
-        "OCCIDENTE": {"precio": 32000, "logo": "🏧", "sector": "Banca", "desc": "Banco de Occidente."},
-        "CANCHAM": {"precio": 1500, "logo": "🌾", "sector": "Agroindustria", "desc": "Inversiones agroindustriales del Caribe."},
-        "CARTON": {"precio": 8500, "logo": "📦", "sector": "Empaques / Cartón", "desc": "Smurfit Kappa Cartón de Colombia."},
-        "COLTEJER": {"precio": 12, "logo": "🧵", "sector": "Textiles", "desc": "Compañía Colombiana de Tejidos."},
-        "PFCORFICOL": {"precio": 16500, "logo": "💼", "sector": "Corporación Financiera", "desc": "Preferencial Corficolombiana."},
-        "PFCELSA": {"precio": 3900, "logo": "💡", "sector": "Energía", "desc": "Preferencial Celsia S.A."}
-    }
-    st.session_state.prices_dict = bvc_36_actions
-    st.session_state.prices = {k: v["precio"] for k, v in bvc_36_actions.items()}
-    st.session_state.stocks_initialized = True
+bvc_36_actions_master = {
+    "ECOPETROL": {"precio": 2685, "logo": "🛢️", "sector": "Petróleo y Gas", "color": "blue", "desc": "Empresa petrolera oficial de Colombia. Explora, refina y transporta hidrocarburos."},
+    "BCOLOMBIA": {"precio": 33500, "logo": "🏦", "sector": "Financiero", "color": "gold", "desc": "El banco comercial más grande del país con operación en toda Latinoamérica."},
+    "PFBCOLOMB": {"precio": 31200, "logo": "💳", "sector": "Financiero", "color": "gold", "desc": "Acción preferencial sin derecho a voto de Bancolombia."},
+    "ISA": {"precio": 18900, "logo": "⚡", "sector": "Energía / Infraestructura", "color": "blue", "desc": "Transporta más del 70% de la energía eléctrica en Colombia y la región."},
+    "GRUPOSURA": {"precio": 36200, "logo": "📈", "sector": "Holding Financiero", "color": "gold", "desc": "Holding multinacional enfocado en banca, seguros, pensiones y servicios."},
+    "PFGRUPSURA": {"precio": 28400, "logo": "📊", "sector": "Holding Financiero", "color": "gold", "desc": "Título preferencial de Grupo Sura con dividendo prioritario."},
+    "CELSIA": {"precio": 4250, "logo": "💡", "sector": "Energía Renovables", "color": "blue", "desc": "Generación y distribución de energías limpias (solar, eólica e hídrica)."},
+    "CEMARGOS": {"precio": 7800, "logo": "🏗️", "sector": "Materiales / Construcción", "color": "green", "desc": "Líder en producción y comercialización de cemento y concreto en las Américas."},
+    "PFCEMARGOS": {"precio": 6100, "logo": "🧱", "sector": "Materiales / Construcción", "color": "green", "desc": "Acción preferencial de Cementos Argos S.A."},
+    "GRUPOARGOS": {"precio": 14200, "logo": "🏙️", "sector": "Holding Infraestructura", "color": "green", "desc": "Holding de infraestructura, concesiones viales, aeropuertos y cementos."},
+    "PFGRUPOARG": {"precio": 10500, "logo": "🏛️", "sector": "Holding Infraestructura", "color": "green", "desc": "Acción preferencial de Grupo Argos."},
+    "NUTRESA": {"precio": 46000, "logo": "🍫", "sector": "Alimentos Procesados", "color": "purple", "desc": "Gigante multilatina procesadora de chocolates, galletas, carnes y cafés."},
+    "PROMIGAS": {"precio": 6400, "logo": "🔥", "sector": "Gas Natural", "color": "blue", "desc": "Transporte y distribución masiva de gas natural en Colombia y Perú."},
+    "CORFICOLCF": {"precio": 19800, "logo": "💼", "sector": "Corporación Financiera", "color": "gold", "desc": "Inversión en megaproyectos viales, infraestructura energética y banca."},
+    "PFDAVVNDA": {"precio": 27200, "logo": "🏛️", "sector": "Banca Comercial", "color": "gold", "desc": "Acción preferencial de Banco Davivienda y plataforma Daviplata."},
+    "BOGOTA": {"precio": 35000, "logo": "🏬", "sector": "Financiero", "color": "gold", "desc": "Banco de Bogotá, una de las instituciones bancarias más antiguas de Colombia."},
+    "PFAVAL": {"precio": 535, "logo": "📉", "sector": "Holding Bancario", "color": "gold", "desc": "Grupo Aval, conglomerado dueño de Banco de Bogotá, Occidente y Porvenir."},
+    "MINEROS": {"precio": 3950, "logo": "⛏️", "sector": "Minería de Oro", "color": "green", "desc": "Exploración y producción responsable de oro en Colombia y Argentina."},
+    "ETB": {"precio": 185, "logo": "☎️", "sector": "Telecomunicaciones", "color": "purple", "desc": "Empresa de Telecomunicaciones de Bogotá, red de fibra óptica y servicios digital."},
+    "GEB": {"precio": 2450, "logo": "🔌", "sector": "Energía de Bogotá", "color": "blue", "desc": "Grupo Energía Bogotá, transmisión y distribución de electricidad y gas."},
+    "TERPEL": {"precio": 8900, "logo": "⛽", "sector": "Combustibles", "color": "purple", "desc": "Red de estaciones de servicio y distribución de lubricantes y combustibles."},
+    "ELCONDOR": {"precio": 1150, "logo": "🚜", "sector": "Construcción e Infraestructura", "color": "green", "desc": "Construcción de vías de cuarta generación (4G) e ingeniería civil."},
+    "CLH": {"precio": 3200, "logo": "🏗️", "sector": "Cementos", "color": "green", "desc": "Cemex Latam Holdings, producción de materiales de construcción."},
+    "CONCONCRET": {"precio": 280, "logo": "🛠️", "sector": "Construcción", "color": "green", "desc": "Constructora Conconcreto S.A., edificaciones e infraestructura masiva."},
+    "ENKA": {"precio": 22, "logo": "🧵", "sector": "Textil y Reciclaje PET", "color": "purple", "desc": "Transformación de botellas recicladas en resinas y hilos sintéticos."},
+    "BVC": {"precio": 11200, "logo": "🔔", "sector": "Bolsa / Financiero", "color": "gold", "desc": "La propia empresa administradora del mercado de valores de Colombia."},
+    "PEI": {"precio": 68000, "logo": "🏢", "sector": "Real Estate / Inmobiliario", "color": "purple", "desc": "Fondo de inversión inmobiliario en centros comerciales, oficinas y bodegas."},
+    "FABRICATO": {"precio": 6, "logo": "👕", "sector": "Textil", "desc": "Compañía textilera colombiana procesadora de telas y confecciones."},
+    "AVIANCA": {"precio": 45, "logo": "✈️", "sector": "Aerolíneas", "color": "purple", "desc": "Línea aérea insignia de transporte de pasajeros y carga."},
+    "POPULAR": {"precio": 280, "logo": "🏦", "sector": "Banca", "color": "gold", "desc": "Banco Popular Colombia, filial de Grupo Aval especializada en crédito bancario."},
+    "OCCIDENTE": {"precio": 32000, "logo": "🏧", "sector": "Banca", "color": "gold", "desc": "Banco de Occidente, soluciones financieras corporativas y personales."},
+    "CANCHAM": {"precio": 1500, "logo": "🌾", "sector": "Agroindustria", "color": "green", "desc": "Desarrollo de proyectos agrícolas y procesamiento agroindustrial."},
+    "CARTON": {"precio": 8500, "logo": "📦", "sector": "Empaques / Cartón", "color": "purple", "desc": "Smurfit Kappa Cartón de Colombia, fabricación de empaques de papel."},
+    "COLTEJER": {"precio": 12, "logo": "🧵", "sector": "Textiles", "color": "purple", "desc": "Compañía Colombiana de Tejidos fundada en Medellín."},
+    "PFCORFICOL": {"precio": 16500, "logo": "💼", "sector": "Corporación Financiera", "color": "gold", "desc": "Acción preferencial de Corficolombiana."},
+    "PFCELSA": {"precio": 3900, "logo": "💡", "sector": "Energía", "color": "blue", "desc": "Acción preferencial de Celsia S.A."}
+}
+
+# Inicializar o actualizar forzadamente para prevenir KeyError
+st.session_state.prices_dict = bvc_36_actions_master
+if "prices" not in st.session_state or len(st.session_state.prices) < 36:
+    st.session_state.prices = {k: v["precio"] for k, v in bvc_36_actions_master.items()}
 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
@@ -302,7 +349,7 @@ usuario_activo = st.session_state.current_user
 u_data = st.session_state.user_database[usuario_activo]
 
 # ==========================================
-# BANNER GLOBAL DE JP EN LA PARTE SUPERIOR
+# BANNER GLOBAL DE JP
 # ==========================================
 def render_guia_banner_global():
     has_img = os.path.exists("jp_foto.jpg")
@@ -544,91 +591,96 @@ if menu == "Masterclass BVC con Jp":
             )
 
 # ==========================================
-# TERMINAL BURSÁTIL GUIADA POR JP (ESTILO TRII 36 ACCIONES)
+# TERMINAL BURSÁTIL: GRID NEÓN DE LAS 36 ACCIONES (ESTILO TRII)
 # ==========================================
 elif menu == "Terminal Bursátil":
-    st.title("🛒 Terminal Bursátil de Colombia (Feed trii / BVC)")
-    st.caption("36 Acciones del Mercado Local Colombiano en Tiempo Real")
+    st.title("🛒 Terminal Bursátil: Mercado de Acciones BVC / trii")
+    st.caption("36 Activos Oficiales de la Bolsa de Valores de Colombia con Tarjetas Neón")
 
     # Botón para simular / refrescar precios del feed de trii / BVC
-    col_a, col_b = st.columns([0.7, 0.3])
-    with col_b:
-        if st.button("🔄 Actualizar Precios Mercado BVC / trii"):
+    col_hdr1, col_hdr2 = st.columns([0.7, 0.3])
+    with col_hdr1:
+        st.write(f"💵 **Efectivo Libre Disponibles:** `${u_data['cash']:,.0f} COP`")
+    with col_hdr2:
+        if st.button("🔄 Actualizar Precios Mercado BVC"):
             for tk in st.session_state.prices:
-                var = random.uniform(-0.018, 0.02)
-                st.session_state.prices[tk] = max(5, int(st.session_state.prices[tk] * (1 + var)))
-            st.success("¡Cotizaciones actualizadas con éxito desde la BVC!")
+                var = random.uniform(-0.015, 0.018)
+                st.session_state.prices[tk] = max(10, int(st.session_state.prices[tk] * (1 + var)))
+            st.success("¡Cotizaciones actualizadas con éxito!")
             st.rerun()
 
-    # GUÍA DE JP DENTRO DE LA TERMINAL
-    st.markdown(
-        """
-        <div class="neon-card-green">
-            <h3 style="color: #2ea043; margin-top: 0;">🟡 Instrucciones de Operación por Jp</h3>
-            <p style="color: #e2e8f0; font-size: 0.98rem; line-height: 1.7;">
-                1. <b>Elige el Activo:</b> Selecciona entre las 36 acciones locales del mercado de renta variable.<br>
-                2. <b>Revisa el Precio Ask / Bid:</b> Compras al precio de venta del mercado (Ask) y vendes al precio de oferta (Bid).<br>
-                3. <b>Calcula tu saldo:</b> Asegúrate de tener efectivo libre antes de enviar la orden de compra.<br>
-                4. <b>Ejecuta con un clic:</b> Tus acciones compradas aparecerán inmediatamente en tu Portafolio en la barra lateral.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown("---")
 
-    ticker_op = st.selectbox(
-        "Seleccione Acción / Activo de Colombia:", 
-        list(st.session_state.prices.keys())
-    )
-    
-    info_act = st.session_state.prices_dict[ticker_op]
-    prc_op = st.session_state.prices[ticker_op]
-    bid_prc, ask_prc = int(prc_op * 0.998), int(prc_op * 1.002)
+    # Renderizar las 36 acciones en cuadrícula de 3 columnas
+    items_acciones = list(bvc_36_actions_master.items())
+    cols_grid = st.columns(3)
 
-    col1, col2, col3, col4 = st.columns(4)
-    with col1: st.metric("Acción / Ticker", f"{info_act['logo']} {ticker_op}")
-    with col2: st.metric("Precio Último", f"${prc_op:,.0f} COP")
-    with col3: st.metric("Bid (Venta)", f"${bid_prc:,.0f} COP")
-    with col4: st.metric("Ask (Compra)", f"${ask_prc:,.0f} COP")
+    for idx, (ticker, data_act) in enumerate(items_acciones):
+        col_dest = cols_grid[idx % 3]
+        prc_actual = st.session_state.prices.get(ticker, data_act["precio"])
+        ask_prc = int(prc_actual * 1.002)
+        bid_prc = int(prc_actual * 0.998)
+        color_class = f"trii-card-{data_act.get('color', 'blue')}"
 
-    st.caption(f"📌 **Sector:** {info_act['sector']} | **Descripción:** {info_act['desc']}")
+        with col_dest:
+            st.markdown(
+                f"""
+                <div class="{color_class}">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="margin:0; font-size: 1.3rem;">{data_act['logo']} {ticker}</h3>
+                        <span class="price-tag">${prc_actual:,.0f} COP</span>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.8rem; margin-top:2px;">📌 <b>Sector:</b> {data_act['sector']}</p>
+                    <p style="color: #cbd5e1; font-size: 0.9rem; min-height: 50px; line-height:1.4;">
+                        {data_act['desc']}
+                    </p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 
-    tab_c, tab_v = st.tabs(["🟢 Comprar Títulos", "🔴 Vender Títulos"])
-    with tab_c:
-        cant = st.number_input("Cantidad de Acciones a Comprar:", 1, 1000000, 10)
-        costo = ask_prc * cant
-        st.write(f"💵 **Costo Total Estimado:** `${costo:,.0f} COP`")
-        if st.button("Ejecutar Orden de Compra ⚡"):
-            if u_data["cash"] >= costo:
-                u_data["cash"] -= costo
-                u_data["portfolio_acciones"][ticker_op] = u_data["portfolio_acciones"].get(ticker_op, 0) + cant
-                save_user_to_db(usuario_activo, u_data)
-                st.success(f"¡Compra exitosa! Has adquirido {cant} acciones de {ticker_op}.")
-                st.rerun()
-            else:
-                st.error("Efectivo insuficiente en caja. Reduce la cantidad o vende otros activos.")
+            # Panel Desplegable Operativo de Compra y Venta por Tarjeta
+            with st.expander(f"⚡ Operar {ticker}"):
+                pos_actual = u_data["portfolio_acciones"].get(ticker, 0)
+                st.caption(f"Tienes **{pos_actual}** acciones en tu portafolio.")
+                
+                tab_comp, tab_vent = st.tabs(["🟢 Comprar", "🔴 Vender"])
+                
+                with tab_comp:
+                    cant_buy = st.number_input(f"Cantidad a comprar ({ticker}):", 1, 100000, 10, key=f"buy_qty_{ticker}")
+                    costo_total = ask_prc * cant_buy
+                    st.write(f"Costo Total: `${costo_total:,.0f} COP`")
+                    if st.button(f"Comprar {ticker}", key=f"btn_buy_{ticker}"):
+                        if u_data["cash"] >= costo_total:
+                            u_data["cash"] -= costo_total
+                            u_data["portfolio_acciones"][ticker] = u_data["portfolio_acciones"].get(ticker, 0) + cant_buy
+                            save_user_to_db(usuario_activo, u_data)
+                            st.success(f"¡Compraste {cant_buy} títulos de {ticker}!")
+                            st.rerun()
+                        else:
+                            st.error("Efectivo insuficiente.")
 
-    with tab_v:
-        en_pos = u_data["portfolio_acciones"].get(ticker_op, 0)
-        st.info(f"Tienes **{en_pos}** acciones de **{ticker_op}** en tu portafolio.")
-        if en_pos > 0:
-            cant_v = st.number_input("Cantidad a Vender:", 1, en_pos, 1)
-            recaudo = bid_prc * cant_v
-            st.write(f"💵 **Ingreso Neto Estimado:** `${recaudo:,.0f} COP`")
-            if st.button("Ejecutar Orden de Venta ⚡"):
-                u_data["cash"] += recaudo
-                u_data["portfolio_acciones"][ticker_op] -= cant_v
-                if u_data["portfolio_acciones"][ticker_op] <= 0:
-                    del u_data["portfolio_acciones"][ticker_op]
-                save_user_to_db(usuario_activo, u_data)
-                st.success(f"¡Venta exitosa! Has liquidado {cant_v} acciones de {ticker_op}.")
-                st.rerun()
+                with tab_vent:
+                    if pos_actual > 0:
+                        cant_sell = st.number_input(f"Cantidad a vender ({ticker}):", 1, pos_actual, 1, key=f"sell_qty_{ticker}")
+                        recaudo_total = bid_prc * cant_sell
+                        st.write(f"Ingreso Total: `${recaudo_total:,.0f} COP`")
+                        if st.button(f"Vender {ticker}", key=f"btn_sell_{ticker}"):
+                            u_data["cash"] += recaudo_total
+                            u_data["portfolio_acciones"][ticker] -= cant_sell
+                            if u_data["portfolio_acciones"][ticker] <= 0:
+                                del u_data["portfolio_acciones"][ticker]
+                            save_user_to_db(usuario_activo, u_data)
+                            st.success(f"¡Vendiste {cant_sell} títulos de {ticker}!")
+                            st.rerun()
+                    else:
+                        st.caption("No posees acciones de esta empresa.")
 
 elif menu == "Catálogo Técnico":
     st.title("📊 Catálogo Técnico de las 36 Acciones BVC")
     st.caption("Evolución y datos clave del mercado colombiano.")
-    for t_k, inf_k in st.session_state.prices_dict.items():
-        pr = st.session_state.prices[t_k]
+    for t_k, inf_k in bvc_36_actions_master.items():
+        pr = st.session_state.prices.get(t_k, inf_k["precio"])
         st.markdown(
             f"""
             <div class="neon-card">
