@@ -240,11 +240,11 @@ def save_user_to_db(username, udata):
     cursor.execute("""
         INSERT OR REPLACE INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
-        username, udata.get("password", "123"), udata.get("rol"), udata.get("semestre"),
-        udata.get("carrera"), udata.get("cash", 500000.0), udata.get("presupuesto_inicial", 500000.0),
-        json.dumps(udata.get("portfolio_acciones")), json.dumps(udata.get("cdt_list")),
-        json.dumps(udata.get("renta_fija_list")), json.dumps([]),
-        udata.get("informe_estudiante"), udata.get("esg_fund")
+        username, udata.get("password", "123"), udata.get("rol", "Estudiante"), udata.get("semestre", ""),
+        udata.get("carrera", ""), udata.get("cash", 500000.0), udata.get("presupuesto_inicial", 500000.0),
+        json.dumps(udata.get("portfolio_acciones", {})), json.dumps(udata.get("cdt_list", [])),
+        json.dumps(udata.get("renta_fija_list", [])), json.dumps([]),
+        udata.get("informe_estudiante", ""), udata.get("esg_fund", 0)
     ))
     conn.commit()
     conn.close()
@@ -253,7 +253,7 @@ if "user_database" not in st.session_state:
     st.session_state.user_database = load_user_db_cached()
 
 # ==========================================
-# DICCIONARIOS Y CATÁLOGOS
+# CATÁLOGOS MAESTROS DE MERCADO
 # ==========================================
 bvc_36_actions_master = {
     "ECOPETROL": {"precio": 2685, "logo": "🛢️", "sector": "Petróleo y Gas", "color": "blue", "desc": "Empresa petrolera oficial de Colombia. Explora, refina y transporta hidrocarburos."},
@@ -270,7 +270,7 @@ bvc_36_actions_master = {
     "NUTRESA": {"precio": 46000, "logo": "🍫", "sector": "Alimentos Procesados", "color": "purple", "desc": "Gigante multilatina procesadora de chocolates, galletas, carnes y cafés."},
     "PROMIGAS": {"precio": 6400, "logo": "🔥", "sector": "Gas Natural", "color": "blue", "desc": "Transporte y distribución masiva de gas natural en Colombia y Perú."},
     "CORFICOLCF": {"precio": 19800, "logo": "💼", "sector": "Corporación Financiera", "color": "gold", "desc": "Inversión en megaproyectos viales, infraestructura energética y banca."},
-    "PFDAVVNDA": {"precio": 27200, "logo": "🏛️️", "sector": "Banca Comercial", "color": "gold", "desc": "Acción preferencial de Banco Davivienda y plataforma Daviplata."},
+    "PFDAVVNDA": {"precio": 27200, "logo": "🏛️", "sector": "Banca Comercial", "color": "gold", "desc": "Acción preferencial de Banco Davivienda y plataforma Daviplata."},
     "BOGOTA": {"precio": 35000, "logo": "🏬", "sector": "Financiero", "color": "gold", "desc": "Banco de Bogotá, una de las instituciones bancarias más antiguas de Colombia."},
     "PFAVAL": {"precio": 535, "logo": "📉", "sector": "Holding Bancario", "color": "gold", "desc": "Grupo Aval, conglomerado dueño de Banco de Bogotá, Occidente y Porvenir."},
     "MINEROS": {"precio": 3950, "logo": "⛏️", "sector": "Minería de Oro", "color": "green", "desc": "Exploración y producción responsable de oro en Colombia y Argentina."},
@@ -296,7 +296,7 @@ bvc_36_actions_master = {
 
 bancos_cdt_50 = [
     {"banco": "Bancolombia S.A.", "tasa_ea": 10.5, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏦"},
-    {"banco": "Banco Davivienda", "tasa_ea": 10.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏛️️"},
+    {"banco": "Banco Davivienda", "tasa_ea": 10.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏛️"},
     {"banco": "Nu Colombia C.F.", "tasa_ea": 12.5, "plazo_dias": 180, "min_inversion": 10000, "logo": "🟣"},
     {"banco": "Lulo Bank S.A.", "tasa_ea": 12.2, "plazo_dias": 180, "min_inversion": 10000, "logo": "🟢"},
     {"banco": "Banco de Bogotá", "tasa_ea": 10.2, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏬"},
@@ -308,7 +308,7 @@ bancos_cdt_50 = [
     {"banco": "Banco Popular S.A.", "tasa_ea": 10.7, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏦"},
     {"banco": "Banco AV Villas", "tasa_ea": 10.5, "plazo_dias": 360, "min_inversion": 50000, "logo": "🔴"},
     {"banco": "Banco Itaú Colombia", "tasa_ea": 10.6, "plazo_dias": 360, "min_inversion": 50000, "logo": "🟧"},
-    {"banco": "Banco GNB Sudameris", "tasa_ea": 11.1, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏛️"},
+    {"banco": "Banco GNB Sudameris", "tasa_ea": 11.1, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏛️️"},
     {"banco": "Banco W S.A.", "tasa_ea": 12.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "💼"},
     {"banco": "Banco Caja Social", "tasa_ea": 10.9, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏠"},
     {"banco": "Banco Pichincha Colombia", "tasa_ea": 11.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "🟡"},
@@ -362,32 +362,81 @@ if "prices" not in st.session_state or len(st.session_state.prices) < 36:
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
-# LOGIN
+# ==========================================
+# LOGIN Y REGISTRO DE ESTUDIANTES
+# ==========================================
 if not st.session_state.logged_in:
     st.markdown(
         """
         <div style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
-            <div style="background: rgba(13, 20, 36, 0.85); border: 1px solid rgba(88, 166, 255, 0.4); border-radius: 24px; padding: 40px; width: 100%; max-width: 450px; box-shadow: 0 0 35px rgba(88, 166, 255, 0.2);">
-                <h1 style="text-align: center; color: #58a6ff;">🔐 BCV By Jp</h1>
-                <h3 style="text-align: center; color: #8b949e; font-size: 1rem;">Terminal Financiera Unisucre</h3>
+            <div style="background: rgba(13, 20, 36, 0.88); border: 1px solid rgba(88, 166, 255, 0.4); border-radius: 24px; padding: 35px; width: 100%; max-width: 480px; box-shadow: 0 0 35px rgba(88, 166, 255, 0.2);">
+                <h1 style="text-align: center; color: #58a6ff; margin-bottom: 0;">🔐 BCV By Jp</h1>
+                <h3 style="text-align: center; color: #8b949e; font-size: 1rem; margin-top: 5px;">Terminal Financiera Unisucre</h3>
         """, unsafe_allow_html=True
     )
-    with st.form("form_login"):
-        user_input = st.text_input("Nombre Completo:")
-        pass_input = st.text_input("Contraseña:", type="password")
-        if st.form_submit_button("Ingresar al Portal 🚀"):
-            if user_input.strip() and pass_input.strip():
-                if user_input not in st.session_state.user_database:
-                    st.session_state.user_database[user_input] = {
-                        "password": pass_input, "rol": "Estudiante", "semestre": "Semestre 5",
-                        "carrera": "Administración de Empresas", "cash": 500000.0, "presupuesto_inicial": 500000.0,
-                        "portfolio_acciones": {}, "cdt_list": [], "renta_fija_list": [],
-                        "informe_estudiante": "", "esg_fund": 0
+    
+    tab_acc1, tab_acc2 = st.tabs(["🔑 Iniciar Sesión", "📝 Registrarse"])
+
+    with tab_acc1:
+        st.caption("Ingresa con tus credenciales registradas.")
+        with st.form("form_login"):
+            user_input = st.text_input("Nombre Completo del Estudiante:")
+            pass_input = st.text_input("Contraseña:", type="password")
+            btn_login = st.form_submit_button("Ingresar al Portal 🚀")
+            
+            if btn_login:
+                user_clean = user_input.strip()
+                pass_clean = pass_input.strip()
+
+                if not user_clean or not pass_clean:
+                    st.error("Por favor completa ambos campos para ingresar.")
+                elif user_clean not in st.session_state.user_database:
+                    st.error("❌ Usuario NO registrado. Debes hacer clic en la pestaña 'Registrarse' primero.")
+                else:
+                    u_stored = st.session_state.user_database[user_clean]
+                    if u_stored.get("password") == pass_clean:
+                        st.session_state.current_user = user_clean
+                        st.session_state.logged_in = True
+                        st.success("¡Bienvenido de nuevo!")
+                        st.rerun()
+                    else:
+                        st.error("❌ Contraseña incorrecta.")
+
+    with tab_acc2:
+        st.caption("Crea tu cuenta para guardar tu avance y portafolio del día.")
+        with st.form("form_registro"):
+            reg_user = st.text_input("Nombre Completo:")
+            reg_semestre = st.selectbox("Semestre Académico:", [f"Semestre {i}" for i in range(1, 11)])
+            reg_carrera = st.text_input("Carrera / Programa Académico:", value="Administración de Empresas")
+            reg_pass = st.text_input("Crea tu Contraseña:", type="password")
+            btn_register = st.form_submit_button("Crear Mi Cuenta y Recibir $500.000 COP 🎁")
+
+            if btn_register:
+                ru_clean = reg_user.strip()
+                rp_clean = reg_pass.strip()
+                
+                if not ru_clean or not rp_clean or not reg_carrera.strip():
+                    st.error("Por favor completa todos los campos del registro.")
+                elif ru_clean in st.session_state.user_database:
+                    st.warning("⚠️ Ya existe un estudiante registrado con este nombre. Ve a 'Iniciar Sesión'.")
+                else:
+                    nuevo_user_data = {
+                        "password": rp_clean,
+                        "rol": "Estudiante",
+                        "semestre": reg_semestre,
+                        "carrera": reg_carrera.strip(),
+                        "cash": 500000.0,
+                        "presupuesto_inicial": 500000.0,
+                        "portfolio_acciones": {},
+                        "cdt_list": [],
+                        "renta_fija_list": [],
+                        "informe_estudiante": "",
+                        "esg_fund": 0
                     }
-                    save_user_to_db(user_input, st.session_state.user_database[user_input])
-                st.session_state.current_user = user_input
-                st.session_state.logged_in = True
-                st.rerun()
+                    st.session_state.user_database[ru_clean] = nuevo_user_data
+                    save_user_to_db(ru_clean, nuevo_user_data)
+                    st.success("🎉 ¡Cuenta registrada con éxito y $500.000 COP acreditados! Ahora puedes Iniciar Sesión.")
+
     st.markdown("</div></div>", unsafe_allow_html=True)
     st.stop()
 
@@ -415,7 +464,7 @@ def render_guia_banner_global():
             <div style="flex-grow: 1;">
                 <h3 style="color: #facc15; margin: 0; font-size: 1.35rem; text-shadow: 0 0 10px rgba(250, 204, 21, 0.4);">🟡 Jp - Tu Guía Virtual Unisucre</h3>
                 <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.95rem;">
-                    ¡Epa, <b>{usuario_activo}</b>! Tu saldo libre actual es de <b>${u_data['cash']:,.0f} COP</b>. Revisa tu portafolio y los gráficos de rendimiento abajo.
+                    ¡Epa, <b>{usuario_activo}</b> ({u_data.get('carrera', 'Unisucre')} - {u_data.get('semestre', '')})! Tu saldo libre es de <b>${u_data['cash']:,.0f} COP</b>. Todo tu avance está seguro en tu cuenta.
                 </p>
             </div>
         </div>
@@ -426,7 +475,7 @@ def render_guia_banner_global():
 # SIDEBAR NAVEGACIÓN
 with st.sidebar:
     st.title("📈 BCV By Jp")
-    st.success(f"👤 **{usuario_activo}**")
+    st.success(f"👤 **{usuario_activo}**\n🎓 {u_data.get('carrera', 'Unisucre')}")
     
     val_acciones_total = sum(
         qty * st.session_state.prices.get(tk, bvc_36_actions_master.get(tk, {}).get("precio", 0))
@@ -733,7 +782,7 @@ elif menu == "Terminal Bursátil":
                         st.caption("No posees acciones de esta empresa.")
 
 # ==========================================
-# MÓDULO PORTAFOLIO CON GRÁFICOS DE COMPORTAMIENTO Y PROYECCIÓN
+# MÓDULO PORTAFOLIO CON GRÁFICOS
 # ==========================================
 elif menu == "Mi Portafolio e Historial":
     st.title("💼 Mi Portafolio e Historial de Inversiones")
@@ -741,7 +790,6 @@ elif menu == "Mi Portafolio e Historial":
 
     tab_p1, tab_p2, tab_p3 = st.tabs(["📈 Acciones Compradas", "📜 CDTs Vigentes", "🇨🇴 Bonos TES de Renta Fija"])
 
-    # 1. ACCIONES CON GRÁFICO HISTÓRICO
     with tab_p1:
         st.subheader("📈 Tus Acciones y Comportamiento Reciente de Mercado")
         if u_data.get("portfolio_acciones") and any(v > 0 for v in u_data["portfolio_acciones"].values()):
@@ -772,7 +820,6 @@ elif menu == "Mi Portafolio e Historial":
 
             if acc_select_graph:
                 p_base = bvc_36_actions_master.get(acc_select_graph, {}).get("precio", 1000)
-                # Generar serie histórica simulada con bajadas y subidas reales
                 random.seed(42 + ord(acc_select_graph[0]))
                 dias_hist = list(range(1, 31))
                 precios_hist = [p_base]
@@ -793,7 +840,6 @@ elif menu == "Mi Portafolio e Historial":
         else:
             st.info("No tienes acciones compradas actualmente. Adquiere algunas en la Terminal Bursátil.")
 
-    # 2. CDTs CON GRÁFICO DE PROYECCIÓN DE VALOR
     with tab_p2:
         st.subheader("📜 Tus CDTs Bancarios y Curva de Rendimiento Esperado")
         if u_data.get("cdt_list"):
@@ -817,14 +863,13 @@ elif menu == "Mi Portafolio e Historial":
                 eje_val_cdt = [m_cdt * ((1 + (t_ea/100))**(d/365)) for d in eje_dias]
 
                 df_proj_cdt = pd.DataFrame({"Días Transcurridos": eje_dias, "Valor Acumulado (COP)": eje_val_cdt})
-                fig_p_cdt = px.line(df_proj_cdt, x="Días Transcurridos", y="Valor Acumulado (COP)", markers=True, title=f"Curva de Crecimiento Garatizada: {cdt_obj['banco']}")
+                fig_p_cdt = px.line(df_proj_cdt, x="Días Transcurridos", y="Valor Acumulado (COP)", markers=True, title=f"Curva de Crecimiento Garantizada: {cdt_obj['banco']}")
                 fig_p_cdt.update_traces(line_color='#2ea043', line_width=3)
                 fig_p_cdt.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(13, 20, 36, 0.7)', font=dict(color='#e2e8f0'))
                 st.plotly_chart(fig_p_cdt, use_container_width=True)
         else:
             st.info("No has constituido ningún CDT aún.")
 
-    # 3. BONOS TES CON GRÁFICO DE PROYECCIÓN DE VALOR
     with tab_p3:
         st.subheader("🇨🇴 Tus Bonos TES de Renta Fija y Proyección de Cupones")
         if u_data.get("renta_fija_list"):
