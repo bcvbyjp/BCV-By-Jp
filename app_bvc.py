@@ -286,7 +286,7 @@ bvc_36_actions_master = {
     "FABRICATO": {"precio": 6, "tasa_ea_esp": 8.5, "logo": "👕", "sector": "Textil", "color": "purple", "desc": "Compañía textilera colombiana procesadora de telas y confecciones."},
     "AVIANCA": {"precio": 45, "tasa_ea_esp": 10.0, "logo": "✈️", "sector": "Aerolíneas", "color": "purple", "desc": "Línea aérea insignia de transporte de pasajeros y carga."},
     "POPULAR": {"precio": 280, "tasa_ea_esp": 11.5, "logo": "🏦", "sector": "Banca", "color": "gold", "desc": "Banco Popular Colombia, filial de Grupo Aval especializada en crédito bancario."},
-    "OCCIDENTE": {"precio": 32000, "tasa_ea_esp": 12.0, "logo": "🏧", "sector": "Banca", "color": "gold", "desc": "Banco de Occidente, soluciones financieras corporativas y personales."},
+    "OCCIDENTE": {"precio": 32000, "tasa_ea_esp": 12.0, "logo": "ATM", "sector": "Banca", "color": "gold", "desc": "Banco de Occidente, soluciones financieras corporativas y personales."},
     "CANCHAM": {"precio": 1500, "tasa_ea_esp": 10.5, "logo": "🌾", "sector": "Agroindustria", "color": "green", "desc": "Desarrollo de proyectos agrícolas y procesamiento agroindustrial."},
     "CARTON": {"precio": 8500, "tasa_ea_esp": 12.2, "logo": "📦", "sector": "Empaques / Cartón", "color": "purple", "desc": "Smurfit Kappa Cartón de Colombia, fabricación de empaques de papel."},
     "COLTEJER": {"precio": 12, "tasa_ea_esp": 7.5, "logo": "🧵", "sector": "Textiles", "color": "purple", "desc": "Compañía Colombiana de Tejidos fundada en Medellín."},
@@ -477,7 +477,6 @@ with st.sidebar:
     st.title("📈 BCV By Jp")
     st.success(f"👤 **{usuario_activo}**\n🎓 {u_data.get('carrera', 'Unisucre')}")
     
-    # Adaptador de estrucutra de acciones (soporta int o dict)
     val_acciones_total = 0
     for tk, val_acc in u_data.get("portfolio_acciones", {}).items():
         qty = val_acc.get("cantidad", val_acc) if isinstance(val_acc, dict) else val_acc
@@ -797,17 +796,17 @@ elif menu == "Terminal Bursátil":
                         st.caption("No posees acciones de esta empresa.")
 
 # ==========================================
-# MÓDULO PORTAFOLIO CON REGISTRO DE FECHA, CRECIMIENTO Y PROYECCIÓN E.A.
+# MÓDULO PORTAFOLIO CON DOS GRÁFICAS MEJORADAS (30 DÍAS CON CAMBIO DE COLOR + PROYECCIÓN FUTURA E.A.)
 # ==========================================
 elif menu == "Mi Portafolio e Historial":
     st.title("💼 Mi Portafolio e Historial de Inversiones")
-    st.caption("Revisión detallada con Fecha de Compra, Crecimiento Acumulado y Proyección E.A. de Rendimiento")
+    st.caption("Monitoreo de activos con cambio de color post-compra y curva de proyección futura E.A.")
 
     tab_p1, tab_p2, tab_p3 = st.tabs(["📈 Acciones Compradas", "📜 CDTs Vigentes", "🇨🇴 Bonos TES de Renta Fija"])
 
-    # 1. ACCIONES CON FECHA DE COMPRA, CRECIMIENTO Y RENDIMIENTO ESPERADO E.A.
+    # 1. ACCIONES CON DOS GRÁFICAS MEJORADAS
     with tab_p1:
-        st.subheader("📈 Tus Acciones: Crecimiento y Rendimiento Esperado (E.A.)")
+        st.subheader("📈 Tus Acciones: Crecimiento y Estado de Mercado")
         if u_data.get("portfolio_acciones"):
             items_p = []
             tot_v_mkt = 0
@@ -848,32 +847,126 @@ elif menu == "Mi Portafolio e Historial":
                 st.success(f"💎 **Valor Total de tus Acciones:** `${tot_v_mkt:,.0f} COP`")
 
                 st.markdown("---")
-                st.subheader("📊 Gráfica del Comportamiento Reciente del Activo Comprado")
                 
                 acciones_compradas = [
                     tk for tk, val in u_data["portfolio_acciones"].items() 
                     if (val.get("cantidad", 0) > 0 if isinstance(val, dict) else val > 0)
                 ]
-                acc_select_graph = st.selectbox("Selecciona una de tus acciones compradas para analizar su trayectoria:", acciones_compradas)
+                acc_select_graph = st.selectbox("Selecciona una de tus acciones para analizar en detalle:", acciones_compradas)
 
                 if acc_select_graph:
-                    p_base = bvc_36_actions_master.get(acc_select_graph, {}).get("precio", 1000)
-                    random.seed(42 + ord(acc_select_graph[0]))
-                    dias_hist = list(range(1, 31))
-                    precios_hist = [p_base]
-                    for d in range(1, 30):
-                        var = random.uniform(-0.035, 0.04)
-                        precios_hist.append(int(precios_hist[-1] * (1 + var)))
+                    val_data_sel = u_data["portfolio_acciones"][acc_select_graph]
+                    p_compra_act = val_data_sel.get("precio_compra", bvc_36_actions_master.get(acc_select_graph, {}).get("precio", 1000)) if isinstance(val_data_sel, dict) else bvc_36_actions_master.get(acc_select_graph, {}).get("precio", 1000)
+                    p_actual_mkt = st.session_state.prices.get(acc_select_graph, bvc_36_actions_master.get(acc_select_graph, {}).get("precio", 1000))
+                    tasa_ea_act = bvc_36_actions_master.get(acc_select_graph, {}).get("tasa_ea_esp", 12.0)
 
-                    df_hist_acc = pd.DataFrame({"Día": dias_hist, "Precio (COP)": precios_hist})
-                    
-                    fig_acc = px.line(
-                        df_hist_acc, x="Día", y="Precio (COP)", markers=True,
-                        title=f"Evolución de Precio de {acc_select_graph} (Trayectoria con Bajadas y Recuperaciones)"
-                    )
-                    fig_acc.update_traces(line_color='#38bdf8', line_width=3)
-                    fig_acc.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(13, 20, 36, 0.7)', font=dict(color='#e2e8f0'))
-                    st.plotly_chart(fig_acc, use_container_width=True)
+                    col_g1, col_g2 = st.columns(2)
+
+                    # GRÁFICA 1: HISTÓRICO 30 DÍAS + DÍA 30 DE COMPRA (CAMBIO DE COLOR POST-COMPRA)
+                    with col_g1:
+                        st.subheader("1. Histórico 30 Días y Punto de Compra")
+                        
+                        random.seed(42 + ord(acc_select_graph[0]))
+                        dias_antes = list(range(1, 30))
+                        p_sim = p_compra_act * 0.88
+                        precios_antes = [p_sim]
+                        for _ in range(1, 29):
+                            var = random.uniform(-0.025, 0.03)
+                            precios_antes.append(int(precios_antes[-1] * (1 + var)))
+
+                        dias_hist = dias_antes + [30, 31]
+                        precios_hist = precios_antes + [p_compra_act, p_actual_mkt]
+
+                        fig_h1 = go.Figure()
+
+                        # Tramo Pre-compra (Días 1 al 30) - Azul
+                        fig_h1.add_trace(go.Scatter(
+                            x=dias_hist[:30],
+                            y=precios_hist[:30],
+                            mode='lines+markers',
+                            name='Antes de Comprar',
+                            line=dict(color='#38bdf8', width=3)
+                        ))
+
+                        # Tramo Post-compra (Día 30 al Día 31 Actual) - Verde/Rojo según ganancia
+                        color_post = '#2ea043' if p_actual_mkt >= p_compra_act else '#f87171'
+                        fig_h1.add_trace(go.Scatter(
+                            x=dias_hist[29:],
+                            y=precios_hist[29:],
+                            mode='lines+markers',
+                            name='Después de Comprar',
+                            line=dict(color=color_post, width=4)
+                        ))
+
+                        # Marcador del Día de Compra Exacto
+                        fig_h1.add_trace(go.Scatter(
+                            x=[30], y=[p_compra_act],
+                            mode='markers+text',
+                            name='Día de Compra (Día 30)',
+                            text=['🛒 Compra'],
+                            textposition='top center',
+                            marker=dict(size=14, color='#facc15', symbol='star')
+                        ))
+
+                        fig_h1.update_layout(
+                            title=f"Histórico + Compra en Día 30 ({acc_select_graph})",
+                            xaxis_title="Días de Historial",
+                            yaxis_title="Precio por Acción (COP)",
+                            paper_bgcolor='rgba(0,0,0,0)',
+                            plot_bgcolor='rgba(13, 20, 36, 0.7)',
+                            font=dict(color='#e2e8f0')
+                        )
+                        st.plotly_chart(fig_h1, use_container_width=True)
+                        st.caption("💡 *El Día 30 representa el momento exacto en que compraste. Desde allí la línea cambia de color según tu rendimiento actual.*")
+
+                    # GRÁFICA 2: PROYECCIÓN FUTURA E.A. VS. ESTADO ACTUAL
+                    with col_g2:
+                        st.subheader(f"2. Proyección Futura E.A. ({tasa_ea_act}% E.A.)")
+                        
+                        meses_eje = list(range(0, 13))
+                        curva_proyectada = [p_compra_act * ((1 + (tasa_ea_act/100))**(m/12)) for m in meses_eje]
+
+                        fig_h2 = go.Figure()
+
+                        # Curva de Expectativa Teórica
+                        fig_h2.add_trace(go.Scatter(
+                            x=meses_eje,
+                            y=curva_proyectada,
+                            mode='lines',
+                            name=f'Proyección {tasa_ea_act}% E.A.',
+                            line=dict(color='#c084fc', width=3, dash='dash')
+                        ))
+
+                        # Punto de Compra Inicial
+                        fig_h2.add_trace(go.Scatter(
+                            x=[0], y=[p_compra_act],
+                            mode='markers+text',
+                            name='Precio Compra',
+                            text=[f'Compra: ${p_compra_act:,.0f}'],
+                            textposition='bottom right',
+                            marker=dict(size=12, color='#facc15')
+                        ))
+
+                        # Punto Actual
+                        fig_h2.add_trace(go.Scatter(
+                            x=[1], y=[p_actual_mkt],
+                            mode='markers+text',
+                            name='Estado Actual',
+                            text=[f'Hoy: ${p_actual_mkt:,.0f}'],
+                            textposition='top right',
+                            marker=dict(size=12, color='#38bdf8')
+                        ))
+
+                        fig_h2.update_layout(
+                            title=f"Proyección de Valor Futuro a 12 Meses ({acc_select_graph})",
+                            xaxis_title="Meses Transcurridos",
+                            yaxis_title="Valor Proyectado por Acción (COP)",
+                            paper_bgcolor='rgba(0,0,0,0)',
+                            plot_bgcolor='rgba(13, 20, 36, 0.7)',
+                            font=dict(color='#e2e8f0')
+                        )
+                        st.plotly_chart(fig_h2, use_container_width=True)
+                        st.caption("🔮 *Esta curva simula cómo debería crecer tu acción mes a mes si cumple la tasa E.A. estimada por el sector.*")
             else:
                 st.info("No tienes acciones en tu bolsillo.")
         else:
