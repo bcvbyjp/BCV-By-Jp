@@ -286,7 +286,7 @@ bvc_36_actions_master = {
     "FABRICATO": {"precio": 6, "tasa_ea_esp": 8.5, "logo": "👕", "sector": "Textil", "color": "purple", "desc": "Compañía textilera colombiana procesadora de telas y confecciones."},
     "AVIANCA": {"precio": 45, "tasa_ea_esp": 10.0, "logo": "✈️", "sector": "Aerolíneas", "color": "purple", "desc": "Línea aérea insignia de transporte de pasajeros y carga."},
     "POPULAR": {"precio": 280, "tasa_ea_esp": 11.5, "logo": "🏦", "sector": "Banca", "color": "gold", "desc": "Banco Popular Colombia, filial de Grupo Aval especializada en crédito bancario."},
-    "OCCIDENTE": {"precio": 32000, "tasa_ea_esp": 12.0, "logo": "ATM", "sector": "Banca", "color": "gold", "desc": "Banco de Occidente, soluciones financieras corporativas y personales."},
+    "OCCIDENTE": {"precio": 32000, "tasa_ea_esp": 12.0, "logo": "🏧", "sector": "Banca", "color": "gold", "desc": "Banco de Occidente, soluciones financieras corporativas y personales."},
     "CANCHAM": {"precio": 1500, "tasa_ea_esp": 10.5, "logo": "🌾", "sector": "Agroindustria", "color": "green", "desc": "Desarrollo de proyectos agrícolas y procesamiento agroindustrial."},
     "CARTON": {"precio": 8500, "tasa_ea_esp": 12.2, "logo": "📦", "sector": "Empaques / Cartón", "color": "purple", "desc": "Smurfit Kappa Cartón de Colombia, fabricación de empaques de papel."},
     "COLTEJER": {"precio": 12, "tasa_ea_esp": 7.5, "logo": "🧵", "sector": "Textiles", "color": "purple", "desc": "Compañía Colombiana de Tejidos fundada en Medellín."},
@@ -361,6 +361,38 @@ if "prices" not in st.session_state or len(st.session_state.prices) < 36:
 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
+
+# ==========================================
+# FUNCIÓN REUTILIZABLE: CÁTEDRA PEDAGÓGICA DE JP
+# ==========================================
+def render_guia_jp_modulo(titulo_modulo, funcion, para_que_sirve, aprendizaje, aplicacion_real, tips_y_lo_malo):
+    st.markdown(
+        f"""
+        <div class="neon-card" style="border-left: 5px solid #facc15; margin-bottom: 25px;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+                <span style="font-size: 1.8rem;">👨‍💼</span>
+                <div>
+                    <h4 style="color: #facc15; margin:0; font-size: 1.15rem;">Cátedra Financiera de Jp | {titulo_modulo}</h4>
+                    <span style="color: #94a3b8; font-size: 0.82rem;">Guía de Operación, Aprendizaje y Mercado Real</span>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 0.92rem; color: #cbd5e1;">
+                <div>
+                    <p style="margin: 4px 0;"><b>⚙️ Funcionamiento:</b> {funcion}</p>
+                    <p style="margin: 4px 0;"><b>🎯 ¿Para qué sirve?:</b> {para_que_sirve}</p>
+                </div>
+                <div>
+                    <p style="margin: 4px 0;"><b>🧠 Aprendizaje Clave:</b> {aprendizaje}</p>
+                    <p style="margin: 4px 0;"><b>🏛️ Aplicación en Mercado Real:</b> {aplicacion_real}</p>
+                </div>
+            </div>
+            <div style="background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.3); padding: 10px 15px; border-radius: 12px; margin-top: 12px; font-size: 0.9rem; color: #fecaca;">
+                💡 <b>Tip de Jp y La Cruda Realidad del Mercado:</b> {tips_y_lo_malo}
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 # ==========================================
 # LOGIN Y REGISTRO DE ESTUDIANTES
@@ -464,7 +496,7 @@ def render_guia_banner_global():
             <div style="flex-grow: 1;">
                 <h3 style="color: #facc15; margin: 0; font-size: 1.35rem; text-shadow: 0 0 10px rgba(250, 204, 21, 0.4);">🟡 Jp - Tu Guía Virtual Unisucre</h3>
                 <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.95rem;">
-                    ¡Epa, <b>{usuario_activo}</b> ({u_data.get('carrera', 'Unisucre')} - {u_data.get('semestre', '')})! Tu saldo libre es de <b>${u_data['cash']:,.0f} COP</b>. Todo tu avance está seguro en tu cuenta.
+                    ¡Epa, <b>{usuario_activo}</b> ({u_data.get('carrera', 'Unisucre')} - {u_data.get('semestre', '')})! Tu saldo libre es de <b>${u_data['cash']:,.0f} COP</b>. Revisa los aprendizajes de Jp en cada pestaña.
                 </p>
             </div>
         </div>
@@ -508,9 +540,18 @@ with st.sidebar:
 render_guia_banner_global()
 
 # ==========================================
-# MASTERCLASS
+# MASTERCLASS BVC EXTENDIDA
 # ==========================================
 if menu == "Masterclass BVC con Jp":
+    render_guia_jp_modulo(
+        titulo_modulo="Masterclass de Inversión BVC",
+        funcion="Un centro de inducción teórica estructurado en 5 módulos interactivos sobre el mercado colombiano.",
+        para_que_sirve="Construir las bases conceptuales antes de arriesgar el capital simulado en la terminal.",
+        aprendizaje="Entender la diferencia entre ahorrar e invertir, el poder del interés compuesto y la función social de la bolsa.",
+        aplicacion_real="Misma fundamentación que analiza un comisionista de bolsa en Valores Bancolombia o Casa de Bolsa.",
+        tips_y_lo_malo="¡Pilas, cuadro! Leer teoría es fácil, pero en la vida real el pánico te hace tomar decisiones pésimas. Mucha gente entra creyendo que la bolsa es un casino y termina perdiendo la plata del arriendo en un mes por no estudiar las empresas."
+    )
+
     has_img = os.path.exists("jp_foto.jpg")
     img_hero_html = ""
     if has_img:
@@ -705,6 +746,15 @@ if menu == "Masterclass BVC con Jp":
 # TERMINAL BURSÁTIL DE ACCIONES
 # ==========================================
 elif menu == "Terminal Bursátil":
+    render_guia_jp_modulo(
+        titulo_modulo="Terminal Bursátil (Comercio de Acciones)",
+        funcion="Cuadrícula interactiva con las 36 acciones oficiales de la BVC, mostrando cotizaciones Bid/Ask y botones de ejecución rápida.",
+        para_que_sirve="Simular la compra y venta de acciones en tiempo real descontando o acreditando saldo libre inmediatamente.",
+        aprendizaje="Comprender la diferencia entre precio de mercado, costo total de compra y liquidez del portafolio.",
+        aplicacion_real="Es exactamente la misma lógica que usas al poner órdenes en apps de inversión como Trii o Tyba en Colombia.",
+        tips_y_lo_malo="¡Ojo pelao! No compres una acción solo porque ves el emoji bonito. Si compras en el pico más alto por pura euforia, cuando la acción sufra una corrección normal te vas a ver en rojo muy feo."
+    )
+
     st.title("🛒 Terminal Bursátil: Mercado de Acciones BVC")
     st.caption("36 Activos Oficiales de la Bolsa de Valores de Colombia")
 
@@ -761,7 +811,6 @@ elif menu == "Terminal Bursátil":
                     if st.button(f"Comprar {ticker}", key=f"btn_buy_{ticker}"):
                         if u_data["cash"] >= costo_total:
                             u_data["cash"] -= costo_total
-                            
                             current_qty = pos_actual
                             new_qty = current_qty + cant_buy
                             u_data["portfolio_acciones"][ticker] = {
@@ -769,7 +818,6 @@ elif menu == "Terminal Bursátil":
                                 "precio_compra": ask_prc,
                                 "fecha": datetime.datetime.now().strftime("%Y-%m-%d")
                             }
-                            
                             save_user_to_db(usuario_activo, u_data)
                             st.success(f"¡Compraste {cant_buy} títulos de {ticker}!")
                             st.rerun()
@@ -788,7 +836,6 @@ elif menu == "Terminal Bursátil":
                                 del u_data["portfolio_acciones"][ticker]
                             else:
                                 u_data["portfolio_acciones"][ticker]["cantidad"] = rem_qty
-                                
                             save_user_to_db(usuario_activo, u_data)
                             st.success(f"¡Vendiste {cant_sell} títulos de {ticker}!")
                             st.rerun()
@@ -796,9 +843,18 @@ elif menu == "Terminal Bursátil":
                         st.caption("No posees acciones de esta empresa.")
 
 # ==========================================
-# MÓDULO PORTAFOLIO CON DOS GRÁFICAS MEJORADAS (30 DÍAS CON CAMBIO DE COLOR + PROYECCIÓN FUTURA E.A.)
+# MÓDULO PORTAFOLIO CON DOS GRÁFICAS Y CÁTEDRA JP
 # ==========================================
 elif menu == "Mi Portafolio e Historial":
+    render_guia_jp_modulo(
+        titulo_modulo="Mi Portafolio e Historial",
+        funcion="Consola de monitoreo patrimonial con dos gráficas avanzadas: Histórico 30 días con cambio de color post-compra y curva de proyección E.A. a 12 meses.",
+        para_que_sirve="Evaluar en tiempo real si tus posiciones en acciones, CDTs y bonos te están dando rendimientos positivos o si estás perdiendo dinero.",
+        aprendizaje="Análisis de rentabilidad acumulada (%), precio promedio de compra y comparación contra metas E.A.",
+        aplicacion_real="Es el equivalente al extracto consolidado que te envía tu comisionista de bolsa al cierre de cada mes.",
+        tips_y_lo_malo="¡Pilas con esto, mi hermano! En la gráfica vas a ver días rojos. Si ves que tu acción cae un 5% y te da la pálida vendiendo asustado, consolidas la pérdida. En el mercado real hay que tener estómago duro y aguantar la volatilidad."
+    )
+
     st.title("💼 Mi Portafolio e Historial de Inversiones")
     st.caption("Monitoreo de activos con cambio de color post-compra y curva de proyección futura E.A.")
 
@@ -988,7 +1044,7 @@ elif menu == "Mi Portafolio e Historial":
             if cdt_sel_idx is not None:
                 cdt_obj = u_data["cdt_list"][cdt_sel_idx]
                 m_cdt = float(cdt_obj.get("monto", 100000))
-                t_ea = float(cdt_obj.get("tasa_ea", "10%").replace("%", "").strip())
+                t_ea = float(str(cdt_obj.get("tasa_ea", "10%")).replace("%", "").strip())
                 p_dias = int(cdt_obj.get("plazo_dias", 360))
 
                 eje_dias = list(range(0, p_dias + 1, max(1, p_dias // 12)))
@@ -1018,7 +1074,7 @@ elif menu == "Mi Portafolio e Historial":
             if rf_sel_idx is not None:
                 rf_obj = u_data["renta_fija_list"][rf_sel_idx]
                 m_rf = float(rf_obj.get("monto", 100000))
-                t_ea_rf = float(rf_obj.get("tasa_ea", "10%").replace("%", "").replace("E.A.", "").strip())
+                t_ea_rf = float(str(rf_obj.get("tasa_ea", "10%")).replace("%", "").replace("E.A.", "").strip())
                 
                 eje_anios_rf = list(range(0, 6))
                 eje_val_rf = [m_rf * ((1 + (t_ea_rf/100))**a) for a in eje_anios_rf]
@@ -1035,6 +1091,15 @@ elif menu == "Mi Portafolio e Historial":
 # ESTRATEGIA CON ACCIONES
 # ==========================================
 elif menu == "Estrategia con Acciones (Jp)":
+    render_guia_jp_modulo(
+        titulo_modulo="Estrategia con Acciones",
+        funcion="Guía técnica sobre los 3 pilares de proyección (EBITDA, Dividend Yield y Ciclos de Sector) e instrucciones para reaccionar ante obstáculos.",
+        para_que_sirve="Aprender a tomar decisiones fundamentadas y evitar operar a ciegas o guiado por rumores en redes sociales.",
+        aprendizaje="Análisis fundamental de empresas, gestión del riesgo y técnica de rebalanceo estratégico de carteras.",
+        aplicacion_real="Metodología usada por analistas de equity research en firmas de inversión internacional.",
+        tips_y_lo_malo="Cuadro, el problema de la Renta Variable es que la gente se enamora de las acciones. Si una empresa entra en crisis financiera grave por malas decisiones directivas, hay que saber cortar pérdidas a tiempo; aguantar terco una empresa quebrada te quema el patrimonio."
+    )
+
     st.title("🧠 Guía de Estrategia y Gestión de Mercado con Jp")
     st.caption("Aprende a proyectar, reaccionar ante obstáculos y gestionar tus acciones como un profesional")
 
@@ -1103,9 +1168,18 @@ elif menu == "Estrategia con Acciones (Jp)":
         )
 
 # ==========================================
-# CDT BANCARIOS
+# CDT BANCARIOS (CON CALCULADORA Y MÓDULO JP)
 # ==========================================
 elif menu == "CDT Bancarios (50 Bancos)":
+    render_guia_jp_modulo(
+        titulo_modulo="CDT Bancarios (50 Bancos)",
+        funcion="Catálogo completo de 50 entidades bancarias y financieras con sus tasas E.A., plazos y simulador de interés compuesto.",
+        para_que_sirve="Constituir CDTs garantizados asegurando un retorno fijo sin la volatilidad del mercado bursátil.",
+        aprendizaje="Ecuación de valor futuro con interés compuesto, rendimiento neto esperado y seguro de depósito FOGAFIN.",
+        aplicacion_real="Mismo procedimiento que realizas desde la banca móvil o sucursal virtual de cualquier banco colombiano.",
+        tips_y_lo_malo="Lo malo del CDT es que **te amarra el dinero**. Si abres un CDT a 360 días y a los 2 meses se te presenta una emergencia o una oportunidad de compra brutal en acciones, te quedas mirando pa'l techo porque el banco no te entrega ni un peso antes del vencimiento."
+    )
+
     st.title("🏦 Certificados de Depósito a Término (CDT) en Colombia")
     st.caption("50 Entidades Bancarias con Calculadora de Interés Compuesto Futuro")
 
@@ -1212,6 +1286,15 @@ elif menu == "CDT Bancarios (50 Bancos)":
 # RENTA FIJA Y BONOS TES
 # ==========================================
 elif menu == "Renta Fija y Bonos TES":
+    render_guia_jp_modulo(
+        titulo_modulo="Renta Fija y Bonos TES",
+        funcion="Módulo de adquisición de títulos de deuda pública soberana del Estado Colombiano y bonos corporativos de grandes empresas.",
+        para_que_sirve="Financiar al Estado o corporaciones a cambio de un pago de cupón periódico garantizado.",
+        aprendizaje="Entender el funcionamiento del mercado de deuda pública, calificación crediticia (AAA) y su relación con la tasa de intervención del Banco de la República.",
+        aplicacion_real="Así invierten los fondos de pensiones (Porvenir, Proteccion) para rentabilizar el dinero del ahorro pensional colombiano.",
+        tips_y_lo_malo="¡Atento, cuadro! Aunque se llame 'Renta Fija', si compras un bono en el mercado secundario y el Banco de la República sube fuertemente las tasas de interés para frenar la inflación, el precio de tu bono cae. La renta fija solo es totalmente segura si te quedas con el bono hasta la fecha de vencimiento final."
+    )
+
     st.title("📜 Renta Fija Sostenible y Bonos del Estado Colombiano (TES)")
     st.caption("Adquiere Títulos de Deuda Pública Soberana y Bonos Corporativos AAA")
 
@@ -1281,9 +1364,18 @@ elif menu == "Renta Fija y Bonos TES":
                     st.warning(f"Necesitas mínimo ${min_rf:,.0f} COP disponibles. Tu efectivo libre actual es de ${cash_libre_rf:,.0f} COP.")
 
 # ==========================================
-# SIMULADOR PROYECTIVO
+# SIMULADOR PROYECTIVO (CON GRÁFICO MULTIESCENARIO COMPLETO)
 # ==========================================
 elif menu == "Simulador Proyectivo":
+    render_guia_jp_modulo(
+        titulo_modulo="Simulador Proyectivo de Inversión",
+        funcion="Motor de modelación estocástica a 36 meses con tres escenarios probabilísticos: Moderado, Optimista y Pesimista.",
+        para_que_sirve="Simular numéricamente la evolución futura del capital antes de colocar dinero real en un activo de renta variable.",
+        aprendizaje="Análisis de sensibilidad financiera, proyecciones multiescenario y modelación de retornos ajustados por riesgo.",
+        aplicacion_real="Herramienta indispensable utilizada en valoración de empresas y diseño de planes de negocios universitarios o corporativos.",
+        tips_y_lo_malo="Mírame bien, pelao: las simulaciones aguantan todo el papel que le pongas, pero el mercado real NO respeta gráficas bonitas. Nunca tomes tus decisiones financieras basándote en el 'Escenario Optimista', prepara tus finanzas siempre pensando en el 'Escenario Pesimista'."
+    )
+
     st.title("🧮 Simulador Proyectivo de Inversión (BVC / Jp)")
     st.caption("Herramienta de simulación de rendimientos futuros con escenarios de mercado")
 
