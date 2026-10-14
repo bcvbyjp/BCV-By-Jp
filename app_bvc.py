@@ -256,42 +256,42 @@ if "user_database" not in st.session_state:
 # CATÁLOGOS MAESTROS DE MERCADO
 # ==========================================
 bvc_36_actions_master = {
-    "ECOPETROL": {"precio": 2685, "logo": "🛢️", "sector": "Petróleo y Gas", "color": "blue", "desc": "Empresa petrolera oficial de Colombia. Explora, refina y transporta hidrocarburos."},
-    "BCOLOMBIA": {"precio": 33500, "logo": "🏦", "sector": "Financiero", "color": "gold", "desc": "El banco comercial más grande del país con operación en toda Latinoamérica."},
-    "PFBCOLOMB": {"precio": 31200, "logo": "💳", "sector": "Financiero", "color": "gold", "desc": "Acción preferencial sin derecho a voto de Bancolombia."},
-    "ISA": {"precio": 18900, "logo": "⚡", "sector": "Energía / Infraestructura", "color": "blue", "desc": "Transporta más del 70% de la energía eléctrica en Colombia y la región."},
-    "GRUPOSURA": {"precio": 36200, "logo": "📈", "sector": "Holding Financiero", "color": "gold", "desc": "Holding multinacional enfocado en banca, seguros, pensiones y servicios."},
-    "PFGRUPSURA": {"precio": 28400, "logo": "📊", "sector": "Holding Financiero", "color": "gold", "desc": "Título preferencial de Grupo Sura con dividendo prioritario."},
-    "CELSIA": {"precio": 4250, "logo": "💡", "sector": "Energía Renovables", "color": "blue", "desc": "Generación y distribución de energías limpias (solar, eólica e hídrica)."},
-    "CEMARGOS": {"precio": 7800, "logo": "🏗️", "sector": "Materiales / Construcción", "color": "green", "desc": "Líder en producción y comercialización de cemento y concreto en las Américas."},
-    "PFCEMARGOS": {"precio": 6100, "logo": "🧱", "sector": "Materiales / Construcción", "color": "green", "desc": "Acción preferencial de Cementos Argos S.A."},
-    "GRUPOARGOS": {"precio": 14200, "logo": "🏙️", "sector": "Holding Infraestructura", "color": "green", "desc": "Holding de infraestructura, concesiones viales, aeropuertos y cementos."},
-    "PFGRUPOARG": {"precio": 10500, "logo": "🏛️", "sector": "Holding Infraestructura", "color": "green", "desc": "Acción preferencial de Grupo Argos."},
-    "NUTRESA": {"precio": 46000, "logo": "🍫", "sector": "Alimentos Procesados", "color": "purple", "desc": "Gigante multilatina procesadora de chocolates, galletas, carnes y cafés."},
-    "PROMIGAS": {"precio": 6400, "logo": "🔥", "sector": "Gas Natural", "color": "blue", "desc": "Transporte y distribución masiva de gas natural en Colombia y Perú."},
-    "CORFICOLCF": {"precio": 19800, "logo": "💼", "sector": "Corporación Financiera", "color": "gold", "desc": "Inversión en megaproyectos viales, infraestructura energética y banca."},
-    "PFDAVVNDA": {"precio": 27200, "logo": "🏛️", "sector": "Banca Comercial", "color": "gold", "desc": "Acción preferencial de Banco Davivienda y plataforma Daviplata."},
-    "BOGOTA": {"precio": 35000, "logo": "🏬", "sector": "Financiero", "color": "gold", "desc": "Banco de Bogotá, una de las instituciones bancarias más antiguas de Colombia."},
-    "PFAVAL": {"precio": 535, "logo": "📉", "sector": "Holding Bancario", "color": "gold", "desc": "Grupo Aval, conglomerado dueño de Banco de Bogotá, Occidente y Porvenir."},
-    "MINEROS": {"precio": 3950, "logo": "⛏️", "sector": "Minería de Oro", "color": "green", "desc": "Exploración y producción responsable de oro en Colombia y Argentina."},
-    "ETB": {"precio": 185, "logo": "☎️", "sector": "Telecomunicaciones", "color": "purple", "desc": "Empresa de Telecomunicaciones de Bogotá, red de fibra óptica y servicios digital."},
-    "GEB": {"precio": 2450, "logo": "🔌", "sector": "Energía de Bogotá", "color": "blue", "desc": "Grupo Energía Bogotá, transmisión y distribución de electricidad y gas."},
-    "TERPEL": {"precio": 8900, "logo": "⛽", "sector": "Combustibles", "color": "purple", "desc": "Red de estaciones de servicio y distribución de lubricantes y combustibles."},
-    "ELCONDOR": {"precio": 1150, "logo": "🚜", "sector": "Construcción e Infraestructura", "color": "green", "desc": "Construcción de vías de cuarta generación (4G) e ingeniería civil."},
-    "CLH": {"precio": 3200, "logo": "🏗️", "sector": "Cementos", "color": "green", "desc": "Cemex Latam Holdings, producción de materiales de construcción."},
-    "CONCONCRET": {"precio": 280, "logo": "🛠️", "sector": "Construcción", "color": "green", "desc": "Constructora Conconcreto S.A., edificaciones e infraestructura masiva."},
-    "ENKA": {"precio": 22, "logo": "🧵", "sector": "Textil y Reciclaje PET", "color": "purple", "desc": "Transformación de botellas recicladas en resinas y hilos sintéticos."},
-    "BVC": {"precio": 11200, "logo": "🔔", "sector": "Bolsa / Financiero", "color": "gold", "desc": "La propia empresa administradora del mercado de valores de Colombia."},
-    "PEI": {"precio": 68000, "logo": "🏢", "sector": "Real Estate / Inmobiliario", "color": "purple", "desc": "Fondo de inversión inmobiliario en centros comerciales, oficinas y bodegas."},
-    "FABRICATO": {"precio": 6, "logo": "👕", "sector": "Textil", "color": "purple", "desc": "Compañía textilera colombiana procesadora de telas y confecciones."},
-    "AVIANCA": {"precio": 45, "logo": "✈️", "sector": "Aerolíneas", "color": "purple", "desc": "Línea aérea insignia de transporte de pasajeros y carga."},
-    "POPULAR": {"precio": 280, "logo": "🏦", "sector": "Banca", "color": "gold", "desc": "Banco Popular Colombia, filial de Grupo Aval especializada en crédito bancario."},
-    "OCCIDENTE": {"precio": 32000, "logo": "🏧", "sector": "Banca", "color": "gold", "desc": "Banco de Occidente, soluciones financieras corporativas y personales."},
-    "CANCHAM": {"precio": 1500, "logo": "🌾", "sector": "Agroindustria", "color": "green", "desc": "Desarrollo de proyectos agrícolas y procesamiento agroindustrial."},
-    "CARTON": {"precio": 8500, "logo": "📦", "sector": "Empaques / Cartón", "color": "purple", "desc": "Smurfit Kappa Cartón de Colombia, fabricación de empaques de papel."},
-    "COLTEJER": {"precio": 12, "logo": "🧵", "sector": "Textiles", "color": "purple", "desc": "Compañía Colombiana de Tejidos fundada en Medellín."},
-    "PFCORFICOL": {"precio": 16500, "logo": "💼", "sector": "Corporación Financiera", "color": "gold", "desc": "Acción preferencial de Corficolombiana."},
-    "PFCELSA": {"precio": 3900, "logo": "💡", "sector": "Energía", "color": "blue", "desc": "Acción preferencial de Celsia S.A."}
+    "ECOPETROL": {"precio": 2685, "tasa_ea_esp": 13.8, "logo": "🛢️", "sector": "Petróleo y Gas", "color": "blue", "desc": "Empresa petrolera oficial de Colombia. Explora, refina y transporta hidrocarburos."},
+    "BCOLOMBIA": {"precio": 33500, "tasa_ea_esp": 12.5, "logo": "🏦", "sector": "Financiero", "color": "gold", "desc": "El banco comercial más grande del país con operación en toda Latinoamérica."},
+    "PFBCOLOMB": {"precio": 31200, "tasa_ea_esp": 12.8, "logo": "💳", "sector": "Financiero", "color": "gold", "desc": "Acción preferencial sin derecho a voto de Bancolombia."},
+    "ISA": {"precio": 18900, "tasa_ea_esp": 11.4, "logo": "⚡", "sector": "Energía / Infraestructura", "color": "blue", "desc": "Transporta más del 70% de la energía eléctrica en Colombia y la región."},
+    "GRUPOSURA": {"precio": 36200, "tasa_ea_esp": 13.0, "logo": "📈", "sector": "Holding Financiero", "color": "gold", "desc": "Holding multinacional enfocado en banca, seguros, pensiones y servicios."},
+    "PFGRUPSURA": {"precio": 28400, "tasa_ea_esp": 13.5, "logo": "📊", "sector": "Holding Financiero", "color": "gold", "desc": "Título preferencial de Grupo Sura con dividendo prioritario."},
+    "CELSIA": {"precio": 4250, "tasa_ea_esp": 12.0, "logo": "💡", "sector": "Energía Renovables", "color": "blue", "desc": "Generación y distribución de energías limpias (solar, eólica e hídrica)."},
+    "CEMARGOS": {"precio": 7800, "tasa_ea_esp": 14.2, "logo": "🏗️", "sector": "Materiales / Construcción", "color": "green", "desc": "Líder en producción y comercialización de cemento y concreto en las Américas."},
+    "PFCEMARGOS": {"precio": 6100, "tasa_ea_esp": 14.5, "logo": "🧱", "sector": "Materiales / Construcción", "color": "green", "desc": "Acción preferencial de Cementos Argos S.A."},
+    "GRUPOARGOS": {"precio": 14200, "tasa_ea_esp": 13.2, "logo": "🏙️", "sector": "Holding Infraestructura", "color": "green", "desc": "Holding de infraestructura, concesiones viales, aeropuertos y cementos."},
+    "PFGRUPOARG": {"precio": 10500, "tasa_ea_esp": 13.6, "logo": "🏛️", "sector": "Holding Infraestructura", "color": "green", "desc": "Acción preferencial de Grupo Argos."},
+    "NUTRESA": {"precio": 46000, "tasa_ea_esp": 10.8, "logo": "🍫", "sector": "Alimentos Procesados", "color": "purple", "desc": "Gigante multilatina procesadora de chocolates, galletas, carnes y cafés."},
+    "PROMIGAS": {"precio": 6400, "tasa_ea_esp": 11.9, "logo": "🔥", "sector": "Gas Natural", "color": "blue", "desc": "Transporte y distribución masiva de gas natural en Colombia y Perú."},
+    "CORFICOLCF": {"precio": 19800, "tasa_ea_esp": 12.7, "logo": "💼", "sector": "Corporación Financiera", "color": "gold", "desc": "Inversión en megaproyectos viales, infraestructura energética y banca."},
+    "PFDAVVNDA": {"precio": 27200, "tasa_ea_esp": 12.3, "logo": "🏛️", "sector": "Banca Comercial", "color": "gold", "desc": "Acción preferencial de Banco Davivienda y plataforma Daviplata."},
+    "BOGOTA": {"precio": 35000, "tasa_ea_esp": 11.8, "logo": "🏬", "sector": "Financiero", "color": "gold", "desc": "Banco de Bogotá, una de las instituciones bancarias más antiguas de Colombia."},
+    "PFAVAL": {"precio": 535, "tasa_ea_esp": 12.1, "logo": "📉", "sector": "Holding Bancario", "color": "gold", "desc": "Grupo Aval, conglomerado dueño de Banco de Bogotá, Occidente y Porvenir."},
+    "MINEROS": {"precio": 3950, "tasa_ea_esp": 15.0, "logo": "⛏️", "sector": "Minería de Oro", "color": "green", "desc": "Exploración y producción responsable de oro en Colombia y Argentina."},
+    "ETB": {"precio": 185, "tasa_ea_esp": 9.5, "logo": "☎️", "sector": "Telecomunicaciones", "color": "purple", "desc": "Empresa de Telecomunicaciones de Bogotá, red de fibra óptica y servicios digital."},
+    "GEB": {"precio": 2450, "tasa_ea_esp": 11.7, "logo": "🔌", "sector": "Energía de Bogotá", "color": "blue", "desc": "Grupo Energía Bogotá, transmisión y distribución de electricidad y gas."},
+    "TERPEL": {"precio": 8900, "tasa_ea_esp": 12.4, "logo": "⛽", "sector": "Combustibles", "color": "purple", "desc": "Red de estaciones de servicio y distribución de lubricantes y combustibles."},
+    "ELCONDOR": {"precio": 1150, "tasa_ea_esp": 13.9, "logo": "🚜", "sector": "Construcción e Infraestructura", "color": "green", "desc": "Construcción de vías de cuarta generación (4G) e ingeniería civil."},
+    "CLH": {"precio": 3200, "tasa_ea_esp": 11.2, "logo": "🏗️", "sector": "Cementos", "color": "green", "desc": "Cemex Latam Holdings, producción de materiales de construcción."},
+    "CONCONCRET": {"precio": 280, "tasa_ea_esp": 12.8, "logo": "🛠️", "sector": "Construcción", "color": "green", "desc": "Constructora Conconcreto S.A., edificaciones e infraestructura masiva."},
+    "ENKA": {"precio": 22, "tasa_ea_esp": 11.0, "logo": "🧵", "sector": "Textil y Reciclaje PET", "color": "purple", "desc": "Transformación de botellas recicladas en resinas y hilos sintéticos."},
+    "BVC": {"precio": 11200, "tasa_ea_esp": 12.5, "logo": "🔔", "sector": "Bolsa / Financiero", "color": "gold", "desc": "La propia empresa administradora del mercado de valores de Colombia."},
+    "PEI": {"precio": 68000, "tasa_ea_esp": 11.8, "logo": "🏢", "sector": "Real Estate / Inmobiliario", "color": "purple", "desc": "Fondo de inversión inmobiliario en centros comerciales, oficinas y bodegas."},
+    "FABRICATO": {"precio": 6, "tasa_ea_esp": 8.5, "logo": "👕", "sector": "Textil", "color": "purple", "desc": "Compañía textilera colombiana procesadora de telas y confecciones."},
+    "AVIANCA": {"precio": 45, "tasa_ea_esp": 10.0, "logo": "✈️", "sector": "Aerolíneas", "color": "purple", "desc": "Línea aérea insignia de transporte de pasajeros y carga."},
+    "POPULAR": {"precio": 280, "tasa_ea_esp": 11.5, "logo": "🏦", "sector": "Banca", "color": "gold", "desc": "Banco Popular Colombia, filial de Grupo Aval especializada en crédito bancario."},
+    "OCCIDENTE": {"precio": 32000, "tasa_ea_esp": 12.0, "logo": "🏧", "sector": "Banca", "color": "gold", "desc": "Banco de Occidente, soluciones financieras corporativas y personales."},
+    "CANCHAM": {"precio": 1500, "tasa_ea_esp": 10.5, "logo": "🌾", "sector": "Agroindustria", "color": "green", "desc": "Desarrollo de proyectos agrícolas y procesamiento agroindustrial."},
+    "CARTON": {"precio": 8500, "tasa_ea_esp": 12.2, "logo": "📦", "sector": "Empaques / Cartón", "color": "purple", "desc": "Smurfit Kappa Cartón de Colombia, fabricación de empaques de papel."},
+    "COLTEJER": {"precio": 12, "tasa_ea_esp": 7.5, "logo": "🧵", "sector": "Textiles", "color": "purple", "desc": "Compañía Colombiana de Tejidos fundada en Medellín."},
+    "PFCORFICOL": {"precio": 16500, "tasa_ea_esp": 12.9, "logo": "💼", "sector": "Corporación Financiera", "color": "gold", "desc": "Acción preferencial de Corficolombiana."},
+    "PFCELSA": {"precio": 3900, "tasa_ea_esp": 12.2, "logo": "💡", "sector": "Energía", "color": "blue", "desc": "Acción preferencial de Celsia S.A."}
 }
 
 bancos_cdt_50 = [
@@ -308,7 +308,7 @@ bancos_cdt_50 = [
     {"banco": "Banco Popular S.A.", "tasa_ea": 10.7, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏦"},
     {"banco": "Banco AV Villas", "tasa_ea": 10.5, "plazo_dias": 360, "min_inversion": 50000, "logo": "🔴"},
     {"banco": "Banco Itaú Colombia", "tasa_ea": 10.6, "plazo_dias": 360, "min_inversion": 50000, "logo": "🟧"},
-    {"banco": "Banco GNB Sudameris", "tasa_ea": 11.1, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏛️️"},
+    {"banco": "Banco GNB Sudameris", "tasa_ea": 11.1, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏛️"},
     {"banco": "Banco W S.A.", "tasa_ea": 12.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "💼"},
     {"banco": "Banco Caja Social", "tasa_ea": 10.9, "plazo_dias": 360, "min_inversion": 50000, "logo": "🏠"},
     {"banco": "Banco Pichincha Colombia", "tasa_ea": 11.8, "plazo_dias": 360, "min_inversion": 50000, "logo": "🟡"},
@@ -477,10 +477,12 @@ with st.sidebar:
     st.title("📈 BCV By Jp")
     st.success(f"👤 **{usuario_activo}**\n🎓 {u_data.get('carrera', 'Unisucre')}")
     
-    val_acciones_total = sum(
-        qty * st.session_state.prices.get(tk, bvc_36_actions_master.get(tk, {}).get("precio", 0))
-        for tk, qty in u_data.get("portfolio_acciones", {}).items()
-    )
+    # Adaptador de estrucutra de acciones (soporta int o dict)
+    val_acciones_total = 0
+    for tk, val_acc in u_data.get("portfolio_acciones", {}).items():
+        qty = val_acc.get("cantidad", val_acc) if isinstance(val_acc, dict) else val_acc
+        val_acciones_total += qty * st.session_state.prices.get(tk, bvc_36_actions_master.get(tk, {}).get("precio", 0))
+
     val_cdt_total = sum(c.get("monto", 0) for c in u_data.get("cdt_list", []))
     val_rf_total = sum(r.get("monto", 0) for r in u_data.get("renta_fija_list", []))
     patrimonio_total = u_data["cash"] + val_acciones_total + val_cdt_total + val_rf_total
@@ -746,7 +748,9 @@ elif menu == "Terminal Bursátil":
             )
 
             with st.expander(f"⚡ Operar {ticker}"):
-                pos_actual = u_data["portfolio_acciones"].get(ticker, 0)
+                pos_entry = u_data["portfolio_acciones"].get(ticker, {"cantidad": 0, "precio_compra": prc_actual, "fecha": datetime.datetime.now().strftime("%Y-%m-%d")})
+                pos_actual = pos_entry.get("cantidad", pos_entry) if isinstance(pos_entry, dict) else pos_entry
+
                 st.caption(f"Tienes **{pos_actual}** acciones en tu portafolio.")
                 
                 tab_comp, tab_vent = st.tabs(["🟢 Comprar", "🔴 Vender"])
@@ -758,7 +762,15 @@ elif menu == "Terminal Bursátil":
                     if st.button(f"Comprar {ticker}", key=f"btn_buy_{ticker}"):
                         if u_data["cash"] >= costo_total:
                             u_data["cash"] -= costo_total
-                            u_data["portfolio_acciones"][ticker] = u_data["portfolio_acciones"].get(ticker, 0) + cant_buy
+                            
+                            current_qty = pos_actual
+                            new_qty = current_qty + cant_buy
+                            u_data["portfolio_acciones"][ticker] = {
+                                "cantidad": new_qty,
+                                "precio_compra": ask_prc,
+                                "fecha": datetime.datetime.now().strftime("%Y-%m-%d")
+                            }
+                            
                             save_user_to_db(usuario_activo, u_data)
                             st.success(f"¡Compraste {cant_buy} títulos de {ticker}!")
                             st.rerun()
@@ -772,9 +784,12 @@ elif menu == "Terminal Bursátil":
                         st.write(f"Ingreso Total: `${recaudo_total:,.0f} COP`")
                         if st.button(f"Vender {ticker}", key=f"btn_sell_{ticker}"):
                             u_data["cash"] += recaudo_total
-                            u_data["portfolio_acciones"][ticker] -= cant_sell
-                            if u_data["portfolio_acciones"][ticker] <= 0:
+                            rem_qty = pos_actual - cant_sell
+                            if rem_qty <= 0:
                                 del u_data["portfolio_acciones"][ticker]
+                            else:
+                                u_data["portfolio_acciones"][ticker]["cantidad"] = rem_qty
+                                
                             save_user_to_db(usuario_activo, u_data)
                             st.success(f"¡Vendiste {cant_sell} títulos de {ticker}!")
                             st.rerun()
@@ -782,61 +797,85 @@ elif menu == "Terminal Bursátil":
                         st.caption("No posees acciones de esta empresa.")
 
 # ==========================================
-# MÓDULO PORTAFOLIO CON GRÁFICOS
+# MÓDULO PORTAFOLIO CON REGISTRO DE FECHA, CRECIMIENTO Y PROYECCIÓN E.A.
 # ==========================================
 elif menu == "Mi Portafolio e Historial":
     st.title("💼 Mi Portafolio e Historial de Inversiones")
-    st.caption("Revisión detallada de activos con gráficos de comportamiento histórico y proyección de valor")
+    st.caption("Revisión detallada con Fecha de Compra, Crecimiento Acumulado y Proyección E.A. de Rendimiento")
 
     tab_p1, tab_p2, tab_p3 = st.tabs(["📈 Acciones Compradas", "📜 CDTs Vigentes", "🇨🇴 Bonos TES de Renta Fija"])
 
+    # 1. ACCIONES CON FECHA DE COMPRA, CRECIMIENTO Y RENDIMIENTO ESPERADO E.A.
     with tab_p1:
-        st.subheader("📈 Tus Acciones y Comportamiento Reciente de Mercado")
-        if u_data.get("portfolio_acciones") and any(v > 0 for v in u_data["portfolio_acciones"].values()):
+        st.subheader("📈 Tus Acciones: Crecimiento y Rendimiento Esperado (E.A.)")
+        if u_data.get("portfolio_acciones"):
             items_p = []
             tot_v_mkt = 0
             
-            for tk_x, c_x in u_data["portfolio_acciones"].items():
+            for tk_x, val_data in u_data["portfolio_acciones"].items():
+                if isinstance(val_data, dict):
+                    c_x = val_data.get("cantidad", 0)
+                    p_compra = val_data.get("precio_compra", bvc_36_actions_master.get(tk_x, {}).get("precio", 1000))
+                    f_compra = val_data.get("fecha", "Reciente")
+                else:
+                    c_x = val_data
+                    p_compra = bvc_36_actions_master.get(tk_x, {}).get("precio", 1000)
+                    f_compra = "Reciente"
+
                 if c_x > 0:
                     pr_x = st.session_state.prices.get(tk_x, bvc_36_actions_master.get(tk_x, {}).get("precio", 0))
                     vm_x = c_x * pr_x
+                    costo_orig = c_x * p_compra
+                    ganancia_var = vm_x - costo_orig
+                    pct_rend = ((vm_x / costo_orig) - 1) * 100 if costo_orig > 0 else 0.0
+                    
+                    tasa_ea_esp = bvc_36_actions_master.get(tk_x, {}).get("tasa_ea_esp", 12.0)
                     tot_v_mkt += vm_x
+                    
                     items_p.append({
                         "Acción Ticker": tk_x,
-                        "Sector": bvc_36_actions_master.get(tk_x, {}).get("sector", "General"),
+                        "Fecha de Compra": f_compra,
                         "Cantidad Títulos": f"{c_x}",
-                        "Precio Actual": f"${pr_x:,.0f} COP",
-                        "Valor Total Mercado": f"${vm_x:,.0f} COP"
+                        "Precio Compra": f"${p_compra:,.0f} COP",
+                        "Precio Actual Mercado": f"${pr_x:,.0f} COP",
+                        "Valor Total Mercado": f"${vm_x:,.0f} COP",
+                        "Crecimiento Acumulado": f"{pct_rend:+.2f}% (${ganancia_var:+,.0f} COP)",
+                        "Rendimiento Esperado": f"{tasa_ea_esp:.1f}% E.A."
                     })
             
-            st.dataframe(pd.DataFrame(items_p), use_container_width=True)
-            st.success(f"💎 **Valor Total de tus Acciones:** `${tot_v_mkt:,.0f} COP`")
+            if items_p:
+                st.dataframe(pd.DataFrame(items_p), use_container_width=True)
+                st.success(f"💎 **Valor Total de tus Acciones:** `${tot_v_mkt:,.0f} COP`")
 
-            st.markdown("---")
-            st.subheader("📊 Gráfica de Comportamiento Histórico del Activo")
-            
-            acciones_compradas = [tk for tk, q in u_data["portfolio_acciones"].items() if q > 0]
-            acc_select_graph = st.selectbox("Selecciona una de tus acciones para ver su comportamiento:", acciones_compradas)
-
-            if acc_select_graph:
-                p_base = bvc_36_actions_master.get(acc_select_graph, {}).get("precio", 1000)
-                random.seed(42 + ord(acc_select_graph[0]))
-                dias_hist = list(range(1, 31))
-                precios_hist = [p_base]
-                for d in range(1, 30):
-                    var = random.uniform(-0.035, 0.04)
-                    precios_hist.append(int(precios_hist[-1] * (1 + var)))
-
-                df_hist_acc = pd.DataFrame({"Día": dias_hist, "Precio (COP)": precios_hist})
+                st.markdown("---")
+                st.subheader("📊 Gráfica del Comportamiento Reciente del Activo Comprado")
                 
-                fig_acc = px.line(
-                    df_hist_acc, x="Día", y="Precio (COP)", markers=True,
-                    title=f"Evolución de Precio Últimos 30 Días ({acc_select_graph})"
-                )
-                fig_acc.update_traces(line_color='#38bdf8', line_width=3)
-                fig_acc.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(13, 20, 36, 0.7)', font=dict(color='#e2e8f0'))
-                st.plotly_chart(fig_acc, use_container_width=True)
-                st.caption("💡 *Nota: Esta gráfica muestra la volatilidad del activo (bajadas y recuperaciones) para ayudarte a tomar decisiones de mantener o vender.*")
+                acciones_compradas = [
+                    tk for tk, val in u_data["portfolio_acciones"].items() 
+                    if (val.get("cantidad", 0) > 0 if isinstance(val, dict) else val > 0)
+                ]
+                acc_select_graph = st.selectbox("Selecciona una de tus acciones compradas para analizar su trayectoria:", acciones_compradas)
+
+                if acc_select_graph:
+                    p_base = bvc_36_actions_master.get(acc_select_graph, {}).get("precio", 1000)
+                    random.seed(42 + ord(acc_select_graph[0]))
+                    dias_hist = list(range(1, 31))
+                    precios_hist = [p_base]
+                    for d in range(1, 30):
+                        var = random.uniform(-0.035, 0.04)
+                        precios_hist.append(int(precios_hist[-1] * (1 + var)))
+
+                    df_hist_acc = pd.DataFrame({"Día": dias_hist, "Precio (COP)": precios_hist})
+                    
+                    fig_acc = px.line(
+                        df_hist_acc, x="Día", y="Precio (COP)", markers=True,
+                        title=f"Evolución de Precio de {acc_select_graph} (Trayectoria con Bajadas y Recuperaciones)"
+                    )
+                    fig_acc.update_traces(line_color='#38bdf8', line_width=3)
+                    fig_acc.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(13, 20, 36, 0.7)', font=dict(color='#e2e8f0'))
+                    st.plotly_chart(fig_acc, use_container_width=True)
+            else:
+                st.info("No tienes acciones en tu bolsillo.")
         else:
             st.info("No tienes acciones compradas actualmente. Adquiere algunas en la Terminal Bursátil.")
 
