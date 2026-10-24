@@ -395,7 +395,7 @@ def render_guia_jp_modulo(titulo_modulo, funcion, para_que_sirve, aprendizaje, a
     )
 
 # ==========================================
-# LOGIN Y REGISTRO DE ESTUDIANTES
+# LOGIN Y REGISTRO DE ESTUDIANTES 
 # ==========================================
 if not st.session_state.logged_in:
     st.markdown(
@@ -420,15 +420,19 @@ if not st.session_state.logged_in:
                 user_clean = user_input.strip()
                 pass_clean = pass_input.strip()
 
+                # Cargar la base de datos actualizada directamente desde SQLite
+                db_actual = load_user_db_cached()
+
                 if not user_clean or not pass_clean:
                     st.error("Por favor completa ambos campos para ingresar.")
-                elif user_clean not in st.session_state.user_database:
-                    st.error("❌ Usuario NO registrado. Debes hacer clic en la pestaña 'Registrarse' primero.")
+                elif user_clean not in db_actual:
+                    st.error("❌ Usuario NO registrado. Ve a la pestaña 'Registrarse' primero.")
                 else:
-                    u_stored = st.session_state.user_database[user_clean]
+                    u_stored = db_actual[user_clean]
                     if u_stored.get("password") == pass_clean:
                         st.session_state.current_user = user_clean
                         st.session_state.logged_in = True
+                        st.session_state.user_database = db_actual
                         st.success("¡Bienvenido de nuevo!")
                         st.rerun()
                     else:
@@ -447,9 +451,11 @@ if not st.session_state.logged_in:
                 ru_clean = reg_user.strip()
                 rp_clean = reg_pass.strip()
                 
+                db_actual = load_user_db_cached()
+
                 if not ru_clean or not rp_clean or not reg_carrera.strip():
                     st.error("Por favor completa todos los campos del registro.")
-                elif ru_clean in st.session_state.user_database:
+                elif ru_clean in db_actual:
                     st.warning("⚠️ Ya existe un estudiante registrado con este nombre. Ve a 'Iniciar Sesión'.")
                 else:
                     nuevo_user_data = {
@@ -465,9 +471,10 @@ if not st.session_state.logged_in:
                         "informe_estudiante": "",
                         "esg_fund": 0
                     }
-                    st.session_state.user_database[ru_clean] = nuevo_user_data
                     save_user_to_db(ru_clean, nuevo_user_data)
-                    st.success("🎉 ¡Cuenta registrada con éxito y $500.000 COP acreditados! Ahora puedes Iniciar Sesión.")
+                    st.cache_data.clear()  # Limpia el caché para cargar de inmediato el nuevo registro
+                    st.session_state.user_database = load_user_db_cached()
+                    st.success("🎉 ¡Cuenta registrada con éxito! Ahora ve a 'Iniciar Sesión' e ingresa.")
 
     st.markdown("</div></div>", unsafe_allow_html=True)
     st.stop()
