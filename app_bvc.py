@@ -189,7 +189,7 @@ st.markdown(
 )
 
 # ==========================================
-# BASE DE DATOS Y PERSISTENCIA (SQLITE)
+# BASE DE DATOS Y PERSISTENCIA (SQLITE CORREGIDO)
 # ==========================================
 DB_FILE = "bcv_database.db"
 
@@ -200,7 +200,8 @@ def init_db():
         CREATE TABLE IF NOT EXISTS users (
             username TEXT PRIMARY KEY, password TEXT, rol TEXT, semestre TEXT, carrera TEXT,
             cash REAL, presupuesto_inicial REAL, portfolio_acciones TEXT, cdt_list TEXT,
-            renta_fija_list TEXT, historial_pasos TEXT, informe_estudiante TEXT, esg_fund REAL
+            renta_fija_list TEXT, historial_pasos TEXT, informe_estudiante TEXT, esg_fund REAL,
+            ultima_conexion TEXT
         )
     """)
     conn.commit()
@@ -216,7 +217,20 @@ def load_user_db_cached():
     rows = cursor.fetchall()
     db = {}
     for row in rows:
-        uname, pwd, rol, sem, car, cash, p_ini, p_acc, c_list, r_list, h_pas, inf, esg = row
+        uname = row[0]
+        pwd = row[1]
+        rol = row[2]
+        sem = row[3]
+        car = row[4]
+        cash = row[5]
+        p_ini = row[6]
+        p_acc = row[7]
+        c_list = row[8]
+        r_list = row[9]
+        inf = row[11]
+        esg = row[12]
+        u_conn = row[13] if len(row) > 13 else ""
+
         try: p_acc = json.loads(p_acc) if p_acc else {}
         except: p_acc = {}
         try: c_list = json.loads(c_list) if c_list else []
@@ -229,7 +243,8 @@ def load_user_db_cached():
             "cash": cash if cash is not None else 500000.0,
             "presupuesto_inicial": p_ini if p_ini is not None else 500000.0,
             "portfolio_acciones": p_acc,
-            "cdt_list": c_list, "renta_fija_list": r_list, "informe_estudiante": inf, "esg_fund": esg
+            "cdt_list": c_list, "renta_fija_list": r_list, "informe_estudiante": inf, "esg_fund": esg,
+            "ultima_conexion": u_conn
         }
     conn.close()
     return db
@@ -237,14 +252,25 @@ def load_user_db_cached():
 def save_user_to_db(username, udata):
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
+    hoy = datetime.datetime.now().strftime("%Y-%m-%d")
+    
     cursor.execute("""
-        INSERT OR REPLACE INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT OR REPLACE INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
-        username, udata.get("password", "123"), udata.get("rol", "Estudiante"), udata.get("semestre", ""),
-        udata.get("carrera", ""), udata.get("cash", 500000.0), udata.get("presupuesto_inicial", 500000.0),
-        json.dumps(udata.get("portfolio_acciones", {})), json.dumps(udata.get("cdt_list", [])),
-        json.dumps(udata.get("renta_fija_list", [])), json.dumps([]),
-        udata.get("informe_estudiante", ""), udata.get("esg_fund", 0)
+        username, 
+        udata.get("password", "123"), 
+        udata.get("rol", "Estudiante"), 
+        udata.get("semestre", ""),
+        udata.get("carrera", ""), 
+        udata.get("cash", 500000.0), 
+        udata.get("presupuesto_inicial", 500000.0),
+        json.dumps(udata.get("portfolio_acciones", {})), 
+        json.dumps(udata.get("cdt_list", [])),
+        json.dumps(udata.get("renta_fija_list", [])), 
+        json.dumps([]),
+        udata.get("informe_estudiante", ""), 
+        udata.get("esg_fund", 0),
+        hoy
     ))
     conn.commit()
     conn.close()
@@ -286,7 +312,7 @@ bvc_36_actions_master = {
     "FABRICATO": {"precio": 6, "tasa_ea_esp": 8.5, "logo": "👕", "sector": "Textil", "color": "purple", "desc": "Compañía textilera colombiana procesadora de telas y confecciones."},
     "AVIANCA": {"precio": 45, "tasa_ea_esp": 10.0, "logo": "✈️", "sector": "Aerolíneas", "color": "purple", "desc": "Línea aérea insignia de transporte de pasajeros y carga."},
     "POPULAR": {"precio": 280, "tasa_ea_esp": 11.5, "logo": "🏦", "sector": "Banca", "color": "gold", "desc": "Banco Popular Colombia, filial de Grupo Aval especializada en crédito bancario."},
-    "OCCIDENTE": {"precio": 32000, "tasa_ea_esp": 12.0, "logo": "🏧", "sector": "Banca", "color": "gold", "desc": "Banco de Occidente, soluciones financieras corporativas y personales."},
+    "OCCIDENTE": {"precio": 32000, "tasa_ea_esp": 12.0, "logo": "ATM", "sector": "Banca", "color": "gold", "desc": "Banco de Occidente, soluciones financieras corporativas y personales."},
     "CANCHAM": {"precio": 1500, "tasa_ea_esp": 10.5, "logo": "🌾", "sector": "Agroindustria", "color": "green", "desc": "Desarrollo de proyectos agrícolas y procesamiento agroindustrial."},
     "CARTON": {"precio": 8500, "tasa_ea_esp": 12.2, "logo": "📦", "sector": "Empaques / Cartón", "color": "purple", "desc": "Smurfit Kappa Cartón de Colombia, fabricación de empaques de papel."},
     "COLTEJER": {"precio": 12, "tasa_ea_esp": 7.5, "logo": "🧵", "sector": "Textiles", "color": "purple", "desc": "Compañía Colombiana de Tejidos fundada en Medellín."},
@@ -395,7 +421,7 @@ def render_guia_jp_modulo(titulo_modulo, funcion, para_que_sirve, aprendizaje, a
     )
 
 # ==========================================
-# LOGIN Y REGISTRO DE ESTUDIANTES 
+# LOGIN Y REGISTRO DE ESTUDIANTES (CON CACHÉ FLUIDO)
 # ==========================================
 if not st.session_state.logged_in:
     st.markdown(
@@ -419,14 +445,12 @@ if not st.session_state.logged_in:
             if btn_login:
                 user_clean = user_input.strip()
                 pass_clean = pass_input.strip()
-
-                # Cargar la base de datos actualizada directamente desde SQLite
                 db_actual = load_user_db_cached()
 
                 if not user_clean or not pass_clean:
                     st.error("Por favor completa ambos campos para ingresar.")
                 elif user_clean not in db_actual:
-                    st.error("❌ Usuario NO registrado. Ve a la pestaña 'Registrarse' primero.")
+                    st.error("❌ Usuario NO registrado. Debes hacer clic en la pestaña 'Registrarse' primero.")
                 else:
                     u_stored = db_actual[user_clean]
                     if u_stored.get("password") == pass_clean:
@@ -450,7 +474,6 @@ if not st.session_state.logged_in:
             if btn_register:
                 ru_clean = reg_user.strip()
                 rp_clean = reg_pass.strip()
-                
                 db_actual = load_user_db_cached()
 
                 if not ru_clean or not rp_clean or not reg_carrera.strip():
@@ -469,12 +492,13 @@ if not st.session_state.logged_in:
                         "cdt_list": [],
                         "renta_fija_list": [],
                         "informe_estudiante": "",
-                        "esg_fund": 0
+                        "esg_fund": 0,
+                        "ultima_conexion": datetime.datetime.now().strftime("%Y-%m-%d")
                     }
                     save_user_to_db(ru_clean, nuevo_user_data)
-                    st.cache_data.clear()  # Limpia el caché para cargar de inmediato el nuevo registro
+                    st.cache_data.clear()
                     st.session_state.user_database = load_user_db_cached()
-                    st.success("🎉 ¡Cuenta registrada con éxito! Ahora ve a 'Iniciar Sesión' e ingresa.")
+                    st.success("🎉 ¡Cuenta registrada con éxito y $500.000 COP acreditados! Ve a 'Iniciar Sesión' e ingresa.")
 
     st.markdown("</div></div>", unsafe_allow_html=True)
     st.stop()
@@ -771,9 +795,11 @@ elif menu == "Terminal Bursátil":
     with col_hdr2:
         if st.button("🔄 Actualizar Precios Mercado BVC"):
             for tk in st.session_state.prices:
-                var = random.uniform(-0.015, 0.018)
+                var = random.uniform(-0.02, 0.025)
                 st.session_state.prices[tk] = max(10, int(st.session_state.prices[tk] * (1 + var)))
-            st.success("¡Cotizaciones actualizadas con éxito!")
+            save_user_to_db(usuario_activo, u_data)
+            st.cache_data.clear()
+            st.success("📈 ¡Precios del mercado actualizados y avance guardado con éxito!")
             st.rerun()
 
     items_acciones = list(bvc_36_actions_master.items())
@@ -826,6 +852,7 @@ elif menu == "Terminal Bursátil":
                                 "fecha": datetime.datetime.now().strftime("%Y-%m-%d")
                             }
                             save_user_to_db(usuario_activo, u_data)
+                            st.cache_data.clear()
                             st.success(f"¡Compraste {cant_buy} títulos de {ticker}!")
                             st.rerun()
                         else:
@@ -844,6 +871,7 @@ elif menu == "Terminal Bursátil":
                             else:
                                 u_data["portfolio_acciones"][ticker]["cantidad"] = rem_qty
                             save_user_to_db(usuario_activo, u_data)
+                            st.cache_data.clear()
                             st.success(f"¡Vendiste {cant_sell} títulos de {ticker}!")
                             st.rerun()
                     else:
@@ -1284,6 +1312,7 @@ elif menu == "CDT Bancarios (50 Bancos)":
                         }
                         u_data.setdefault("cdt_list", []).append(nuevo_cdt)
                         save_user_to_db(usuario_activo, u_data)
+                        st.cache_data.clear()
                         st.success(f"¡CDT constituido con éxito en {item_b['banco']}!")
                         st.rerun()
                 else:
@@ -1365,6 +1394,7 @@ elif menu == "Renta Fija y Bonos TES":
                         }
                         u_data.setdefault("renta_fija_list", []).append(nuevo_bono)
                         save_user_to_db(usuario_activo, u_data)
+                        st.cache_data.clear()
                         st.success(f"¡Has adquirido exitosamente {bono['nombre']}!")
                         st.rerun()
                 else:
